@@ -1,0 +1,58 @@
+Duplex Operation and Mismatch Issues
+Many common network problems can be identified and resolved with little effort. Now that you have the tools and the process for troubleshooting a network, this topic reviews some common networking issues that you are likely to find as a network administrator.
+In data communications, duplex refers to the direction of data transmission between two devices.
+There are two duplex communication modes:
+Half-duplex - Communication is restricted to the exchange of data in one direction at a time.
+Full-duplex - Communications is permitted to be sent and received simultaneously.
+The figure illustrates how each duplex method operates.
+
+Interconnecting Ethernet interfaces must operate in the same duplex mode for best communication performance and to avoid inefficiency and latency on the link.
+The Ethernet autonegotiation feature facilitates configuration, minimizes problems and maximizes link performance between two interconnecting Ethernet links. The connected devices first announce their supported capabilities and then choose the highest performance mode supported by both ends. For example, the switch and router in the figure have successfully autonegotiated full-duplex mode.
+
+If one of the two connected devices is operating in full-duplex and the other is operating in half-duplex, a duplex mismatch occurs. While data communication will occur through a link with a duplex mismatch, link performance will be very poor.
+Duplex mismatches are typically caused by a misconfigured interface or in rare instances by a failed autonegotiation. Duplex mismatches may be difficult to troubleshoot as the communication between devices still occurs.
+IP Addressing Issues on IOS Devices
+IP address-related problems will likely keep remote network devices from communicating. Because IP addresses are hierarchical, any IP address assigned to a network device must conform to that range of addresses in that network. Wrongly assigned IP addresses create a variety of issues, including IP address conflicts and routing problems.
+Two common causes of incorrect IPv4 assignment are manual assignment mistakes or DHCP-related issues.
+Network administrators often have to manually assign IP addresses to devices such as servers and routers. If a mistake is made during the assignment, then communications issues with the device are very likely to occur.
+On an IOS device, use the show ip interface or show ip interface brief commands to verify what IPv4 addresses are assigned to the network interfaces. For example, issuing the show ip interface brief command as shown would validate the interface status on R1.
+IP Addressing Issues on End Devices
+In Windows-based machines, when the device cannot contact a DHCP server, Windows will automatically assign an address belonging to the 169.254.0.0/16 range. This feature is called Automatic Private IP Addressing (APIPA) and is designed to facilitate communication within the local network. Think of it as Windows saying, “I will use this address from the 169.254.0.0/16 range because I could not get any other address”.
+Often, a computer with an APIPA address will not be able to communicate with other devices in the network because those devices will most likely not belong to the 169.254.0.0/16 network. This situation indicates an automatic IPv4 address assignment problem that should be fixed.
+Note: Other operating systems, such Linux and OS X, will not assign an IPv4 address to the network interface if communication with a DHCP server fails.
+Most end devices are configured to rely on a DHCP server for automatic IPv4 address assignment. If the device is unable to communicate with the DHCP server, then the server cannot assign an IPv4 address for the specific network and the device will not be able to communicate.
+To verify the IP addresses assigned to a Windows-based computer, use the ipconfig command, as shown in the output.
+Default Gateway Issues
+The default gateway for an end device is the closest networking device that can forward traffic to other networks. If a device has an incorrect or nonexistent default gateway address, it will not be able to communicate with devices in remote networks. Because the default gateway is the path to remote networks, its address must belong to the same network as the end device.
+The address of the default gateway can be manually set or obtained from a DHCP server. Similar to IPv4 addressing issues, default gateway problems can be related to misconfiguration (in the case of manual assignment) or DHCP problems (if automatic assignment is in use).
+To solve misconfigured default gateway issues, ensure that the device has the correct default gateway configured. If the default address was manually set but is incorrect, simply replace it with the proper address. If the default gateway address was automatically set, ensure the device can communicate with the DHCP server. It is also important to verify that the proper IPv4 address and subnet mask were configured on the interface of the router and that the interface is active.
+To verify the default gateway on Windows-based computers, use the ipconfig command as shown.
+On a router, use the show ip route command to list the routing table and verify that the default gateway, known as a default route, has been set. This route is used when the destination address of the packet does not match any other routes in its routing table.
+For example, the output verifies that R1 has a default gateway (i.e., Gateway of last resort) configured pointing to IP address 209.168.200.226.
+The first highlighted line basically states that the gateway to any (i.e., 0.0.0.0) should be sent to IP address 209.165.200.226. The second highlighted displays how R1 learned about the default gateway. In this case, R1 received the information from another OSPF-enabled router.
+Troubleshooting DNS Issues
+Domain Name Service (DNS) defines an automated service that matches names, such as
+www.cisco.com
+, with the IP address. Although DNS resolution is not crucial to device communication, it is very important to the end user.
+It is common for users to mistakenly relate the operation of an internet link to the availability of the DNS. User complaints such as “the network is down” or “the internet is down” are often caused by an unreachable DNS server. While packet routing and all other network services are still operational, DNS failures often lead the user to the wrong conclusion. If a user types in a domain name such as
+www.cisco.com
+in a web browser and the DNS server is unreachable, the name will not be translated into an IP address and the website will not display.
+DNS server addresses can be manually or automatically assigned. Network administrators are often responsible for manually assigning DNS server addresses on servers and other devices, while DHCP is used to automatically assign DNS server addresses to clients.
+Although it is common for companies and organizations to manage their own DNS servers, any reachable DNS server can be used to resolve names. Small office and home office (SOHO) users often rely on the DNS server maintained by their ISP for name resolution. ISP-maintained DNS servers are assigned to SOHO customers via DHCP. Additionally, Google maintains a public DNS server that can be used by anyone and it is very useful for testing. The IPv4 address of Google’s public DNS server is 8.8.8.8 and 2001:4860:4860::8888 for its IPv6 DNS address.
+Cisco offers OpenDNS which provides secure DNS service by filtering phishing and some malware sites. You can change your DNS address to 208.67.222.222 and 208.67.220.220 in the Preferred DNS server and Alternate DNS server fields. Advanced features such as web content filtering and security are available to families and businesses.
+Use the ipconfig /all as shown to verify which DNS server is in use by the Windows computer.
+The nslookup command is another useful DNS troubleshooting tool for PCs. With nslookup a user can manually place DNS queries and analyze the DNS response. The nslookup command shows the output for a query for
+www.cisco.com.
+Notice you can also simply enter an IP address and nslookup will resolve the name.
+Note: It is not always possible to type an IP address in nslookup and receive the domain name. One of the most common reasons for this is that most websites run on servers that support multiple sites.
+Lab - Troubleshoot Connectivity Issues
+In this lab, you will complete the following objectives:
+Identify the Problem
+Implement Network Changes
+Verify Full Functionality
+Document Findings and Configuration Changes
+Troubleshoot Connectivity Issues
+Packet Tracer - Troubleshoot Connectivity Issues
+The objective of this Packet Tracer activity is to troubleshoot and resolve connectivity issues, if possible. Otherwise, the issues should be clearly documented and so they can be escalated.
+Troubleshoot Connectivity Issues
+Troubleshoot Connectivity Issues

@@ -1,0 +1,32 @@
+Dynamic LLAs
+All IPv6 devices must have an IPv6 LLA. Like IPv6 GUAs, you can also create LLAs dynamically. Regardless of how you create your LLAs (and your GUAs), it is important that you verify all IPv6 address configuration. This topic explains dynamically generated LLAs and IPv6 configuration verification.
+The figure shows the LLA is dynamically created using the fe80::/10 prefix and the interface ID using the EUI-64 process, or a randomly generated 64-bit number.
+
+Dynamic LLAs on Windows
+Operating systems, such as Windows, will typically use the same method for both a SLAAC-created GUA and a dynamically assigned LLA. See the highlighted areas in the following examples that were shown previously.
+EUI-64 Generated Interface ID
+Random 64-bit Generated Interface ID
+Dynamic LLAs on Cisco Routers
+Cisco routers automatically create an IPv6 LLA whenever a GUA is assigned to the interface. By default, Cisco IOS routers use EUI-64 to generate the interface ID for all LLAs on IPv6 interfaces. For serial interfaces, the router will use the MAC address of an Ethernet interface. Recall that an LLA must be unique only on that link or network. However, a drawback to using the dynamically assigned LLA is its long interface ID, which makes it challenging to identify and remember assigned addresses. The example displays the MAC address on the GigabitEthernet 0/0/0 interface of router R1. This address is used to dynamically create the LLA on the same interface, and also for the Serial 0/1/0 interface.
+To make it easier to recognize and remember these addresses on routers, it is common to statically configure IPv6 LLAs on routers.
+IPv6 LLA Using EUI-64 on Router R1
+Verify IPv6 Address Configuration
+The figure shows the example topology.
+
+Click each button for the output and a description of the command.
+show ipv6 interface brief
+show ipv6 route
+ping
+The show ipv6 interface brief command displays the MAC address of the Ethernet interfaces. EUI-64 uses this MAC address to generate the interface ID for the LLA. Additionally, the show ipv6 interface brief command displays abbreviated output for each of the interfaces. The [up/up] output on the same line as the interface indicates the Layer 1/Layer 2 interface state. This is the same as the Status and Protocol columns in the equivalent IPv4 command.
+Notice that each interface has two IPv6 addresses. The second address for each interface is the GUA that was configured. The first address, the one that begins with fe80, is the link-local unicast address for the interface. Recall that the LLA is automatically added to the interface when a GUA is assigned.
+Also, notice that the R1 Serial 0/1/0 LLA is the same as its GigabitEthernet 0/0/0 interface. Serial interfaces do not have Ethernet MAC addresses, so Cisco IOS uses the MAC address of the first available Ethernet interface. This is possible because link-local interfaces only have to be unique on that link.
+The show ipv6 interface brief Command on R1
+Syntax Checker - Verify IPv6 Address Configuration
+Use show commands to verify IPv6 address configuration on router R1 interfaces.
+
+Enter the show command that will display a brief summary of the IPv6 interface status.
+R1#
+Packet Tracer - Configure IPv6 Addressing
+In this activity, you will practice configuring IPv6 addresses on a router, servers, and clients. You will also practice verifying your IPv6 addressing implementation.
+Configure IPv6 Addressing
+Configure IPv6 Addressing

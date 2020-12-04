@@ -1,0 +1,12 @@
+Why should I take this module?
+Welcome to Data Link Layer!
+Every network has physical components and media connecting the components. Different types of media need different information about the data in order to accept it and move it across the physical network. Think of it this way: A well-hit golf ball moves through the air fast and far. It can also move through water but not as fast or as far unless it is helped by a more forceful hit. This is because the golf ball is traveling through a different medium; water instead of air.
+Data must have help to move it across different media. The data link layer provides this help. As you might have guessed, this help differs based on a number of factors. This module gives you an overview of these factors, how they affect data, and the protocols designed to ensure successful delivery. Let’s get started!
+What will I learn to do in this module?
+Module Title: Data Link Layer
+Module Objective: Explain how media access control in the data link layer supports communication across networks.
+Table caption
+Topic Title Topic Objective
+Purpose of the Data Link Layer Describe the purpose and function of the data link layer in preparing communication for transmission on specific media.
+Topologies Compare the characteristics of media access control methods on WAN and LAN topologies.
+Data Link Frame Describe the characteristics and functions of the data link frame.

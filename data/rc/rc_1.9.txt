@@ -1,0 +1,17 @@
+CCNA
+As a NetAcad student, you may already have a career in IT, or are still educating yourself to prepare for your career. In either case, it is good to know about the skills needed to match the types of jobs that are available in IT.
+The role and skills required of network engineers are evolving and are more vital than ever. The Cisco Certified Network Associate (CCNA) certification demonstrates that you have a knowledge of foundational technologies and ensures you stay relevant with skill sets needed for the adoption of next-generation technologies.
+A consolidated and updated CCNA for networking engineers is three courses and one exam which covers the fundamental topics for all network technologies. The new CCNA focuses on IP foundation and security topics along with wireless, virtualization, automation, and network programmability.
+There are new DevNet certifications at the associate, specialist and professional levels, to validate your software development skills.
+There are specialist certification options to validate your skills in line with your job role and interests. This includes the Cisco Enterprise Advanced Infrastructure Specialist certification.
+You can start where you want. There are no prerequisites to start earning your associate, specialist, professional, or expert level certification. Continuing education credits for recertification and ongoing development are now available for CCNA.
+Networking Jobs
+Your CCNA certification will prepare you for a variety of jobs in today’s market. At
+www.netacad.com
+you can click the Careers menu and then select Employment opportunities. You can find employment opportunities where you live by using the new program, the Talent Bridge Matching Engine. Search for jobs with Cisco, as well as Cisco partners and distributors seeking Cisco Networking Academy students and alumni.
+You can also search for IT jobs using online search engines such as Indeed, Glassdoor, and Monster. Use search terms such as IT, network administrator, network architects, and computer systems administrator. You can also search using the term Cisco CCNA.
+Lab - Research IT and Networking Job Opportunities
+In this lab, you will complete the following objectives:
+Part 1: Research Job Opportunities
+Part 2: Reflect on Research
+Research IT and Networking Job Opportunities

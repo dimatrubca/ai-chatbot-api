@@ -1,0 +1,56 @@
+Ethernet Encapsulation
+This module starts with a discussion of Ethernet technology including an explanation of MAC sublayer and the Ethernet frame fields.
+Ethernet is one of two LAN technologies used today, with the other being wireless LANs (WLANs). Ethernet uses wired communications, including twisted pair, fiber-optic links, and coaxial cables.
+Ethernet operates in the data link layer and the physical layer. It is a family of networking technologies defined in the IEEE 802.2 and 802.3 standards. Ethernet supports data bandwidths of the following:
+10 Mbps
+100 Mbps
+1000 Mbps (1 Gbps)
+10,000 Mbps (10 Gbps)
+40,000 Mbps (40 Gbps)
+100,000 Mbps (100 Gbps)
+As shown in the figure, Ethernet standards define both the Layer 2 protocols and the Layer 1 technologies.
+
+Ethernet and the OSI Model
+Ethernet is defined by data link layer and physical layer protocols.
+Data Link Sublayers
+IEEE 802 LAN/MAN protocols, including Ethernet, use the following two separate sublayers of the data link layer to operate. They are the Logical Link Control (LLC) and the Media Access Control (MAC), as shown in the figure.
+Recall that LLC and MAC have the following roles in the data link layer:
+LLC Sublayer - This IEEE 802.2 sublayer communicates between the networking software at the upper layers and the device hardware at the lower layers. It places information in the frame that identifies which network layer protocol is being used for the frame. This information allows multiple Layer 3 protocols, such as IPv4 and IPv6, to use the same network interface and media.
+MAC Sublayer - This sublayer (IEEE 802.3, 802.11, or 802.15 for example) is implemented in hardware and is responsible for data encapsulation and media access control. It provides data link layer addressing and is integrated with various physical layer technologies.
+
+MAC Sublayer
+The MAC sublayer is responsible for data encapsulation and accessing the media.
+Data Encapsulation
+IEEE 802.3 data encapsulation includes the following:
+Ethernet frame - This is the internal structure of the Ethernet frame.
+Ethernet Addressing - The Ethernet frame includes both a source and destination MAC address to deliver the Ethernet frame from Ethernet NIC to Ethernet NIC on the same LAN.
+Ethernet Error detection - The Ethernet frame includes a frame check sequence (FCS) trailer used for error detection.
+Accessing the Media
+As shown in the figure, the IEEE 802.3 MAC sublayer includes the specifications for different Ethernet communications standards over various types of media including copper and fiber.
+
+Ethernet Standards in the MAC Sublayer
+Recall that legacy Ethernet using a bus topology or hubs, is a shared, half-duplex medium. Ethernet over a half-duplex medium uses a contention-based access method, carrier sense multiple access/collision detection (CSMA/CD) This ensures that only one device is transmitting at a time. CSMA/CD allows multiple devices to share the same half-duplex medium, detecting a collision when more than one device attempts to transmit simultaneously. It also provides a back-off algorithm for retransmission.
+Ethernet LANs of today use switches that operate in full-duplex. Full-duplex communications with Ethernet switches do not require access control through CSMA/CD.
+Ethernet Frame Fields
+The minimum Ethernet frame size is 64 bytes and the expected maximum is 1518 bytes. This includes all bytes from the destination MAC address field through the frame check sequence (FCS) field. The preamble field is not included when describing the size of the frame.
+Note: The frame size may be larger if additional requirements are included, such as VLAN tagging. VLAN tagging is beyond the scope of this course.
+Any frame less than 64 bytes in length is considered a “collision fragment” or “runt frame” and is automatically discarded by receiving stations. Frames with more than 1500 bytes of data are considered “jumbo” or “baby giant frames”.
+If the size of a transmitted frame is less than the minimum, or greater than the maximum, the receiving device drops the frame. Dropped frames are likely to be the result of collisions or other unwanted signals. They are considered invalid. Jumbo frames are usually supported by most Fast Ethernet and Gigabit Ethernet switches and NICs.
+The figure shows each field in the Ethernet frame. Refer to the table for more information about the function of each field.
+
+Ethernet Frame Fields
+Ethernet Frame Fields Detail
+Table caption
+Field Description
+Preamble and Start Frame Delimiter Fields The Preamble (7 bytes) and Start Frame Delimiter (SFD), also called the Start of Frame (1 byte), fields are used for synchronization between the sending and receiving devices. These first eight bytes of the frame are used to get the attention of the receiving nodes. Essentially, the first few bytes tell the receivers to get ready to receive a new frame.
+Destination MAC Address Field This 6-byte field is the identifier for the intended recipient. As you will recall, this address is used by Layer 2 to assist devices in determining if a frame is addressed to them. The address in the frame is compared to the MAC address in the device. If there is a match, the device accepts the frame. Can be a unicast, multicast or broadcast address.
+Source MAC Address Field This 6-byte field identifies the originating NIC or interface of the frame.
+Type / Length This 2-byte field identifies the upper layer protocol encapsulated in the Ethernet frame. Common values are, in hexadecimal, 0x800 for IPv4, 0x86DD for IPv6 and 0x806 for ARP.
+Note: You may also see this field referred to as EtherType, Type, or Length.
+Data Field This field (46 - 1500 bytes) contains the encapsulated data from a higher layer, which is a generic Layer 3 PDU, or more commonly, an IPv4 packet. All frames must be at least 64 bytes long. If a small packet is encapsulated, additional bits called a pad are used to increase the size of the frame to this minimum size.
+Frame Check Sequence Field The Frame Check Sequence (FCS) field (4 bytes) is used to detect errors in a frame. It uses a cyclic redundancy check (CRC). The sending device includes the results of a CRC in the FCS field of the frame. The receiving device receives the frame and generates a CRC to look for errors. If the calculations match, no error occurred. Calculations that do not match are an indication that the data has changed; therefore, the frame is dropped. A change in the data could be the result of a disruption of the electrical signals that represent the bits.
+Lab - Use Wireshark to Examine Ethernet Frames
+In this lab, you will complete the following objectives:
+Part 1: Examine the Header Fields in an Ethernet II Frame
+Part 2: Use Wireshark to Capture and Analyze Ethernet Frames
+Use Wireshark to Examine Ethernet Frames

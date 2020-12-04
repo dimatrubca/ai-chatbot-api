@@ -1,0 +1,61 @@
+Properties of UTP Cabling
+In the previous topic, you learned a bit about unshielded twisted-pair (UTP) copper cabling. Because UTP cabling is the standard for use in LANs, this topic goes into detail about its advantages and limitations, and what can be done to avoid problems.
+When used as a networking medium, UTP cabling consists of four pairs of color-coded copper wires that have been twisted together and then encased in a flexible plastic sheath. Its small size can be advantageous during installation.
+UTP cable does not use shielding to counter the effects of EMI and RFI. Instead, cable designers have discovered other ways that they can limit the negative effect of crosstalk:
+Cancellation - Designers now pair wires in a circuit. When two wires in an electrical circuit are placed close together, their magnetic fields are the exact opposite of each other. Therefore, the two magnetic fields cancel each other and also cancel out any outside EMI and RFI signals.
+Varying the number of twists per wire pair - To further enhance the cancellation effect of paired circuit wires, designers vary the number of twists of each wire pair in a cable. UTP cable must follow precise specifications governing how many twists or braids are permitted per meter (3.28 feet) of cable. Notice in the figure that the orange/orange white pair is twisted less than the blue/blue white pair. Each colored pair is twisted a different number of times.
+UTP cable relies solely on the cancellation effect produced by the twisted wire pairs to limit signal degradation and effectively provide self-shielding for wire pairs within the network media.
+UTP Cabling Standards and Connectors
+UTP cabling conforms to the standards established jointly by the TIA/EIA. Specifically, TIA/EIA-568 stipulates the commercial cabling standards for LAN installations and is the standard most commonly used in LAN cabling environments. Some of the elements defined are as follows:
+Cable types
+Cable lengths
+Connectors
+Cable termination
+Methods of testing cable
+The electrical characteristics of copper cabling are defined by the Institute of Electrical and Electronics Engineers (IEEE). IEEE rates UTP cabling according to its performance. Cables are placed into categories based on their ability to carry higher bandwidth rates. For example, Category 5 cable is used commonly in 100BASE-TX Fast Ethernet installations. Other categories include Enhanced Category 5 cable, Category 6, and Category 6a.
+Cables in higher categories are designed and constructed to support higher data rates. As new gigabit speed Ethernet technologies are being developed and adopted, Category 5e is now the minimally acceptable cable type, with Category 6 being the recommended type for new building installations.
+The figure shows three categories of UTP cable:
+Category 3 was originally used for voice communication over voice lines, but later used for data transmission.
+Category 5 and 5e is used for data transmission. Category 5 supports 100Mbps and Category 5e supports 1000 Mbps
+Category 6 has an added separator between each wire pair to support higher speeds. Category 6 supports up to 10 Gbps.
+Category 7 also supports 10 Gbps.
+Category 8 supports 40 Gbps.
+Some manufacturers are making cables exceeding the TIA/EIA Category 6a specifications and refer to these as Category 7.
+
+UTP cable is usually terminated with an RJ-45 connector. The TIA/EIA-568 standard describes the wire color codes to pin assignments (pinouts) for Ethernet cables.
+As shown in the figure, the RJ-45 connector is the male component, crimped at the end of the cable.
+
+RJ-45 UTP Plugs
+The socket, shown in the figure, is the female component of a network device, wall, cubicle partition outlet, or patch panel. When terminated improperly, each cable is a potential source of physical layer performance degradation.
+
+RJ-45 UTP Sockets
+This figure shows an example of a badly terminated UTP cable. This bad connector has wires that are exposed, untwisted, and not entirely covered by the sheath.
+
+Poorly Terminated UTP Cable
+The next figure shows a properly terminated UTP cable. It is a good connector with wires that are untwisted only to the extent necessary to attach the connector.
+
+Properly Terminated UTP Cable
+Note: Improper cable termination can impact transmission performance.
+Straight-through and Crossover UTP Cables
+Different situations may require UTP cables to be wired according to different wiring conventions. This means that the individual wires in the cable have to be connected in different orders to different sets of pins in the RJ-45 connectors.
+The following are the main cable types that are obtained by using specific wiring conventions:
+Ethernet Straight-through - The most common type of networking cable. It is commonly used to interconnect a host to a switch and a switch to a router.
+Ethernet Crossover - A cable used to interconnect similar devices. For example, to connect a switch to a switch, a host to a host, or a router to a router. However, crossover cables are now considered legacy as NICs use medium-dependent interface crossover (auto-MDIX) to automatically detect the cable type and make the internal connection.
+Note: Another type of cable is a rollover cable, which is Cisco proprietary. It is used to connect a workstation to a router or switch console port.
+Using a crossover or straight-through cable incorrectly between devices may not damage the devices, but connectivity and communication between the devices will not take place. This is a common error and checking that the device connections are correct should be the first troubleshooting action if connectivity is not achieved.
+The figure identifies the individual wire pairs for the T568A and T568B standards.
+
+T568A and T568B Standards
+The table shows the UTP cable type, related standards, and typical application of these cables.
+Cable Types and Standards
+Cable TypeStandardApplicationEthernet Straight-throughBoth ends T568A or both ends T568BConnects a network host to a network device such as a switch or hubEthernet CrossoverOne end T568A, other end T568BConnects two network hostsConnects two network intermediary devices (switch to switch or router to router)RolloverCisco proprietaryConnects a workstation serial port to a router console port, using an adapter
+Cable Type Standard Application
+Ethernet Straight-through Both ends T568A or both ends T568B Connects a network host to a network device such as a switch or hub
+Ethernet Crossover One end T568A, other end T568B Connects two network hosts Connects two network intermediary devices (switch to switch or router to router)
+Rollover Cisco proprietary Connects a workstation serial port to a router console port, using an adapter
+Activity - Cable Pinouts
+For this activity, correctly order the wire colors to a TIA/EIA cable pinout. Select a wire case color by clicking it. Then click a wire to apply that casing to it.
+Select the pin case, then the cable pin to apply the casing.
+T568A Pinout
+Select the pin case, then the cable pin to apply the casing.
+T568B Pinout

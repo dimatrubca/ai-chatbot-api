@@ -1,0 +1,78 @@
+RS and RA Messages
+If you do not want to statically configure IPv6 GUAs, no need to worry. Most devices obtain their IPv6 GUAs dynamically. This topic explains how this process works using Router Advertisement (RA) and Router Solicitation (RS) messages. This topic gets rather technical, but when you understand the difference between the three methods that a router advertisement can use, as well as how the EUI-64 process for creating an interface ID differs from a randomly generated process, you will have made a huge leap in your IPv6 expertise!
+For the GUA, a device obtains the address dynamically through Internet Control Message Protocol version 6 (ICMPv6) messages. IPv6 routers periodically send out ICMPv6 RA messages, every 200 seconds, to all IPv6-enabled devices on the network. An RA message will also be sent in response to a host sending an ICMPv6 RS message, which is a request for an RA message. Both messages are shown in the figure.
+
+ICMPv6 RS and RA Messages
+RS messages are sent to all IPv6 routers by hosts requesting addressing information.
+RA messages are sent to all IPv6 nodes. If Method 1 (SLAAC only) is used, the RA includes network prefix, prefix-length, and default-gateway information.
+RA messages are on IPv6 router Ethernet interfaces. The router must be enabled for IPv6 routing, which is not enabled by default. To enable a router as an IPv6 router, the ipv6 unicast-routing global configuration command must be used.
+The ICMPv6 RA message is a suggestion to a device on how to obtain an IPv6 GUA. The ultimate decision is up to the device operating system. The ICMPv6 RA message includes the following:
+Network prefix and prefix length - This tells the device which network it belongs to.
+Default gateway address - This is an IPv6 LLA, the source IPv6 address of the RA message.
+DNS addresses and domain name - These are the addresses of DNS servers and a domain name.
+There are three methods for RA messages:
+Method 1: SLAAC - “I have everything you need including the prefix, prefix length, and default gateway address.”
+Method 2: SLAAC with a stateless DHCPv6 server - “Here is my information but you need to get other information such as DNS addresses from a stateless DHCPv6 server.”
+Method 3: Stateful DHCPv6 (no SLAAC) - “I can give you your default gateway address. You need to ask a stateful DHCPv6 server for all your other information.”
+Method 1: SLAAC
+SLAAC is a method that allows a device to create its own GUA without the services of DHCPv6. Using SLAAC, devices rely on the ICMPv6 RA messages of the local router to obtain the necessary information.
+By default, the RA message suggests that the receiving device use the information in the RA message to create its own IPv6 GUA and all other necessary information. The services of a DHCPv6 server are not required.
+SLAAC is stateless, which means there is no central server (for example, a stateful DHCPv6 server) allocating GUAs and keeping a list of devices and their addresses. With SLAAC, the client device uses the information in the RA message to create its own GUA. As shown in the figure, the two parts of the address are created as follows:
+Prefix - This is advertised in the RA message.
+Interface ID - This uses the EUI-64 process or by generating a random 64-bit number, depending on the device operating system.
+
+The router sends an RA message with the prefix for the local link.
+The PC uses SLAAC to obtain a prefix from the RA message and creates its own Interface ID.
+Method 2: SLAAC and Stateless DHCPv6
+A router interface can be configured to send a router advertisement using SLAAC and stateless DHCPv6.
+As shown in the figure, with this method, the RA message suggests devices use the following:
+SLAAC to create its own IPv6 GUA
+The router LLA, which is the RA source IPv6 address, as the default gateway address
+A stateless DHCPv6 server to obtain other information such as a DNS server address and a domain name
+Note: A stateless DHCPv6 server distributes DNS server addresses and domain names. It does not allocate GUAs.
+
+The PC sends an RS to all IPv6 routers, “I need addressing information.”
+The router sends an RA message to all IPv6 nodes with Method 2 (SLAAC and DHCPv6) specified. “Here is your prefix, prefix-length, and default gateway information. But you will need to get DNS information from a DHCPv6 server.”
+The PC sends a DHCPv6 Solicit message to all DHCPv6 servers. "I used SLAAC to create my IPv6 address and get my default gateway address, but I need other information from a stateless DHCPv6 server."
+Method 3: Stateful DHCPv6
+A router interface can be configured to send an RA using stateful DHCPv6 only.
+Stateful DHCPv6 is similar to DHCP for IPv4. A device can automatically receive its addressing information including a GUA, prefix length, and the addresses of DNS servers from a stateful DHCPv6 server.
+As shown in the figure, with this method, the RA message suggests devices use the following:
+The router LLA, which is the RA source IPv6 address, for the default gateway address.
+A stateful DHCPv6 server to obtain a GUA, DNS server address, domain name and other necessary information.
+
+The PC sends an RS to all IPv6 routers, “I need addressing information.”
+The router sends an RA message to all IPv6 nodes with Method 3 (Stateful DHCPv6) specified, “I am your default gateway, but you need to ask a stateful DHCPv6 server for your IPv6 address and other addressing information."
+The PC sends a DHCPv6 Solicit message to all DHCPv6 servers, " I received my default gateway address from the RA message, but I need an IPv6 address and all other addressing information from a stateful DHCPv6 server."
+A stateful DHCPv6 server allocates and maintains a list of which device receives which IPv6 address. DHCP for IPv4 is stateful.
+Note: The default gateway address can only be obtained dynamically from the RA message. The stateless or stateful DHCPv6 server does not provide the default gateway address.
+EUI-64 Process vs. Randomly Generated
+When the RA message is either SLAAC or SLAAC with stateless DHCPv6, the client must generate its own interface ID. The client knows the prefix portion of the address from the RA message, but must create its own interface ID. The interface ID can be created using the EUI-64 process or a randomly generated 64-bit number, as shown in the figure.
+
+Dynamically Creating an Interface ID
+The router sends an RA message.
+The PC uses the prefix in the RA message and uses either EUI-64 or a random 64-bit number to generate an interface ID.
+EUI-64 Process
+IEEE defined the Extended Unique Identifier (EUI) or modified EUI-64 process. This process uses the 48-bit Ethernet MAC address of a client, and inserts another 16 bits in the middle of the 48-bit MAC address to create a 64-bit interface ID.
+Ethernet MAC addresses are usually represented in hexadecimal and are made up of two parts:
+Organizationally Unique Identifier (OUI) - The OUI is a 24-bit (6 hexadecimal digits) vendor code assigned by IEEE.
+Device Identifier - The device identifier is a unique 24-bit (6 hexadecimal digits) value within a common OUI.
+An EUI-64 Interface ID is represented in binary and is made up of three parts:
+24-bit OUI from the client MAC address, but the 7th bit (the Universally/Locally (U/L) bit) is reversed. This means that if the 7th bit is a 0, it becomes a 1, and vice versa.
+The inserted 16-bit value fffe (in hexadecimal).
+24-bit Device Identifier from the client MAC address.
+The EUI-64 process is illustrated in the figure, using the R1 GigabitEthernet MAC address of fc99:4775:cee0.
+
+Step 1: Divide the MAC address between the OUI and device identifier.
+Step 2: Insert the hexadecimal value fffe, which in binary is: 1111 1111 1111 1110.
+Step 3: Convert the first 2 hexadecimal values of the OUI to binary and flip the U/L bit (bit 7). In this example, the 0 in bit 7 is changed to a 1.
+The result is an EUI-64 generated interface ID of fe99:47ff:fe75:cee0.
+Note: The use of the U/L bit, and the reasons for reversing its value, are discussed in RFC 5342.
+The example output for the ipconfig command shows the IPv6 GUA being dynamically created using SLAAC and the EUI-64 process. An easy way to identify that an address was probably created using EUI-64 is the fffe located in the middle of the interface ID.
+The advantage of EUI-64 is that the Ethernet MAC address can be used to determine the interface ID. It also allows network administrators to easily track an IPv6 address to an end-device using the unique MAC address. However, this has caused privacy concerns among many users who worried that their packets could be traced to the actual physical computer. Due to these concerns, a randomly generated interface ID may be used instead.
+EUI-64 Generated Interface ID
+Randomly Generated Interface IDs
+Depending upon the operating system, a device may use a randomly generated interface ID instead of using the MAC address and the EUI-64 process. Beginning with Windows Vista, Windows uses a randomly generated interface ID instead of one created with EUI-64. Windows XP and previous Windows operating systems used EUI-64.
+After the interface ID is established, either through the EUI-64 process or through random generation, it can be combined with an IPv6 prefix in the RA message to create a GUA, as shown in the figure.
+Random 64-bit Generated Interface ID
+Note: To ensure the uniqueness of any IPv6 unicast address, the client may use a process known as Duplicate Address Detection (DAD). This is similar to an ARP request for its own address. If there is no reply, then the address is unique.

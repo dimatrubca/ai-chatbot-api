@@ -1,0 +1,12 @@
+Why should I take this module?
+Welcome to Ethernet Switching!
+If you are planning to become a network administrator or a network architect, you will definitely need to know about Ethernet and Ethernet switching. The two most prominent LAN technologies in use today are Ethernet and WLAN. Ethernet supports bandwidths of up to 100 Gbps, which explains its popularity. This module contains a lab using Wireshark in which you can look at Ethernet frames and another lab where you view network device MAC addresses. There are also some instructional videos to help you better understand Ethernet. By the time you have finished this module, you too could create a switched network that uses Ethernet!
+What will I learn to do in this module?
+Module Title: Ethernet Switching
+Module Objective: Explain how Ethernet operates in a switched network.
+Table caption
+Topic Title Topic Objective
+Ethernet Frame Explain how the Ethernet sublayers are related to the frame fields.
+Ethernet MAC Address Describe the Ethernet MAC address.
+The MAC Address Table Explain how a switch builds its MAC address table and forwards frames.
+Switch Speeds and Forwarding Methods Describe switch forwarding methods and port settings available on Layer 2 switch ports.

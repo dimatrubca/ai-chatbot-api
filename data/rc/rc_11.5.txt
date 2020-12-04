@@ -1,0 +1,103 @@
+Subnet on an Octet Boundary
+In the previous topic you learned several good reasons for segmenting a network. You also learned that segmenting a network is called subnetting. Subnetting is a critical skill to have when administering an IPv4 network. It is a bit daunting at first, but it gets much easier with practice.
+IPv4 subnets are created by using one or more of the host bits as network bits. This is done by extending the subnet mask to borrow some of the bits from the host portion of the address to create additional network bits. The more host bits that are borrowed, the more subnets that can be defined. The more bits that are borrowed to increase the number of subnets reduces the number of hosts per subnet.
+Networks are most easily subnetted at the octet boundary of /8, /16, and /24. The table identifies these prefix lengths. Notice that using longer prefix lengths decreases the number of hosts per subnet.
+Subnet Masks on Octet Boundaries
+Prefix LengthSubnet MaskSubnet Mask in Binary (n = network, h = host)# of hosts/8255.0.0.0nnnnnnnn.hhhhhhhh.hhhhhhhh.hhhhhhhh 11111111.00000000.00000000.0000000016,777,214/16255.255.0.0nnnnnnnn.nnnnnnnn.hhhhhhhh.hhhhhhhh 11111111.11111111.00000000.0000000065,534/24255.255.255.0nnnnnnnn.nnnnnnnn.nnnnnnnn.hhhhhhhh 11111111.11111111.11111111.00000000254
+Prefix Length Subnet Mask Subnet Mask in Binary (n = network, h = host) # of hosts
+/8 255.0.0.0
+nnnnnnnn.hhhhhhhh.hhhhhhhh.hhhhhhhh 
+11111111.00000000.00000000.00000000
+16,777,214
+/16 255.255.0.0
+nnnnnnnn.nnnnnnnn.hhhhhhhh.hhhhhhhh 
+11111111.11111111.00000000.00000000
+65,534
+/24 255.255.255.0
+nnnnnnnn.nnnnnnnn.nnnnnnnn.hhhhhhhh 
+11111111.11111111.11111111.00000000
+254
+To understand how subnetting on the octet boundary can be useful, consider the following example. Assume an enterprise has chosen the private address 10.0.0.0/8 as its internal network address. That network address can connect 16,777,214 hosts in one broadcast domain. Obviously, having more than 16 million hosts on a single subnet is not ideal.
+The enterprise could further subnet the 10.0.0.0/8 address at the octet boundary of /16 as shown in the table. This would provide the enterprise the ability to define up to 256 subnets (i.e., 10.0.0.0/16 - 10.255.0.0/16) with each subnet capable of connecting 65,534 hosts. Notice how the first two octets identify the network portion of the address whereas the last two octets are for host IP addresses.
+Subnetting Network 10.0.0.0/8 using a /16
+Subnet Address (256 Possible Subnets)Host Range (65,534 possible hosts per subnet)Broadcast10.0.0.0/1610.0.0.1 - 10.0.255.25410.0.255.25510.1.0.0/1610.1.0.1 - 10.1.255.25410.1.255.25510.2.0.0/1610.2.0.1 - 10.2.255.25410.2.255.25510.3.0.0/1610.3.0.1 - 10.3.255.25410.3.255.25510.4.0.0/1610.4.0.1 - 10.4.255.25410.4.255.25510.5.0.0/1610.5.0.1 - 10.5.255.25410.5.255.25510.6.0.0/1610.6.0.1 - 10.6.255.25410.6.255.25510.7.0.0/1610.7.0.1 - 10.7.255.25410.7.255.255.........10.255.0.0/1610.255.0.1 - 10.255.255.25410.255.255.255
+Subnet Address
+(256 Possible Subnets) Host Range
+(65,534 possible hosts per subnet) Broadcast
+10.0.0.0/16 10.0.0.1 - 10.0.255.254 10.0.255.255
+10.1.0.0/16 10.1.0.1 - 10.1.255.254 10.1.255.255
+10.2.0.0/16 10.2.0.1 - 10.2.255.254 10.2.255.255
+10.3.0.0/16 10.3.0.1 - 10.3.255.254 10.3.255.255
+10.4.0.0/16 10.4.0.1 - 10.4.255.254 10.4.255.255
+10.5.0.0/16 10.5.0.1 - 10.5.255.254 10.5.255.255
+10.6.0.0/16 10.6.0.1 - 10.6.255.254 10.6.255.255
+10.7.0.0/16 10.7.0.1 - 10.7.255.254 10.7.255.255
+... ... ...
+10.255.0.0/16 10.255.0.1 - 10.255.255.254 10.255.255.255
+Alternatively, the enterprise could choose to subnet the 10.0.0.0/8 network at the /24 octet boundary, as shown in the table. This would enable the enterprise to define 65,536 subnets each capable of connecting 254 hosts. The /24 boundary is very popular in subnetting because it accommodates a reasonable number of hosts and conveniently subnets at the octet boundary.
+Subnetting Network 10.0.0.0/8 using a /24 Prefix
+Subnet Address (65,536 Possible Subnets)Host Range (254 possible hosts per subnet)Broadcast10.0.0.0/2410.0.0.1 - 10.0.0.25410.0.0.25510.0.1.0/2410.0.1.1 - 10.0.1.25410.0.1.25510.0.2.0/2410.0.2.1 - 10.0.2.25410.0.2.255………10.0.255.0/2410.0.255.1 - 10.0.255.25410.0.255.25510.1.0.0/2410.1.0.1 - 10.1.0.25410.1.0.25510.1.1.0/2410.1.1.1 - 10.1.1.25410.1.1.25510.1.2.0/2410.1.2.1 - 10.1.2.25410.1.2.255………10.100.0.0/2410.100.0.1 - 10.100.0.25410.100.0.255.........10.255.255.0/2410.255.255.1 - 10.2255.255.25410.255.255.255
+Subnet Address
+(65,536 Possible Subnets) Host Range
+(254 possible hosts per subnet) Broadcast
+10.0.0.0/24 10.0.0.1 - 10.0.0.254 10.0.0.255
+10.0.1.0/24 10.0.1.1 - 10.0.1.254 10.0.1.255
+10.0.2.0/24 10.0.2.1 - 10.0.2.254 10.0.2.255
+… … …
+10.0.255.0/24 10.0.255.1 - 10.0.255.254 10.0.255.255
+10.1.0.0/24 10.1.0.1 - 10.1.0.254 10.1.0.255
+10.1.1.0/24 10.1.1.1 - 10.1.1.254 10.1.1.255
+10.1.2.0/24 10.1.2.1 - 10.1.2.254 10.1.2.255
+… … …
+10.100.0.0/24 10.100.0.1 - 10.100.0.254 10.100.0.255
+... ... ...
+10.255.255.0/24 10.255.255.1 - 10.2255.255.254 10.255.255.255
+Subnet within an Octet Boundary
+The examples shown thus far borrowed host bits from the common /8, /16, and /24 network prefixes. However, subnets can borrow bits from any host bit position to create other masks.
+For instance, a /24 network address is commonly subnetted using longer prefix lengths by borrowing bits from the fourth octet. This provides the administrator with additional flexibility when assigning network addresses to a smaller number of end devices.
+Refer to the table to see six ways to subnet a /24 network.
+Subnet a /24 Network
+Prefix LengthSubnet MaskSubnet Mask in Binary (n = network, h = host)# of subnets# of hosts/25255.255.255.128nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh 11111111.11111111.11111111.100000002126/26255.255.255.192nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh 11111111.11111111.11111111.11000000462/27255.255.255.224nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh 11111111.11111111.11111111.11100000830/28255.255.255.240nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh 11111111.11111111.11111111.111100001614/29255.255.255.248nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh 11111111.11111111.11111111.11111000326/30255.255.255.252nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh 11111111.11111111.11111111.11111100642
+Prefix Length Subnet Mask Subnet Mask in Binary
+(n = network, h = host) # of subnets # of hosts
+/25 255.255.255.128
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh
+11111111.11111111.11111111.10000000
+2 126
+/26 255.255.255.192
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh
+11111111.11111111.11111111.11000000
+4 62
+/27 255.255.255.224
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh
+11111111.11111111.11111111.11100000
+8 30
+/28 255.255.255.240
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh
+11111111.11111111.11111111.11110000
+16 14
+/29 255.255.255.248
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh
+11111111.11111111.11111111.11111000
+32 6
+/30 255.255.255.252
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh
+11111111.11111111.11111111.11111100
+64 2
+For each bit borrowed in the fourth octet, the number of subnetworks available is doubled, while reducing the number of host addresses per subnet:
+/25 row - Borrowing 1 bit from the fourth octet creates 2 subnets supporting 126 hosts each.
+/26 row - Borrowing 2 bits creates 4 subnets supporting 62 hosts each.
+/27 row - Borrowing 3 bits creates 8 subnets supporting 30 hosts each.
+/28 row - Borrowing 4 bits creates 16 subnets supporting 14 hosts each.
+/29 row - Borrowing 5 bits creates 32 subnets supporting 6 hosts each.
+/30 row - Borrowing 6 bits creates 64 subnets supporting 2 hosts each.
+Video - The Subnet Mask
+Click Play to view an explanation of the subnet mask.
+Video - Subnet with the Magic Number
+Click Play to view an explanation of the magic number.
+Packet Tracer - Subnet an IPv4 Network
+In this activity, starting from a single network address and network mask, you will subnet the Customer network into multiple subnets. The subnet scheme should be based on the number of host computers required in each subnet, as well as other network considerations, like future network host expansion.
+After you have created a subnetting scheme and completed the table by filling in the missing host and interface IP addresses, you will configure the host PCs, switches and router interfaces.
+After the network devices and host PCs have been configured, you will use the ping command to test for network connectivity.
+Subnet an IPv4 Network
+Subnet an IPv4 Network

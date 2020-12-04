@@ -1,0 +1,10 @@
+Why should I take this module?
+Welcome to ICMP!
+Imagine that you have an intricate model train set. Your tracks and trains are all connected and powered up and ready to go. You throw the switch. The train goes halfway around the track and stops. You know right away that the problem is most likely located where the train has stopped, so you look there first. It is not as easy to visualize this with a network. Fortunately, there are tools to help you locate problem areas in your network, AND they work with both IPv4 and IPv6 networks! You will be happy to know that this module has a couple Packet Tracer activities to help you practice using these tools, so let’s get testing!
+What will I learn in this module?
+Module Title: ICMP
+Module Objective: Use various tools to test network connectivity.
+Table caption
+Topic Title Topic Objective
+ICMP Messages Explain how ICMP is used to test network connectivity.
+Ping and Traceroute Testing Use ping and traceroute utilities to test network connectivity.

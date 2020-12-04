@@ -1,0 +1,13 @@
+Video Activity - Test the Interface Assignment
+In the previous topic, you implemented basic connectivity by configuring IP addressing on switches and PCs. Then you verified your configurations and connectivity, because, what is the point of configuring a device if you do not verify that the configuration is working? You will continue this process in this topic. Using the CLI, you will verify the interfaces and the addresses of the switches and routers in your network.
+In the same way that you use commands and utilities like ipconfig to verify the network configuration of a PC host, you also use commands to verify the interfaces and address settings of intermediary devices like switches and routers.
+Click Play in the figure to view a video demonstration of the show ip interface brief command. This command is useful for verifying the condition of the switch interfaces.
+Follow Along in Packet Tracer
+Download the same PKT file that is used in the video. Practice using the ipconfig and show ip interface brief commands, as shown in the video.
+Test the Interface Assignment
+Video Activity - Test End-to-End Connectivity
+The ping command can be used to test connectivity to another device on the network or a website on the internet.
+Click Play in the figure to view a video demonstration using the ping command to test connectivity to a switch and to another PC.
+Follow Along in Packet Tracer
+Download the same PKT file that is used in the video. Practice using the ping command, as shown in the video.
+Test End-to-End Connectivity

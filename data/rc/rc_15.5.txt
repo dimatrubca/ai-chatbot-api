@@ -1,0 +1,22 @@
+File Transfer Protocol
+As you learned in previous topics, in the client/server model, the client can upload data to a server, and download data from a server, if both devices are using a file transfer protocol (FTP). Like HTTP, email, and addressing protocols, FTP is commonly used application layer protocol. This topic discusses FTP in more detail.
+FTP was developed to allow for data transfers between a client and a server. An FTP client is an application which runs on a computer that is being used to push and pull data from an FTP server.
+
+Based on commands sent across the control connection, data can be downloaded from the server or uploaded from the client.
+The client establishes the first connection to the server for control traffic using TCP port 21. The traffic consists of client commands and server replies.
+The client establishes the second connection to the server for the actual data transfer using TCP port 20. This connection is created every time there is data to be transferred.
+The data transfer can happen in either direction. The client can download (pull) data from the server, or the client can upload (push) data to the server.
+Server Message Block
+The Server Message Block (SMB) is a client/server file sharing protocol that describes the structure of shared network resources, such as directories, files, printers, and serial ports. It is a request-response protocol. All SMB messages share a common format. This format uses a fixed-sized header, followed by a variable-sized parameter and data component.
+Here are three functions of SMB messages:
+Start, authenticate, and terminate sessions.
+Control file and printer access.
+Allow an application to send or receive messages to or from another device.
+SMB file-sharing and print services have become the mainstay of Microsoft networking. With the introduction of the Windows 2000 software series, Microsoft changed the underlying structure for using SMB. In previous versions of Microsoft products, the SMB services used a non-TCP/IP protocol to implement name resolution. Beginning with Windows 2000, all subsequent Microsoft products use DNS naming, which allows TCP/IP protocols to directly support SMB resource sharing, as shown in the figure.
+
+SMB is a client/server, request-response protocol. Servers can make their own resources available to clients on the network.
+The SMB file exchange process between Windows PCs is shown in the next figure.
+
+A file may be copied from PC to PC with Windows Explorer using the SMB protocol.
+Unlike the file sharing supported by FTP, clients establish a long-term connection to servers. After the connection is established, the user of the client can access the resources on the server as though the resource is local to the client host.
+The LINUX and UNIX operating systems also provide a method of sharing resources with Microsoft networks by using a version of SMB called SAMBA. The Apple Macintosh operating systems also support resource sharing by using the SMB protocol.

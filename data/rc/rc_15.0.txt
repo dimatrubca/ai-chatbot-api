@@ -1,0 +1,13 @@
+Why should I take this module?
+Welcome to Application Layer!
+As you have learned, the transport layer is where data actually gets moved from one host to another. But before that can take place, there are a lot of details that have to be determined so that this data transport happens correctly. This is why there is an application layer in both the OSI and the TCP/IP models. As an example, before there was streaming video over the internet, we had to watch home movies in a variety of other ways. Imagine that you videotaped some of your child’s soccer game. Your parents, in another city, only have a video cassette player. You have to copy your video from your camera onto the right type of video cassette to send to them. Your brother has a DVD player, so you transfer your video to a DVD to send to him. This is what the application layer is all about, making sure that your data is in a format that the receiving device can use. Let’s dive in!
+What will I learn to do in this module?
+Module Title: Application Layer
+Module Objective: Explain the operation of application layer protocols in providing support to end-user applications.
+Table caption
+Topic Title Topic Objective
+Application, Presentation, and Session Explain how the functions of the application layer, presentation layer, and session layer work together to provide network services to end user applications.
+Peer-to-Peer Explain how end user applications operate in a peer-to-peer network.
+Web and Email Protocols Explain how web and email protocols operate.
+IP Addressing Services Explain how DNS and DHCP operate.
+File Sharing Services Explain how file transfer protocols operate.

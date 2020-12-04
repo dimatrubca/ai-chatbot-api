@@ -1,0 +1,12 @@
+Why should I take this module?
+Welcome to Basic Router Configuration!
+Have you ever run a relay? The first person runs the first leg of the race and hands off the baton to the next runner, who continues forward in the second leg of the race and hands off the baton to the third runner, and on it goes. Routing packets is very similar to a relay. But if the first runner does not know where to find the second runner, or drops the baton in the first leg, then that relay team will most certainly lose the race.
+Routing packets is very similar to a relay. As you know, routing tables are created and used by routers to forward packets from their local networks on to other networks. But a router cannot create a routing table or forward any packets until it has been configured. If you plan to become a network administrator you definitely must know how to do this. The good news? It is easy! This module has Syntax Checker activities so that you can practice your configuration commands and see the output. There are also some Packet Tracer activities to get you started. Let’s go!
+What will I learn in this module?
+Module Title: Basic Router Configuration
+Module Objective: Implement initial settings on a router and end devices.
+Table caption
+Topic Title Topic Objective
+Configure Initial Router Settings Configure initial settings on an IOS Cisco router.
+Configure Interfaces Configure two active interfaces on a Cisco IOS router.
+Configure the Default Gateway Configure devices to use the default gateway.

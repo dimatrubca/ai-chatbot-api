@@ -1,0 +1,17 @@
+Why should I take this module?
+Welcome to IPv4 Addressing!
+Currently, there are still plenty of networks using IPv4 addressing, even as the organizations which use them are making the transition to IPv6. So it is still very important for network administrators to know everything they can about IPv4 addressing. This module covers the fundamental aspects of IPv4 addressing in detail. It includes how to segment a network into subnets and how to create a variable-length subnet mask (VLSM) as part of an overall IPv4 addressing scheme. Subnetting is like cutting a pie into smaller and smaller pieces. Subnetting may seem overwhelming at first, but we show you some tricks to help you along the way. This module includes several videos, activities to help you practice subnetting, Packet Tracers and a lab. Once you get the hang of it, you’ll be on your way to network administration!
+What will I learn to do in this module?
+Module Title: IPv4 Addressing
+Module Objective: Calculate an IPv4 subnetting scheme to efficiently segment your network.
+Table caption
+Topic Title Topic Objective
+IPv4 Address Structure Describe the structure of an IPv4 address including the network portion, the host portion, and the subnet mask.
+IPv4 Unicast, Broadcast, and Multicast Compare the characteristics and uses of the unicast, broadcast and multicast IPv4 addresses.
+Types of IPv4 Addresses Explain public, private, and reserved IPv4 addresses.
+Network Segmentation Explain how subnetting segments a network to enable better communication.
+Subnet an IPv4 Network Calculate IPv4 subnets for a /24 prefix.
+Subnet a /16 and a /8 Prefix Calculate IPv4 subnets for a /16 and /8 prefix.
+Subnet To Meet Requirements Given a set of requirements for subnetting, implement an IPv4 addressing scheme.
+Variable Length Subnet Masking Explain how to create a flexible addressing scheme using variable length subnet masking (VLSM).
+Structured Design Implement a VLSM addressing scheme.

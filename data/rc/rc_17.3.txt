@@ -1,0 +1,32 @@
+Small Network Growth
+If your network is for a small business, presumably, you want that business to grow, and your network to grow along with it. This is called scaling a network, and there are some best practices for doing this.
+Growth is a natural process for many small businesses, and their networks must grow accordingly. Ideally, the network administrator has enough lead-time to make intelligent decisions about growing the network in alignment with the growth of the company.
+To scale a network, several elements are required:
+Network documentation - Physical and logical topology
+Device inventory - List of devices that use or comprise the network
+Budget - Itemized IT budget, including fiscal year equipment purchasing budget
+Traffic analysis - Protocols, applications, and services and their respective traffic requirements should be documented
+These elements are used to inform the decision-making that accompanies the scaling of a small network.
+Protocol Analysis
+As the network grows, it becomes important to determine how to manage network traffic. It is important to understand the type of traffic that is crossing the network as well as the current traffic flow. There are several network management tools that can be used for this purpose. However, a simple protocol analyzer such as Wireshark can also be used.
+For instance, running Wireshark on several key hosts can reveal the types of network traffic flowing through the network. The following figure displays Wireshark protocol hierarchy statistics for a Windows host on a small network.
+
+The screen capture reveals the host is using IPv6 and IPv4 protocols. The IPv4 specific output also reveals that the host has used DNS, SSL, HTTP, ICMP, and other protocols.
+To determine traffic flow patterns, it is important to do the following:
+Capture traffic during peak utilization times to get a good representation of the different traffic types.
+Perform the capture on different network segments and devices as some traffic will be local to a particular segment.
+Information gathered by the protocol analyzer is evaluated based on the source and destination of the traffic, as well as the type of traffic being sent. This analysis can be used to make decisions on how to manage the traffic more efficiently. This can be done by reducing unnecessary traffic flows or changing flow patterns altogether by moving a server, for example.
+Sometimes, simply relocating a server or service to another network segment improves network performance and accommodates the growing traffic needs. At other times, optimizing the network performance requires major network redesign and intervention.
+Employee Network Utilization
+In addition to understanding changing traffic trends, a network administrator must be aware of how network use is changing. Many operating systems provide built-in tools to display such information. For example, a Windows host provides tools such as the Task Manager, Event Viewer, and Data Usage tools.
+These tools can be used to capture a “snapshot” of information such as the following:
+OS and OS Version
+CPU utilization
+RAM utilization
+Drive utilization
+Non-Network applications
+Network applications
+Documenting snapshots for employees in a small network over a period of time is very useful to identify evolving protocol requirements and associated traffic flows. A shift in resource utilization may require the network administrator to adjust network resource allocations accordingly.
+The Windows 10 Data Usage tool is especially useful to determine which applications are using network services on a host. The Data Usage tool is accessed using Settings > Network & Internet > Data usage > network interface (from the last 30 days).
+The example in the figure is displaying the applications running on a remote user Windows 10 host using the local Wi-Fi network connection.
+

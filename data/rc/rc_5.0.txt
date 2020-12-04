@@ -1,0 +1,12 @@
+Why should I take this module?
+Welcome to Number Systems!
+Guess what? This is a 32-bit IPv4 address of a computer in a network: 11000000.10101000.00001010.00001010. It is shown in binary. This is the IPv4 address for the same computer in dotted decimal: 192.168.10.10. Which one would you rather work with? IPv6 addresses are 128 bits! To make these addresses more manageable, IPv6 uses a hexadecimal system of 0-9 and the letters A-F.
+As a network administrator you must know how to convert binary addresses into dotted decimal and dotted decimal addresses into binary. You will also need to know how to convert dotted decimal into hexadecimal and vice versa. (Hint: You still need your binary conversion skills to make this work.)
+Surprisingly, it is not that hard when you learn a few tricks. This module contains an activity called the Binary Game which will really help you get started. So, why wait?
+What will I learn to do in this module?
+Module Title: Number Systems
+Module Objective: Calculate numbers between decimal, binary, and hexadecimal systems.
+Table caption
+Topic Title Topic Objective
+Binary Number System Calculate numbers between decimal and binary systems.
+Hexadecimal Number System Calculate numbers between decimal and hexadecimal systems.

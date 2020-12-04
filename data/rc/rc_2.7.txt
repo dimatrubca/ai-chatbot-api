@@ -1,0 +1,30 @@
+Manual IP Address Configuration for End Devices
+Much like you need your friends' telephone numbers to text or call them, end devices in your network need an IP address so that they can communicate with other devices on your network. In this topic, you will implement basic connectivity by configuring IP addressing on switches and PCs.
+IPv4 address information can be entered into end devices manually, or automatically using Dynamic Host Configuration Protocol (DHCP).
+To manually configure an IPv4 address on a Windows host, open the Control Panel > Network Sharing Center > Change adapter settings and choose the adapter. Next right-click and select Properties to display the Local Area Connection Properties, as shown in the figure.
+Highlight Internet Protocol Version 4 (TCP/IPv4) and click Properties to open the Internet Protocol Version 4 (TCP/IPv4) Properties window, shown in the figure. Configure the IPv4 address and subnet mask information, and default gateway.
+Note: IPv6 addressing and configuration options are similar to IPv4.
+Note: The DNS server addresses are the IPv4 and IPv6 addresses of the Domain Name System (DNS) servers, which are used to translate IP addresses to domain names, such as
+www.cisco.com
+.
+Automatic IP Address Configuration for End Devices
+End devices typically default to using DHCP for automatic IPv4 address configuration. DHCP is a technology that is used in almost every network. The best way to understand why DHCP is so popular is by considering all the extra work that would have to take place without it.
+In a network, DHCP enables automatic IPv4 address configuration for every end device that is DHCP-enabled. Imagine the amount of time it would take if every time you connected to the network, you had to manually enter the IPv4 address, the subnet mask, the default gateway, and the DNS server. Multiply that by every user and every device in an organization and you see the problem. Manual configuration also increases the chance of misconfiguration by duplicating another device’s IPv4 address.
+As shown in the figure, to configure DHCP on a Windows PC, you only need to select Obtain an IP address automatically and Obtain DNS server address automatically. Your PC will search out a DHCP server and be assigned the address settings necessary to communicate on the network.
+Note: IPv6 uses DHCPv6 and SLAAC (Stateless Address Autoconfiguration) for dynamic address allocation.
+Syntax Checker - Verify Windows PC IP Configuration
+It is possible to display the IP configuration settings on a Windows PC by using the ipconfig command at the command prompt. The output will show the IPv4 address, subnet mask, and gateway information received from the DHCP server.
+Enter the command to display the IP configuration on a Windows PC.
+Enter the command to display the IP configuration on a Windows PC.
+C:\>
+Switch Virtual Interface Configuration
+To access the switch remotely, an IP address and a subnet mask must be configured on the SVI. To configure an SVI on a switch, use the interface vlan 1 global configuration command. Vlan 1 is not an actual physical interface but a virtual one. Next assign an IPv4 address using the ip address ip-address subnet-mask interface configuration command. Finally, enable the virtual interface using the no shutdown interface configuration command.
+After these commands are configured, the switch has all the IPv4 elements ready for communication over the network.
+Note: Similar to a Windows hosts, switches configured with an IPv4 address will typically also need to have a default gateway assigned. This can be done using the ip default-gateway ip-address global configuration command. The ip-address parameter would be the IPv4 address of the local router on the network, as shown in the example. However, in this module you will only be configuring a network with switches and hosts. Routers will be introduced later.
+Syntax Checker - Configure a Switch Virtual Interface
+Enter interface configuration mode for VLAN 1.
+Switch(config)#
+Packet Tracer - Implement Basic Connectivity
+In this activity, you will first perform basic switch configurations. Then you will implement basic connectivity by configuring IP addressing on switches and PCs. When the IP addressing configuration is complete, you will use various show commands to verify configurations and use the ping command to verify basic connectivity between devices.
+Implement Basic Connectivity
+Implement Basic Connectivity

@@ -1,0 +1,11 @@
+Why should I take this module?
+Welcome to Address Resolution!
+Hosts and routers both create routing tables to ensure that they can send and receive data across networks. So how does this information get created in a routing table? As a network administrator, you could enter these MAC and IP addresses manually. But that would take a lot of time and the likelihood of making a few mistakes is great. Are you thinking that there must be some way that this could be done automatically, by the hosts and routers themselves? Of course, you are correct! And even though it is automatic, you must still understand how this works, because you may have to troubleshoot a problem, or worse, your network could be attacked by a threat actor. Are you ready to learn about address resolution? This module has several very good videos to help explain the concepts, as well as three Packet Tracer activities to cement your understanding. Why wait?
+What will I learn to do in this module?
+Module Title: Address Resolution
+Module Objective: Explain how ARP and ND enable communication on a network.
+Table caption
+Topic Title Topic Objective
+MAC and IP Compare the roles of the MAC address and the IP address.
+ARP Describe the purpose of ARP.
+Neighbor Discovery Describe the operation of IPv6 neighbor discovery.

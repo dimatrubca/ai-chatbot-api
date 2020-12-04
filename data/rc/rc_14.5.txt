@@ -1,0 +1,56 @@
+TCP Server Processes
+You already know the fundamentals of TCP. Understanding the role of port numbers will help you to grasp the details of the TCP communication process. In this topic, you will also learn about the TCP three-way handshake and session termination processes.
+Each application process running on a server is configured to use a port number. The port number is either automatically assigned or configured manually by a system administrator.
+An individual server cannot have two services assigned to the same port number within the same transport layer services. For example, a host running a web server application and a file transfer application cannot have both configured to use the same port, such as TCP port 80.
+An active server application assigned to a specific port is considered open, which means that the transport layer accepts, and processes segments addressed to that port. Any incoming client request addressed to the correct socket is accepted, and the data is passed to the server application. There can be many ports open simultaneously on a server, one for each active server application.
+Click each button for more information about TCP server processes.
+Clients Sending TCP Requests
+Request Destination Ports
+Request Source Ports
+Response Destination Ports
+Response Source Ports
+Clients Sending TCP Requests
+Client 1 is requesting web services and Client 2 is requesting email service of the same sever.
+
+TCP Connection Establishment
+In some cultures, when two persons meet, they often greet each other by shaking hands. Both parties understand the act of shaking hands as a signal for a friendly greeting. Connections on the network are similar. In TCP connections, the host client establishes the connection with the server using the three-way handshake process.
+Click each button for more information about each TCP connection establishment step.
+Step 1. SYN
+Step 2. ACK and SYN
+Step 3. ACK
+Step 1. SYN
+The initiating client requests a client-to-server communication session with the server.
+
+The three-way handshake validates that the destination host is available to communicate. In this example, host A has validated that host B is available.
+Session Termination
+To close a connection, the Finish (FIN) control flag must be set in the segment header. To end each one-way TCP session, a two-way handshake, consisting of a FIN segment and an Acknowledgment (ACK) segment, is used. Therefore, to terminate a single conversation supported by TCP, four exchanges are needed to end both sessions. Either the client or the server can initiate the termination.
+In the example, the terms client and server are used as a reference for simplicity, but any two hosts that have an open session can initiate the termination process.
+Click each button for more information about the session termination steps.
+Step 1. FIN
+Step 2. ACK
+Step 3. FIN
+Step 4. ACK
+Step 1. FIN
+When the client has no more data to send in the stream, it sends a segment with the FIN flag set.
+
+When all segments have been acknowledged, the session is closed.
+TCP Three-way Handshake Analysis
+Hosts maintain state, track each data segment within a session, and exchange information about what data is received using the information in the TCP header. TCP is a full-duplex protocol, where each connection represents two one-way communication sessions. To establish the connection, the hosts perform a three-way handshake. As shown in the figure, control bits in the TCP header indicate the progress and status of the connection.
+These are the functions of the three-way handshake:
+It establishes that the destination device is present on the network.
+It verifies that the destination device has an active service and is accepting requests on the destination port number that the initiating client intends to use.
+It informs the destination device that the source client intends to establish a communication session on that port number.
+After the communication is completed the sessions are closed, and the connection is terminated. The connection and session mechanisms enable TCP reliability function.
+
+Control Bits Field
+The six bits in the Control Bits field of the TCP segment header are also known as flags. A flag is a bit that is set to either on or off.
+The six control bits flags are as follows:
+URG - Urgent pointer field significant
+ACK - Acknowledgment flag used in connection establishment and session termination
+PSH - Push function
+RST - Reset the connection when an error or timeout occurs
+SYN - Synchronize sequence numbers used in connection establishment
+FIN - No more data from sender and used in session termination
+Search the internet to learn more about the PSH and URG flags.
+Video - TCP 3-Way Handshake
+Click Play in the figure to see a video demonstration of the TCP 3-Way handshake, using Wireshark.

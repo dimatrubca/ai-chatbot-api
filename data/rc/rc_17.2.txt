@@ -1,0 +1,48 @@
+Common Applications
+The previous topic discussed the components of a small network, as well as some of the design considerations. These considerations are necessary when you are just setting up a network. After you have set it up, your network still needs certain types of applications and protocols in order to work.
+The network is only as useful as the applications that are on it. There are two forms of software programs or processes that provide access to the network: network applications and application layer services.
+Network Applications
+Applications are the software programs used to communicate over the network. Some end-user applications are network-aware, meaning that they implement application layer protocols and are able to communicate directly with the lower layers of the protocol stack. Email clients and web browsers are examples of this type of application.
+Application Layer Services
+Other programs may need the assistance of application layer services to use network resources like file transfer or network print spooling. Though transparent to an employee, these services are the programs that interface with the network and prepare the data for transfer. Different types of data, whether text, graphics or video, require different network services to ensure that they are properly prepared for processing by the functions occurring at the lower layers of the OSI model.
+Each application or network service uses protocols, which define the standards and data formats to be used. Without protocols, the data network would not have a common way to format and direct data. In order to understand the function of various network services, it is necessary to become familiar with the underlying protocols that govern their operation.
+Use the Task Manager to view the current applications, processes, and services running on a Windows PC, as shown in the figure.
+Common Protocols
+Most of a technician’s work, in either a small or a large network, will in some way be involved with network protocols. Network protocols support the applications and services used by employees in a small network.
+Network administrators commonly require access to network devices and servers. The two most common remote access solutions are Telnet and Secure Shell (SSH). SSH service is a secure alternative to Telnet. When connected, administrators can access the SSH server device as though they were logged in locally.
+SSH is used to establish a secure remote access connection between an SSH client and other SSH-enabled devices:
+Network device - The network device (e.g., router, switch, access point, etc.) must support SSH to provide remote access SSH server services to clients.
+Server - The server (e.g., web server, email server, etc.) must support remote access SSH server services to clients.
+Network administrators must also support common network servers and their required related network protocols, as shown in the figure.
+
+Click each button for more information about common network servers and their required related network protocols.
+Web Server
+Email Server
+FTP Server
+DHCP Server
+DNS Server
+Web Server
+Web clients and web servers exchange web traffic using the Hypertext Transfer Protocol (HTTP).
+Hypertext Transfer Protocol Secure (HTTPS) is used for secure web communication.
+Note: A server could provide multiple network services. For instance, a server could be an email, FTP, and SSH server.
+These network protocols comprise the fundamental toolset of a network professional. Each of these network protocols define:
+Processes on either end of a communication session
+Types of messages
+Syntax of the messages
+Meaning of informational fields
+How messages are sent and the expected response
+Interaction with the next lower layer
+Many companies have established a policy of using secure versions (e.g., SSH, SFTP, and HTTPS) of these protocols whenever possible.
+Voice and Video Applications
+Businesses today are increasingly using IP telephony and streaming media to communicate with customers and business partners. Many organizations are enabling their employees to work remotely. As the figure shows, many of their users still require access to corporate software and files, as well as support for voice and video applications.
+
+The network administrator must ensure the proper equipment is installed in the network and that the network devices are configured to ensure priority delivery.
+Click each button for more information about the factors that a small network administrator must consider when supporting real-time applications.
+Infrastructure
+VoIP
+IP Telephony
+Real-Time Applications
+Infrastructure
+The network infrastructure must support the real-time applications.
+Existing devices and cabling must be tested and validated.
+Newer networking products may be required.

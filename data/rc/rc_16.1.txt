@@ -1,0 +1,44 @@
+Types of Threats
+Wired and wireless computer networks are essential to everyday activities. Individuals and organizations depend on their computers and networks. Intrusion by an unauthorized person can result in costly network outages and loss of work. Attacks on a network can be devastating and can result in a loss of time and money due to damage, or theft of important information or assets.
+Intruders can gain access to a network through software vulnerabilities, hardware attacks, or through guessing someone's username and password. Intruders who gain access by modifying software or exploiting software vulnerabilities are called threat actors.
+After the threat actor gains access to the network, four types of threats may arise.
+Click each button for information about each threat.
+Information Theft
+Data Loss and Manipulation
+Identity Theft
+Disruption of Service
+Information theft is breaking into a computer to obtain confidential information. Information can be used or sold for various purposes such as when someone is stealing proprietary information of an organization, like research and development data.
+
+Types of Vulnerabilities
+Vulnerability is the degree of weakness in a network or a device. Some degree of vulnerability is inherent in routers, switches, desktops, servers, and even security devices. Typically, the network devices under attack are the endpoints, such as servers and desktop computers.
+There are three primary vulnerabilities or weaknesses: technological, configuration, and security policy. All three of these sources of vulnerabilities can leave a network or device open to various attacks, including malicious code attacks and network attacks.
+Click each button for a table with examples and a description of each type of vulnerability.
+Technological Vulnerabilities
+Configuration Vulnerabilities
+Policy Vulnerabilities
+Technological Vulnerabilities
+Table caption
+Vulnerability Description
+TCP/IP Protocol Weakness
+Hypertext Transfer Protocol (HTTP), File Transfer Protocol (FTP), and Internet Control Message Protocol (ICMP) are inherently insecure.
+Simple Network Management Protocol (SNMP) and Simple Mail Transfer Protocol (SMTP) are related to the inherently insecure structure upon which TCP was designed.
+Operating System Weakness
+Each operating system has security problems what must be addressed.
+UNIX, Linux, Mac OS, Mac OS X, Windows Server 2012, Windows 7, Windows 8
+They are documented in the Computer Emergency Response Team (CERT) archives at http://www.cert.org
+Network Equipment Weakness Various types of network equipment, such as routers, firewalls, and switches have security weaknesses that must be recognized and protected against. Their weaknesses include password protection, lack of authentication, routing protocols, and firewall holes.
+Physical Security
+An equally important vulnerable area of the network to consider is the physical security of devices. If network resources can be physically compromised, a threat actor can deny the use of network resources.
+The four classes of physical threats are as follows:
+Hardware threats - This includes physical damage to servers, routers, switches, cabling plant, and workstations.
+Environmental threats - This includes temperature extremes (too hot or too cold) or humidity extremes (too wet or too dry).
+Electrical threats - This includes voltage spikes, insufficient supply voltage (brownouts), unconditioned power (noise), and total power loss.
+Maintenance threats - This includes poor handling of key electrical components (electrostatic discharge), lack of critical spare parts, poor cabling, and poor labeling.
+A good plan for physical security must be created and implemented to address these issues. The figure shows an example of physical security plan.
+
+Plan Physical Security to Limit Damage to Equipment
+Secure computer room.
+Implement physical security to limit damage to the equipment.
+Step 1. Lock up equipment and prevent unauthorized access from the doors, ceiling, raised floor, windows, ducts, and vents.
+Step 2. Monitor and control closet entry with electronic logs.
+Step 3. Use security cameras.

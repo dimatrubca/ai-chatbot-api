@@ -1,0 +1,43 @@
+Primary Command Modes
+In the previous topic, you learned that all network devices require an OS and that they can be configured using the CLI or a GUI. Using the CLI may provide the network administrator with more precise control and flexibility than using the GUI. This topic discusses using CLI to navigate the Cisco IOS.
+As a security feature, the Cisco IOS software separates management access into the following two command modes:
+User EXEC Mode - This mode has limited capabilities but is useful for basic operations. It allows only a limited number of basic monitoring commands but does not allow the execution of any commands that might change the configuration of the device. The user EXEC mode is identified by the CLI prompt that ends with the > symbol.
+Privileged EXEC Mode - To execute configuration commands, a network administrator must access privileged EXEC mode. Higher configuration modes, like global configuration mode, can only be reached from privileged EXEC mode. The privileged EXEC mode can be identified by the prompt ending with the # symbol.
+The table summarizes the two modes and displays the default CLI prompts of a Cisco switch and router.
+Table caption
+Command Mode Description Default Device Prompt
+User Exec Mode
+Mode allows access to only a limited number of basic monitoring commands.
+It is often referred to as “view-only" mode.
+Switch> 
+Router>
+Privileged EXEC Mode
+Mode allows access to all commands and features.
+The user can use any monitoring commands and execute configuration and management commands.
+Switch# 
+Router#
+Configuration Mode and Subconfiguration Modes
+To configure the device, the user must enter global configuration mode, which is commonly called global config mode.
+From global config mode, CLI configuration changes are made that affect the operation of the device as a whole. Global configuration mode is identified by a prompt that ends with (config)# after the device name, such as Switch(config)#.
+Global configuration mode is accessed before other specific configuration modes. From global config mode, the user can enter different subconfiguration modes. Each of these modes allows the configuration of a particular part or function of the IOS device. Two common subconfiguration modes include:
+Line Configuration Mode - Used to configure console, SSH, Telnet, or AUX access.
+Interface Configuration Mode - Used to configure a switch port or router network interface.
+When the CLI is used, the mode is identified by the command-line prompt that is unique to that mode. By default, every prompt begins with the device name. Following the name, the remainder of the prompt indicates the mode. For example, the default prompt for line configuration mode is Switch(config-line)# and the default prompt for interface configuration mode is Switch(config-if)#.
+Video - IOS CLI Primary Command Modes
+Click Play in the figure to view a video demonstration of navigating between IOS modes.
+Navigate Between IOS Modes
+Various commands are used to move in and out of command prompts. To move from user EXEC mode to privileged EXEC mode, use the enable command. Use the disable privileged EXEC mode command to return to user EXEC mode.
+Note: Privileged EXEC mode is sometimes called enable mode.
+To move in and out of global configuration mode, use the configure terminal privileged EXEC mode command. To return to the privileged EXEC mode, enter the exit global config mode command.
+There are many different subconfiguration modes. For example, to enter line subconfiguration mode, you use the line command followed by the management line type and number you wish to access. Use the exit command to exit a subconfiguration mode and return to global configuration mode.
+To move from any subconfiguration mode of the global configuration mode to the mode one step above it in the hierarchy of modes, enter the exit command.
+To move from any subconfiguration mode to the privileged EXEC mode, enter the end command or enter the key combination Ctrl+Z.
+You can also move directly from one subconfiguration mode to another. Notice how after selecting an interface, the command prompt changes from (config-line)# to (config-if)#.
+Video - Navigate Between IOS Modes
+Click Play in the figure to view a video demonstration of how to move between various IOS CLI modes.
+A Note About Syntax Checker Activities
+When you are learning how to modify device configurations, you might want to start in a safe, non-production environment before trying it on real equipment. NetAcad gives you different simulation tools to help build your configuration and troubleshooting skills. Because these are simulation tools, they typically do not have all the functionality of real equipment. One such tool is the Syntax Checker. In each Syntax Checker, you are given a set of instructions to enter a specific set of commands. You cannot progress in Syntax Checker unless the exact and full command is entered as specified. More advanced simulation tools, such as Packet Tracer, let you enter abbreviated commands, much as you would do on real equipment.
+Syntax Checker - Navigate Between IOS Modes
+Use the Syntax Checker activity to navigate between IOS command lines on a switch.
+Enter privileged EXEC mode using the enable command.
+Switch>

@@ -1,0 +1,13 @@
+Why should I take this module?
+Welcome to Network Layer!
+By now you may have noticed that the modules in this course are progressing from the bottom up through the OSI model layers. At the network layer of the OSI model, we introduce you to communication protocols and routing protocols. Say you want to send an email to a friend who lives in another city, or even another country. This person is not on the same network as you. A simple switched network cannot get your message any further than the end of your own network. You need some help to keep this message moving along the path to your friend’s end device. To send an email (a video, or a file, etc.) to anyone who is not on your local network, you must have access to routers. To access routers, you must use network layer protocols. To help you visualize these processes, this module contains two Wireshark activities. Enjoy!
+What will I learn to do in this module?
+Module Title: Network Layer
+Module Objective: Explain how routers use network layer protocols and services to enable end-to-end connectivity.
+Table caption
+Topic Title Topic Objective
+Network Layer Characteristics Explain how the network layer uses IP protocols for reliable communications.
+IPv4 Packet Explain the role of the major header fields in the IPv4 packet.
+IPv6 Packet Explain the role of the major header fields in the IPv6 packet.
+How a Host Routes Explain how network devices use routing tables to direct packets to a destination network.
+Router Routing Tables Explain the function of fields in the routing table of a router.

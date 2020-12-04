@@ -1,0 +1,15 @@
+Why should I take this module?
+Welcome to Build a Small Network!
+Hooray! You have come to the final module in the Introduction to Networks v7.0 course. You have most of the foundational knowledge needed to set up your own network. Where do you go from here? You build a network, of course. And not only do you build one, you verify that it is working, and even troubleshoot some common network problems. This module has labs and Packet Tracer activities to help you practice your new skills as a network administrator. Let's get going!
+What will I learn to do in this module?
+Module Title: Build a Small Network
+Module Objective: Implement a network design for a small network to include a router, a switch, and end devices.
+Table caption
+Topic Title Topic Objective
+Devices in a Small Network Identify the devices used in a small network.
+Small Network Applications and Protocols Identify the protocols and applications used in a small network.
+Scale to Larger Networks Explain how a small network serves as the basis of larger networks.
+Verify Connectivity Use the output of the ping and tracert commands to verify connectivity and establish relative network performance.
+Host and IOS Commands Use host and IOS commands to acquire information about the devices in a network.
+Troubleshooting Methodologies Describe common network troubleshooting methodologies
+Troubleshooting Scenarios Troubleshoot issues with devices in the network.

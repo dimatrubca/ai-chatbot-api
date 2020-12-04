@@ -1,0 +1,24 @@
+Subnet Using the Subnet ID
+The introduction to this module mentioned subnetting an IPv6 network. It also said that you might discover that it is a bit easier than subnetting an IPv4 network. You are about to find out!
+Recall that with IPv4, we must borrow bits from the host portion to create subnets. This is because subnetting was an afterthought with IPv4. However, IPv6 was designed with subnetting in mind. A separate subnet ID field in the IPv6 GUA is used to create subnets. As shown in the figure, the subnet ID field is the area between the Global Routing Prefix and the interface ID.
+
+GUA with a 16-bit Subnet ID
+The benefit of a 128-bit address is that it can support more than enough subnets and hosts per subnet, for each network. Address conservation is not an issue. For example, if the global routing prefix is a /48, and using a typical 64 bits for the interface ID, this will create a 16-bit subnet ID:
+16-bit subnet ID - Creates up to 65,536 subnets.
+64-bit interface ID - Supports up to 18 quintillion host IPv6 addresses per subnet (i.e., 18,000,000,000,000,000,000).
+Note: Subnetting into the 64-bit interface ID (or host portion) is also possible but it is rarely required.
+IPv6 subnetting is also easier to implement than IPv4, because there is no conversion to binary required. To determine the next available subnet, just count up in hexadecimal.
+IPv6 Subnetting Example
+For example, assume an organization has been assigned the 2001:db8:acad::/48 global routing prefix with a 16 bit subnet ID. This would allow the organization to create 65,536 /64 subnets, as shown in the figure. Notice how the global routing prefix is the same for all subnets. Only the subnet ID hextet is incremented in hexadecimal for each subnet.
+
+Subnetting using a 16-bit Subnet ID
+IPv6 Subnet Allocation
+With over 65,536 subnets to choose from, the task of the network administrator becomes one of designing a logical scheme to address the network.
+As shown in the figure, the example topology requires five subnets, one for each LAN as well as for the serial link between R1 and R2. Unlike the example for IPv4, with IPv6 the serial link subnet will have the same prefix length as the LANs. Although this may seem to “waste” addresses, address conservation is not a concern when using IPv6.
+
+Example Topology
+As shown in the next figure, the five IPv6 subnets were allocated, with the subnet ID field 0001 through 0005 used for this example. Each /64 subnet will provide more addresses than will ever be needed.
+
+Router Configured with IPv6 Subnets
+Similar to configuring IPv4, the example shows that each of the router interfaces has been configured to be on a different IPv6 subnet.
+IPv6 Address Configuration on Router R1

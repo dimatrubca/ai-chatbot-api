@@ -1,0 +1,12 @@
+Why should I take this module?
+Welcome to Network Security Fundamentals!
+You may have already set up a network, or you may be getting ready to do just that. Here is something to think about. Setting up a network without securing it is like opening all the doors and windows to your home and then going on vacation. Anyone could come by, gain entry, steal or break items, or just make a mess. As you have seen on the news, it is possible to break into any network! As a network administrator, it is part of your job to make it difficult for threat actors to gain access to your network. This module gives you an overview of types of network attacks and what you can do to reduce a threat actor’s chances of succeeding. It also has Packet Tracer activities to let you practice some basic techniques for network security. If you have a network, but it is not as secure as possible, then you will want to read this module right now!
+What will I learn to do in this module?
+Module Title: Network Security Fundamentals
+Module Objective: Configure switches and routers with device hardening features to enhance security.
+Table caption
+Topic Title Topic Objective
+Security Threats and Vulnerabilities Explain why basic security measure are necessary on network devices.
+Network Attacks Identify security vulnerabilities.
+Network Attack Mitigation Identify general mitigation techniques.
+Device Security Configure network devices with device hardening features to mitigate security threats.

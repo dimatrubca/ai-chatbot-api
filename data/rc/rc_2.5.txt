@@ -1,0 +1,32 @@
+Configuration Files
+You now know how to perform basic configuration on a switch, including passwords and banner messages. This topic will show you how to save your configurations.
+There are two system files that store the device configuration:
+startup-config - This is the saved configuration file that is stored in NVRAM. It contains all the commands that will be used by the device upon startup or reboot. Flash does not lose its contents when the device is powered off.
+running-config - This is stored in Random Access Memory (RAM). It reflects the current configuration. Modifying a running configuration affects the operation of a Cisco device immediately. RAM is volatile memory. It loses all of its content when the device is powered off or restarted.
+The show running-config privileged EXEC mode command is used to view the running config. As shown in the example, the command will list the complete configuration currently stored in RAM.
+To view the startup configuration file, use the show startup-config privileged EXEC command.
+If power to the device is lost, or if the device is restarted, all configuration changes will be lost unless they have been saved. To save changes made to the running configuration to the startup configuration file, use the copy running-config startup-config privileged EXEC mode command.
+Alter the Running Configuration
+If changes made to the running config do not have the desired effect and the running-config has not yet been saved, you can restore the device to its previous configuration. Remove the changed commands individually, or reload the device using the reload privileged EXEC mode command to restore the startup-config.
+The downside to using the reload command to remove an unsaved running config is the brief amount of time the device will be offline, causing network downtime.
+When a reload is initiated, the IOS will detect that the running config has changes that were not saved to the startup configuration. A prompt will appear to ask whether to save the changes. To discard the changes, enter n or no.
+Alternatively, if undesired changes were saved to the startup config, it may be necessary to clear all the configurations. This requires erasing the startup config and restarting the device. The startup config is removed by using the erase startup-config privileged EXEC mode command. After the command is issued, the switch will prompt you for confirmation. Press Enter to accept.
+After removing the startup config from NVRAM, reload the device to remove the current running config file from RAM. On reload, a switch will load the default startup config that originally shipped with the device.
+Video - Alter the Running Configuration
+Click Play in the figure to view a video demonstration on how to save switch configuration files.
+Capture Configuration to a Text File
+Configuration files can also be saved and archived to a text document. This sequence of steps ensures that a working copy of the configuration file is available for editing or reuse later.
+For example, assume that a switch has been configured, and the running config has been saved on the device.
+Step 1. Open terminal emulation software, such as PuTTY or Tera Term, that is already connected to a switch.
+Step 2. Enable logging in the terminal software and assign a name and file location to save the log file. The figure displays that All session output will be captured to the file specified (i.e., MySwitchLogs).
+Step 3. Execute the show running-config or show startup-config command at the privileged EXEC prompt. Text displayed in the terminal window will be placed into the chosen file.
+Step 4. Disable logging in the terminal software. The figure shows how to disable logging by choosing the None session logging option.
+The text file created can be used as a record of how the device is currently implemented. The file could require editing before being used to restore a saved configuration to a device.
+To restore a configuration file to a device:
+Step 1. Enter global configuration mode on the device.
+Step 2. Copy and paste the text file into the terminal window connected to the switch.
+The text in the file will be applied as commands in the CLI and become the running configuration on the device. This is a convenient method of manually configuring a device.
+Packet Tracer - Configure Initial Switch Settings
+In this activity, you will perform basic switch configurations. You will secure access to the CLI and console ports using encrypted and plaintext passwords. You will learn how to configure messages for users logging into the switch. These banners are also used to warn unauthorized users that access is prohibited.
+Configure Initial Switch Settings
+Configure Initial Switch Settings

@@ -1,0 +1,78 @@
+Verify Connectivity with Ping
+Whether your network is small and new, or you are scaling an existing network, you will always want to be able to verify that your components are properly connected to each other and to the internet. This topic discusses some utilities that you can use to ensure that your network is connected.
+The ping command is the most effective way to quickly test Layer 3 connectivity between a source and destination IP address. The command also displays various round-trip time statistics.
+Specifically, the ping command uses the Internet Control Message Protocol (ICMP) echo request (ICMP Type 8) and echo reply (ICMP Type 0) messages. The ping command is available in most operating systems including Windows, Linux, macOS, and Cisco IOS.
+On a Windows 10 host, the ping command sends four consecutive ICMP echo request messages and expects four consecutive ICMP echo replies from the destination.
+For example, assume PC A pings PC B. As shown in the figure, the PC A Windows host sends four consecutive ICMP echo request messages. sometimes referred to as an ICMP echo, to PC B (i.e., 10.1.1.10).
+
+The destination host receives and processes the ICMP echos. As shown in the figure, PC B responds by sending four ICMP echo reply messages to PC A.
+
+As shown in the command output, PC A has received echo replies from PC-B verifying the Layer 3 network connection.
+The output validates Layer 3 connectivity between PC A and PC B.
+A Cisco IOS ping command output varies from a Windows host. For instance, the IOS ping sends five ICMP echo messages, as shown in the output.
+Notice the !!!!! output characters. The IOS ping command displays an indicator for each ICMP echo reply received. The table lists the most common output characters from the ping command.
+IOS Ping Indicators
+Table caption
+Element Description
+!
+Exclamation mark indicates successful receipt of an echo reply message.
+It validates a Layer 3 connection between source and destination.
+.
+A period means that time expired waiting for an echo reply message.
+This indicates a connectivity problem occurred somewhere along the path.
+U
+Uppercase U indicates a router along the path responded with an ICMP Type 3 “destination unreachable” error message.
+Possible reasons include the router does not know the direction to the destination network or it could not find the host on the destination network.
+Note: Other possible ping replies include Q, M, ?, or &. However, the meaning of these are out of scope for this module.
+Extended Ping
+A standard ping uses the IP address of the interface closest to the destination network as the source of the ping. The source IP address of the ping 10.1.1.10 command on R1 would be that of the G0/0/0 interface (i.e., 209.165.200.225), as illustrated in the example.
+
+The Cisco IOS offers an "extended" mode of the ping command. This mode enables the user to create special type of pings by adjusting parameters related to the command operation.
+Extended ping is entered in privileged EXEC mode by typing ping without a destination IP address. You will then be given several prompts to customize the extended ping.
+Note: Pressing Enter accepts the indicated default values.
+For example, assume you wanted to test connectivity from the R1 LAN (i.e., 192.168.10.0/24) to the 10.1.1.0 LAN. This could be verified from the PC A. However, an extended ping could be configured on R1 to specify a different source address.
+As illustrated in the example, the source IP address of the extended ping command on R1 could be configured to use the G0/0/1 interface IP address (i.e., 192.168.10.1).
+
+The following command output configures an extended ping on R1 and specifies the source IP address to be that of the G0/0/1 interface (i.e., 192.168.10.1).
+Note: The ping ipv6 command is used for IPv6 extended pings.
+Verify Connectivity with Traceroute
+The ping command is useful to quickly determine if there is a Layer 3 connectivity problem. However, it does not identify where the problem is located along the path.
+Traceroute can help locate Layer 3 problem areas in a network. A trace returns a list of hops as a packet is routed through a network. It could be used to identify the point along the path where the problem can be found.
+The syntax of the trace command varies between operating systems, as illustrated in the figure.
+
+Windows and Cisco IOS Trace Commands
+The following is a sample output of tracert command on a Windows 10 host.
+Note: Use Ctrl-C to interrupt a tracert in Windows.
+The only successful response was from the gateway on R1. Trace requests to the next hop timed out as indicated by the asterisk (*), meaning that the next hop router did not respond. The timed out requests indicate that there is a failure in the internetwork beyond the LAN, or that these routers have been configured to not respond to echo requests used in the trace. In this example there appears to be a problem between R1 and R2.
+A Cisco IOS traceroute command output varies from the Windows tracert command. For instance, refer to the following topology.
+
+The following is a sample output of traceroute command from R1.
+In this example, the trace validated that it could successfully reach PC B.
+Timeouts indicate a potential problem. For instance, if the 10.1.1.10 host was not available, the traceroute command would display the following output.
+Use Ctrl-Shift-6 to interrupt a traceroute in Cisco IOS.
+Note: Windows implementation of traceroute (tracert) sends ICMP Echo Requests. Cisco IOS and Linux use UDP with an invalid port number. The final destination will return an ICMP port unreachable message.
+Extended Traceroute
+Like the extended ping command, there is also an extended traceroute command. It allows the administrator to adjust parameters related to the command operation. This is helpful in locating the problem when troubleshooting routing loops, determining the exact next-hop router, or determining where packets are getting dropped or denied by a router or firewall.
+The Windows tracert command allows the input of several parameters through options in the command line. However, it is not guided like the extended traceroute IOS command. The following output displays the available options for the Windows tracert command.
+The Cisco IOS extended traceroute option enables the user to create a special type of trace by adjusting parameters related to the command operation. Extended traceroute is entered in privileged EXEC mode by typing traceroute without a destination IP address. IOS will guide you through the command options by presenting a number of prompts related to the setting of all the different parameters.
+Note: Pressing Enter accepts the indicated default values.
+For example, assume you want to test connectivity to PC B from the R1 LAN. Although this could be verified from PC A, an extended traceroute could be configured on R1 to specify a different source address.
+
+As illustrated in the example, the source IP address of the extended traceroute command on R1 could be configured to use the R1 LAN interface IP address (i.e., 192.168.10.1).
+Network Baseline
+One of the most effective tools for monitoring and troubleshooting network performance is to establish a network baseline. Creating an effective network performance baseline is accomplished over a period of time. Measuring performance at varying times and loads will assist in creating a better picture of overall network performance.
+The output derived from network commands contributes data to the network baseline. One method for starting a baseline is to copy and paste the results from an executed ping, trace, or other relevant commands into a text file. These text files can be time stamped with the date and saved into an archive for later retrieval and comparison.
+Among items to consider are error messages and the response times from host to host. If there is a considerable increase in response times, there may be a latency issue to address.
+For example, the following ping output was captured and pasted into a text file.
+August 19, 2019 at 08:14:43
+Notice the ping round-trip times are less than 1 ms.
+A month later, the ping is repeated and captured.
+September 19, 2019 at 10:18:21
+Notice this time that the ping round-trip times are much longer indicating a potential problem.
+Corporate networks should have extensive baselines; more extensive than we can describe in this course. Professional-grade software tools are available for storing and maintaining baseline information. In this course, we cover a few basic techniques and discuss the purpose of baselines.
+Cisco’s best practices for baseline processes can be found by searching the internet for “Baseline Process Best Practices”.
+Lab - Test Network Latency with Ping and Traceroute
+In this lab, you will complete the following objectives:
+Part 1: Use Ping to Document Network Latency
+Part 2: Use Traceroute to Document Network Latency
+Test Network Latency with Ping and Traceroute

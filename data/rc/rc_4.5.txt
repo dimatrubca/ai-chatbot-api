@@ -1,0 +1,54 @@
+Properties of Fiber-Optic Cabling
+As you have learned, fiber-optic cabling is the other type of cabling used in networks. Because it is expensive, it is not as commonly used at the various types of copper cabling. But fiber-optic cabling has certain properties that make it the best option in certain situations, which you will discover in this topic.
+Optical fiber cable transmits data over longer distances and at higher bandwidths than any other networking media. Unlike copper wires, fiber-optic cable can transmit signals with less attenuation and is completely immune to EMI and RFI. Optical fiber is commonly used to interconnect network devices.
+Optical fiber is a flexible, but extremely thin, transparent strand of very pure glass, not much bigger than a human hair. Bits are encoded on the fiber as light impulses. The fiber-optic cable acts as a waveguide, or “light pipe,” to transmit light between the two ends with minimal loss of signal.
+As an analogy, consider an empty paper towel roll with the inside coated like a mirror. It is a thousand meters in length, and a small laser pointer is used to send Morse code signals at the speed of light. Essentially that is how a fiber-optic cable operates, except that it is smaller in diameter and uses sophisticated light technologies.
+Types of Fiber Media
+Fiber-optic cables are broadly classified into two types:
+Single-mode fiber (SMF)
+Multimode fiber (MMF)
+Click each button for an illustration and explanation of each type.
+Single-Mode Fiber
+Multimode Fiber
+Single-Mode Fiber
+SMF consists of a very small core and uses expensive laser technology to send a single ray of light, as shown in the figure. SMF is popular in long-distance situations spanning hundreds of kilometers, such as those required in long haul telephony and cable TV applications.
+
+One of the highlighted differences between MMF and SMF is the amount of dispersion. Dispersion refers to the spreading out of a light pulse over time. Increased dispersion means increased loss of signal strength. MMF has a greater dispersion than SMF. That is why MMF can only travel up to 500 meters before signal loss.
+Fiber-Optic Cabling Usage
+Fiber-optic cabling is now being used in four types of industry:
+Enterprise Networks - Used for backbone cabling applications and interconnecting infrastructure devices
+Fiber-to-the-Home (FTTH) - Used to provide always-on broadband services to homes and small businesses
+Long-Haul Networks - Used by service providers to connect countries and cities
+Submarine Cable Networks - Used to provide reliable high-speed, high-capacity solutions capable of surviving in harsh undersea environments at up to transoceanic distances. Search the internet for “submarine cables telegeography map” to view various maps online.
+Our focus in this course is the use of fiber within the enterprise.
+Fiber-Optic Connectors
+An optical-fiber connector terminates the end of an optical fiber. A variety of optical-fiber connectors are available. The main differences among the types of connectors are dimensions and methods of coupling. Businesses decide on the types of connectors that will be used, based on their equipment.
+Note: Some switches and routers have ports that support fiber-optic connectors through a small form-factor pluggable (SFP) transceiver. Search the internet for various types of SFPs.
+Click each fiber-optic connector type for an image and more information.
+Straight-Tip (ST) Connectors
+Subscriber Connector (SC) Connectors
+Lucent Connector (LC) Simplex Connectors
+Duplex Multimode LC Connectors
+ST connectors were one of the first connector types used. The connector locks securely with a “Twist-on/twist-off” bayonet-style mechanism.
+Until recently, light could only travel in one direction over optical fiber. Two fibers were required to support the full duplex operation. Therefore, fiber-optic patch cables bundle together two optical fiber cables and terminate them with a pair of standard, single-fiber connectors. Some fiber connectors accept both the transmitting and receiving fibers in a single connector known as a duplex connector, as shown in the Duplex Multimode LC Connector in the figure. BX standards such as 100BASE-BX use different wavelengths for sending and receiving over a single fiber.
+Fiber Patch Cords
+Fiber patch cords are required for interconnecting infrastructure devices. The use of color distinguishes between single-mode and multimode patch cords. A yellow jacket is for single-mode fiber cables and orange (or aqua) for multimode fiber cables.
+Click each fiber patch cord for an image.
+SC-SC Multimode Patch Cord
+LC-LC Single-mode Patch Cord
+ST-LC Multimode Patch Cord
+SC-ST Single-mode Patch Cord
+Note: Fiber cables should be protected with a small plastic cap when not in use.
+Fiber versus Copper
+There are many advantages to using fiber-optic cable compared to copper cables. The table highlights some of these differences.
+At present, in most enterprise environments, optical fiber is primarily used as backbone cabling for high-traffic, point-to-point connections between data distribution facilities. It is also used for the interconnection of buildings in multi-building campuses. Because fiber-optic cables do not conduct electricity and have a low signal loss, they are well suited for these uses.
+UTP and Fiber-Optic Cabling Comparison
+Table caption
+Implementation Issues UTP Cabling Fiber-Optic Cabling
+Bandwidth supported 10 Mb/s - 10 Gb/s 10 Mb/s - 100 Gb/s
+Distance Relatively short (1 - 100 meters) Relatively long ( 1 - 100,000 meters)
+Immunity to EMI and RFI Low High (Completely immune)
+Immunity to electrical hazards Low High (Completely immune)
+Media and connector costs Lowest Highest
+Installation skills required Lowest Highest
+Safety precautions Lowest Highest

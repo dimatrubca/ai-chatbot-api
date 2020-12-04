@@ -1,0 +1,18 @@
+Why should I take this module?
+Welcome to Basic Switch and End Device Configuration!
+As part of your career in networking, you might have to set up a new network or maintain and upgrade an existing one. In either case, you’ll configure switches and end devices so that they are secure and perform effectively based on your requirements.
+Out of the box, switches and end devices come with some general configuration. But for your particular network, switches and end devices require your specific information and instructions. In this module, you will learn how to access Cisco IOS network devices. You will learn basic configuration commands and use them to configure and verify a Cisco IOS device and an end device with an IP address.
+Of course, there is much more to network administration, but none of that can happen without first configuring switches and end devices. Let’s get started!
+What will I learn to do in this module?
+Module Title: Basic Switch and End Device Configuration
+Module Objective: Implement initial settings including passwords, IP addressing, and default gateway parameters on a network switch and end devices.
+Table caption
+Topic Title Topic Objective
+Cisco IOS Access Explain how to access a Cisco IOS device for configuration purposes.
+IOS Navigation Explain how to navigate Cisco IOS to configure network devices.
+The Command Structure Describe the command structure of Cisco IOS software.
+Basic Device Configuration Configure a Cisco IOS device using CLI.
+Save Configurations Use IOS commands to save the running configuration.
+Ports and Addresses Explain how devices communicate across network media.
+Configure IP Addressing Configure a host device with an IP address.
+Verify Connectivity Verify connectivity between two end devices.

@@ -1,0 +1,52 @@
+Small Network Topologies
+The majority of businesses are small; therefore, it is not surprising that the majority of business networks are also small.
+A small network design is usually simple. The number and type of devices included are significantly reduced compared to that of a larger network.
+For instance, refer to the sample small-business network shown in the figure.
+
+This small network requires a router, a switch, and a wireless access point to connect wired and wireless users, an IP phone, a printer, and a server. Small networks typically have a single WAN connection provided by DSL, cable, or an Ethernet connection.
+Large networks require an IT department to maintain, secure, and troubleshoot network devices and to protect organizational data. Managing a small network requires many of the same skills as those required for managing a larger one. Small networks are managed by a local IT technician or by a contracted professional.
+Device Selection for a Small Network
+Like large networks, small networks require planning and design to meet user requirements. Planning ensures that all requirements, cost factors, and deployment options are given due consideration.
+One of the first design considerations is the type of intermediary devices to use to support the network.
+Click each button for more information about the factors that must be considered when selecting network devices.
+Cost
+Speed and Types of Ports/Interfaces
+Expandability
+Operating System Features and Services
+Cost
+The cost of a switch or router is determined by its capacity and features. This includes the number and types of ports available and the backplane speed. Other factors that influence the cost are network management capabilities, embedded security technologies, and optional advanced switching technologies. The expense of cable runs required to connect every device on the network must also be considered. Another key element affecting cost considerations is the amount of redundancy to incorporate into the network.
+IP Addressing for a Small Network
+When implementing a network, create an IP addressing scheme and use it. All hosts and devices within an internetwork must have a unique address.
+Devices that will factor into the IP addressing scheme include the following:
+End user devices - The number and type of connection (i.e., wired, wireless, remote access)
+Servers and peripherals devices (e.g., printers and security cameras)
+Intermediary devices including switches and access points
+It is recommended that you plan, document, and maintain an IP addressing scheme based on device type. The use of a planned IP addressing scheme makes it easier to identify a type of device and to troubleshoot problems, as for instance, when troubleshooting network traffic issues with a protocol analyzer.
+For example, refer to the topology of a small to medium sized organization in the figure.
+
+The organization requires three user LANs (i.e., 192.168.1.0/24, 192.168.2.0/24, and 192.168.3.0/24). The organization has decided to implement a consistent IP addressing scheme for each 192.168.x.0/24 LAN using the following plan:
+Device TypeAssignable IP Address Range Summarized as …Default gateway (Router)192.168.x.1 - 192.168.x.2192.168.x.0/30Switches (max 2)192.168.x.5 - 192.168.x.6192.168.x.4/30Access points (max 6)192.168.x.9 - 192.168.x.14192.168.x.8/29Servers (max 6)192.168.x.17 - 192.168.x.22192.168.x.16/29Printers (max 6)192.168.x.25 - 192.168.x.30192.168.x.24/29IP Phones (max 6)192.168.x.33 - 192.168.x.38192.168.x.32/29Wired devices (max 62)192.168.x.65 - 192.168.x.126192.168.x.64/26Wireless devices (max 62)192.168.x.193 - 192.168.x.254192.168.x.192/26
+Device Type Assignable IP Address Range Summarized as …
+Default gateway (Router) 192.168.x.1 - 192.168.x.2 192.168.x.0/30
+Switches (max 2) 192.168.x.5 - 192.168.x.6 192.168.x.4/30
+Access points (max 6) 192.168.x.9 - 192.168.x.14 192.168.x.8/29
+Servers (max 6) 192.168.x.17 - 192.168.x.22 192.168.x.16/29
+Printers (max 6) 192.168.x.25 - 192.168.x.30 192.168.x.24/29
+IP Phones (max 6) 192.168.x.33 - 192.168.x.38 192.168.x.32/29
+Wired devices (max 62) 192.168.x.65 - 192.168.x.126 192.168.x.64/26
+Wireless devices (max 62) 192.168.x.193 - 192.168.x.254 192.168.x.192/26
+The figure displays an example of the 192.168.2.0/24 network devices with assigned IP addresses using the predefined IP addressing scheme.
+
+For instance, the default gateway IP address is 192.168.2.1/24, the switch is 192.168.2.5/24, the server is 192.168.2.17/24, etc..
+Notice that the assignable IP address ranges were deliberately allocated on subnetnetwork boundaries to simplify summarizing the group type. For instance, assume another switch with IP address 192.168.2.6 is added to the network. To identify all switches in a network policy, the administrator could specify the summarized network address 192.168.x.4/30.
+Redundancy in a Small Network
+Another important part of network design is reliability. Even small businesses often rely heavily on their network for business operation. A failure of the network can be very costly.
+In order to maintain a high degree of reliability, redundancy is required in the network design. Redundancy helps to eliminate single points of failure.
+There are many ways to accomplish redundancy in a network. Redundancy can be accomplished by installing duplicate equipment, but it can also be accomplished by supplying duplicate network links for critical areas, as shown in the figure.
+
+Small networks typically provide a single exit point toward the internet via one or more default gateways. If the router fails, the entire network loses connectivity to the internet. For this reason, it may be advisable for a small business to pay for a second service provider as backup.
+Traffic Management
+The goal for a good network design, even for a small network, is to enhance the productivity of the employees and minimize network downtime. The network administrator should consider the various types of traffic and their treatment in the network design.
+The routers and switches in a small network should be configured to support real-time traffic, such as voice and video, in an appropriate manner relative to other data traffic. In fact, a good network design will implement quality of service (QoS) to classify traffic carefully according to priority during times of congestion, as shown in the figure.
+
+Priority queuing has four queues. The high-priority queue is always emptied first.

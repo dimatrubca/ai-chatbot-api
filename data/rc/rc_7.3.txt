@@ -1,0 +1,70 @@
+Switch Fundamentals
+Now that you know all about Ethernet MAC addresses, it is time to talk about how a switch uses these addresses to forward (or discard) frames to other devices on a network. If a switch just forwarded every frame it received out all ports, your network would be so congested that it would probably come to a complete halt.
+A Layer 2 Ethernet switch uses Layer 2 MAC addresses to make forwarding decisions. It is completely unaware of the data (protocol) being carried in the data portion of the frame, such as an IPv4 packet, an ARP message, or an IPv6 ND packet. The switch makes its forwarding decisions based solely on the Layer 2 Ethernet MAC addresses.
+An Ethernet switch examines its MAC address table to make a forwarding decision for each frame, unlike legacy Ethernet hubs that repeat bits out all ports except the incoming port. In the figure, the four-port switch was just powered on. The table shows the MAC Address Table which has not yet learned the MAC addresses for the four attached PCs.
+Note: MAC addresses are shortened throughout this topic for demonstration purposes.
+
+The switch MAC address table is empty.
+Note: The MAC address table is sometimes referred to as a content addressable memory (CAM) table. While the term CAM table is fairly common, for the purposes of this course, we will refer to it as a MAC address table.
+Switch Learning and Forwarding
+The switch dynamically builds the MAC address table by examining the source MAC address of the frames received on a port.  The switch forwards frames by searching for a match between the destination MAC address in the frame and an entry in the MAC address table.
+Click the Learn and Forward buttons for an illustration and explanation of this process.
+Learn
+Forward
+Examine the Source MAC Address
+Every frame that enters a switch is checked for new information to learn. It does this by examining the source MAC address of the frame and the port number where the frame entered the switch. If the source MAC address does not exist, it is added to the table along with the incoming port number. If the source MAC address does exist, the switch updates the refresh timer for that entry. By default, most Ethernet switches keep an entry in the table for 5 minutes.
+In the figure for example, PC-A is sending an Ethernet frame to PC-D. The table shows the switch adds the MAC address for PC-A to the MAC Address Table.
+Note: If the source MAC address does exist in the table but on a different port, the switch treats this as a new entry. The entry is replaced using the same MAC address but with the more current port number.
+
+PC-A sends an Ethernet frame.
+The switch adds the port number and MAC address for PC-A to the MAC Address Table.
+Filtering Frames
+As a switch receives frames from different devices, it is able to populate its MAC address table by examining the source MAC address of every frame. When the MAC address table of the switch contains the destination MAC address, it is able to filter the frame and forward out a single port.
+Click each button for an illustration and explanation of how a switch filters frames.
+PC-D to Switch
+Switch to PC-A
+PC-A to Switch to PC-D
+In the figure, PC-D is replying back to PC-A. The switch sees the MAC address of PC-D in the incoming frame on port 4. The switch then puts the MAC address of PC-D into the MAC Address Table associated with port 4.
+
+The switch adds the port number and MAC address for PC-D to its MAC address table.
+Video - MAC Address Tables on Connected Switches
+A switch can have multiple MAC addresses associated with a single port. This is common when the switch is connected to another switch. The switch will have a separate MAC address table entry for each frame received with a different source MAC address.
+Click Play in the figure to view a demonstration of how two connected switches build MAC address tables.
+Video - Sending the Frame to the Default Gateway
+When a device has an IP address that is on a remote network, the Ethernet frame cannot be sent directly to the destination device. Instead, the Ethernet frame is sent to the MAC address of the default gateway, the router.
+Click Play in the figure to view a demonstration of how PC-A communicates with its default gateway.
+Note: In the video, the IP packet that is sent from PC-A to a destination on a remote network has a source IP address of PC-A and a destination IP address of the remote host. The returning IP packet will have the source IP address of remote host and the destination IP address will be that of PC-A.
+Activity - Switch It!
+Determine how the switch forwards a frame based on the source MAC address, the destination MAC address, and information in the switch MAC table. Answer the questions using the information provided.
+Frame
+Preamble
+Destination MAC
+Source MAC
+Type / Length
+Frame
+End of Frame
+MAC Table
+Question 1 - Where will the switch forward the frame?
+Fa1
+Fa2
+Fa3
+Fa4
+Fa5
+Fa6
+Fa7
+Fa8
+Fa9
+Fa10
+Fa11
+Fa12
+Question 2 - When the switch forwards the frame, which statement(s) are true?
+Switch adds the source MAC address which is currently not in the MAC address table.
+Frame is a broadcast frame and will be forwarded to all ports.
+Frame is a unicast frame and will be sent to specific port only.
+Frame is a unicast frame and will be flooded to all ports.
+Frame is a unicast frame but it will be dropped at the switch.
+Lab - View the Switch MAC Address Table
+In this lab, you will complete the following objectives:
+Part 1: Build and Configure the Network
+Part 2: Examine the Switch MAC Address Table
+View the Switch MAC Address Table

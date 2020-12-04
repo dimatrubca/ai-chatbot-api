@@ -1,0 +1,15 @@
+Why should I take this module?
+Welcome to Transport Layer!
+The transport layer is where, as the name implies, data is transported from one host to another. This is where your network really gets moving! The transport layer uses two protocols: TCP and UDP. Think of TCP as getting a registered letter in the mail. You have to sign for it before the mail carrier will let you have it. This slows down the process a bit, but the sender knows for certain that you received the letter and when you received it. UDP is more like a regular, stamped letter. It arrives in your mailbox and, if it does, it is probably intended for you, but it might actually be for someone else who does not live there. Also, it may not arrive in your mailbox at all. The sender cannot be sure you received it. Nevertheless, there are times when UDP, like a stamped letter, is the protocol that is needed. This topic dives into how TCP and UDP work in the transport layer. Later in this module there are several videos to help you understand these processes.
+What will I learn to do in this module?
+Module Title: Transport Layer
+Module Objective: Compare the operations of transport layer protocols in supporting end-to-end communication.
+Table caption
+Topic Title Topic Objective
+Transportation of Data Explain the purpose of the transport layer in managing the transportation of data in end-to-end communication.
+TCP Overview Explain characteristics of TCP.
+UDP Overview Explain characteristics of UDP.
+Port Numbers Explain how TCP and UDP use port numbers.
+TCP Communication Process Explain how TCP session establishment and termination processes facilitate reliable communication.
+Reliability and Flow Control Explain how TCP protocol data units are transmitted and acknowledged to guarantee delivery.
+UDP Communication Compare the operations of transport layer protocols in supporting end-to-end communication.

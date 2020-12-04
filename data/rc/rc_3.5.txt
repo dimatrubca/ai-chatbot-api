@@ -1,0 +1,49 @@
+The Benefits of Using a Layered Model
+You cannot actually watch real packets travel across a real network, the way you can watch the components of a car being put together on an assembly line. so, it helps to have a way of thinking about a network so that you can imagine what is happening. A model is useful in these situations.
+Complex concepts such as how a network operates can be difficult to explain and understand. For this reason, a layered model is used to modularize the operations of a network into manageable layers.
+These are the benefits of using a layered model to describe network protocols and operations:
+Assisting in protocol design because protocols that operate at a specific layer have defined information that they act upon and a defined interface to the layers above and below
+Fostering competition because products from different vendors can work together
+Preventing technology or capability changes in one layer from affecting other layers above and below
+Providing a common language to describe networking functions and capabilities
+As shown in the figure, there are two layered models that are used to describe network operations:
+Open System Interconnection (OSI) Reference Model
+TCP/IP Reference Model
+
+The OSI Reference Model
+The OSI reference model provides an extensive list of functions and services that can occur at each layer. This type of model provides consistency within all types of network protocols and services by describing what must be done at a particular layer, but not prescribing how it should be accomplished.
+It also describes the interaction of each layer with the layers directly above and below. The TCP/IP protocols discussed in this course are structured around both the OSI and TCP/IP models. The table shows details about each layer of the OSI model. The functionality of each layer and the relationship between layers will become more evident throughout this course as the protocols are discussed in more detail.
+OSI Model LayerDescription7 - ApplicationThe application layer contains protocols used for process-to-process communications.6 - PresentationThe presentation layer provides for common representation of the data transferred between application layer services.5 - SessionThe session layer provides services to the presentation layer to organize its dialogue and to manage data exchange.4 - TransportThe transport layer defines services to segment, transfer, and reassemble the data for individual communications between the end devices.3 - NetworkThe network layer provides services to exchange the individual pieces of data over the network between identified end devices.2 - Data LinkThe data link layer protocols describe methods for exchanging data frames between devices over a common media1 - PhysicalThe physical layer protocols describe the mechanical, electrical, functional, and procedural means to activate, maintain, and de-activate physical connections for a bit transmission to and from a network device.
+OSI Model Layer Description
+7 - Application The application layer contains protocols used for process-to-process communications.
+6 - Presentation The presentation layer provides for common representation of the data transferred between application layer services.
+5 - Session The session layer provides services to the presentation layer to organize its dialogue and to manage data exchange.
+4 - Transport The transport layer defines services to segment, transfer, and reassemble the data for individual communications between the end devices.
+3 - Network The network layer provides services to exchange the individual pieces of data over the network between identified end devices.
+2 - Data Link The data link layer protocols describe methods for exchanging data frames between devices over a common media
+1 - Physical The physical layer protocols describe the mechanical, electrical, functional, and procedural means to activate, maintain, and de-activate physical connections for a bit transmission to and from a network device.
+Note: Whereas the TCP/IP model layers are referred to only by name, the seven OSI model layers are more often referred to by number rather than by name. For instance, the physical layer is referred to as Layer 1 of the OSI model, data link layer is Layer2, and so on.
+The TCP/IP Protocol Model
+The TCP/IP protocol model for internetwork communications was created in the early 1970s and is sometimes referred to as the internet model. This type of model closely matches the structure of a particular protocol suite. The TCP/IP model is a protocol model because it describes the functions that occur at each layer of protocols within the TCP/IP suite. TCP/IP is also used as a reference model. The table shows details about each layer of the OSI model.
+TCP/IP Model LayerDescription4 - ApplicationRepresents data to the user, plus encoding and dialog control.3 - TransportSupports communication between various devices across diverse networks.2 - InternetDetermines the best path through the network.1 - Network AccessControls the hardware devices and media that make up the network.
+TCP/IP Model Layer Description
+4 - Application Represents data to the user, plus encoding and dialog control.
+3 - Transport Supports communication between various devices across diverse networks.
+2 - Internet Determines the best path through the network.
+1 - Network Access Controls the hardware devices and media that make up the network.
+The definitions of the standard and the TCP/IP protocols are discussed in a public forum and defined in a publicly available set of IETF RFCs. An RFC is authored by networking engineers and sent to other IETF members for comments.
+OSI and TCP/IP Model Comparison
+The protocols that make up the TCP/IP protocol suite can also be described in terms of the OSI reference model. In the OSI model, the network access layer and the application layer of the TCP/IP model are further divided to describe discrete functions that must occur at these layers.
+At the network access layer, the TCP/IP protocol suite does not specify which protocols to use when transmitting over a physical medium; it only describes the handoff from the internet layer to the physical network protocols. OSI Layers 1 and 2 discuss the necessary procedures to access the media and the physical means to send data over a network.
+
+The key similarities are in the transport and network layers; however, the two models differ in how they relate to the layers above and below each layer:
+OSI Layer 3, the network layer, maps directly to the TCP/IP internet layer. This layer is used to describe protocols that address and route messages through an internetwork.
+OSI Layer 4, the transport layer, maps directly to the TCP/IP transport layer. This layer describes general services and functions that provide ordered and reliable delivery of data between source and destination hosts.
+The TCP/IP application layer includes several protocols that provide specific functionality to a variety of end user applications. The OSI model Layers 5, 6, and 7 are used as references for application software developers and vendors to produce applications that operate on networks.
+Both the TCP/IP and OSI models are commonly used when referring to protocols at various layers. Because the OSI model separates the data link layer from the physical layer, it is commonly used when referring to these lower layers.
+Packet Tracer - Investigate the TCP/IP and OSI Models in Action
+This simulation activity is intended to provide a foundation for understanding the TCP/IP protocol suite and the relationship to the OSI model. Simulation mode allows you to view the data contents being sent across the network at each layer.
+As data moves through the network, it is broken down into smaller pieces and identified so that the pieces can be put back together when they arrive at the destination. Each piece is assigned a specific name and is associated with a specific layer of the TCP/IP and OSI models. The assigned name is called a protocol data unit (PDU). Using Packet Tracer simulation mode, you can view each of the layers and the associated PDU. The following steps lead the user through the process of requesting a web page from a web server by using the web browser application available on a client PC.
+Even though much of the information displayed will be discussed in more detail later, this is an opportunity to explore the functionality of Packet Tracer and be able to visualize the encapsulation process.
+Investigate the TCP-IP and OSI Models in Action
+Investigate the TCP-IP and OSI Models in Action

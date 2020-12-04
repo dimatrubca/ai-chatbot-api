@@ -1,0 +1,110 @@
+Create Subnets with a Slash 16 prefix
+Some subnetting is easier than other subnetting. This topic explains how to create subnets that each have the same number of hosts.
+In a situation requiring a larger number of subnets, an IPv4 network is required that has more hosts bits available to borrow. For example, the network address 172.16.0.0 has a default mask of 255.255.0.0, or /16. This address has 16 bits in the network portion and 16 bits in the host portion. The 16 bits in the host portion are available to borrow for creating subnets. The table highlights all the possible scenarios for subnetting a /16 prefix.
+Subnet a /16 Network
+Prefix LengthSubnet MaskNetwork Address (n = network, h = host)# of subnets# of hosts/17255.255.128.0nnnnnnnn.nnnnnnnn.nhhhhhhh.hhhhhhhh 11111111.11111111.10000000.00000000232766/18255.255.192.0nnnnnnnn.nnnnnnnn.nnhhhhhh.hhhhhhhh 11111111.11111111.11000000.00000000416382/19255.255.224.0nnnnnnnn.nnnnnnnn.nnnhhhhh.hhhhhhhh 11111111.11111111.11100000.0000000088190/20255.255.240.0nnnnnnnn.nnnnnnnn.nnnnhhhh.hhhhhhhh 11111111.11111111.11110000.00000000164094/21255.255.248.0nnnnnnnn.nnnnnnnn.nnnnnhhh.hhhhhhhh 11111111.11111111.11111000.00000000322046/22255.255.252.0nnnnnnnn.nnnnnnnn.nnnnnnhh.hhhhhhhh 11111111.11111111.11111100.00000000641022/23255.255.254.0nnnnnnnn.nnnnnnnn.nnnnnnnh.hhhhhhhh 11111111.11111111.11111110.00000000128510/24255.255.255.0nnnnnnnn.nnnnnnnn.nnnnnnnn.hhhhhhhh 11111111.11111111.11111111.00000000256254/25255.255.255.128nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh 11111111.11111111.11111111.10000000512126/26255.255.255.192nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh 11111111.11111111.11111111.11000000102462/27255.255.255.224nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh 11111111.11111111.11111111.11100000204830/28255.255.255.240nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh 11111111.11111111.11111111.11110000409614/29255.255.255.248nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh 11111111.11111111.11111111.1111100081926/30255.255.255.252nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh 11111111.11111111.11111111.11111100163842
+Prefix Length Subnet Mask Network Address
+(n = network, h = host) # of subnets # of hosts
+/17 255.255.128.0
+nnnnnnnn.nnnnnnnn.nhhhhhhh.hhhhhhhh 
+11111111.11111111.10000000.00000000
+2 32766
+/18 255.255.192.0
+nnnnnnnn.nnnnnnnn.nnhhhhhh.hhhhhhhh 
+11111111.11111111.11000000.00000000
+4 16382
+/19 255.255.224.0
+nnnnnnnn.nnnnnnnn.nnnhhhhh.hhhhhhhh 
+11111111.11111111.11100000.00000000
+8 8190
+/20 255.255.240.0
+nnnnnnnn.nnnnnnnn.nnnnhhhh.hhhhhhhh 
+11111111.11111111.11110000.00000000
+16 4094
+/21 255.255.248.0
+nnnnnnnn.nnnnnnnn.nnnnnhhh.hhhhhhhh 
+11111111.11111111.11111000.00000000
+32 2046
+/22 255.255.252.0
+nnnnnnnn.nnnnnnnn.nnnnnnhh.hhhhhhhh 
+11111111.11111111.11111100.00000000
+64 1022
+/23 255.255.254.0
+nnnnnnnn.nnnnnnnn.nnnnnnnh.hhhhhhhh 
+11111111.11111111.11111110.00000000
+128 510
+/24 255.255.255.0
+nnnnnnnn.nnnnnnnn.nnnnnnnn.hhhhhhhh 
+11111111.11111111.11111111.00000000
+256 254
+/25 255.255.255.128
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh 
+11111111.11111111.11111111.10000000
+512 126
+/26 255.255.255.192
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh 
+11111111.11111111.11111111.11000000
+1024 62
+/27 255.255.255.224
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh 
+11111111.11111111.11111111.11100000
+2048 30
+/28 255.255.255.240
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh 
+11111111.11111111.11111111.11110000
+4096 14
+/29 255.255.255.248
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh 
+11111111.11111111.11111111.11111000
+8192 6
+/30 255.255.255.252
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh 
+11111111.11111111.11111111.11111100
+16384 2
+Although you do not need to memorize this table, you still need a good understanding of how each value in the table is generated. Do not let the size of the table intimidate you. The reason it is big is that it has 8 additional bits that can be borrowed, and, therefore, the numbers of subnets and hosts are simply larger.
+Create 100 Subnets with a Slash 16 prefix
+Consider a large enterprise that requires at least 100 subnets and has chosen the private address 172.16.0.0/16 as its internal network address.
+When borrowing bits from a /16 address, start borrowing bits in the third octet, going from left to right. Borrow a single bit at a time until the number of bits necessary to create 100 subnets is reached.
+The figure displays the number of subnets that can be created when borrowing bits from the third octet and the fourth octet. Notice there are now up to 14 host bits that can be borrowed.
+
+Number of Subnets Created
+To satisfy the requirement of 100 subnets for the enterprise, 7 bits (i.e., 27 = 128 subnets) would need to be borrowed (for a total of 128 subnets), as shown in the figure.
+
+172.16.0.0/23 Network
+Recall that the subnet mask must change to reflect the borrowed bits. In this example, when 7 bits are borrowed, the mask is extended 7 bits into the third octet. In decimal, the mask is represented as 255.255.254.0, or a /23 prefix, because the third octet is 11111110 in binary and the fourth octet is 00000000 in binary.
+The figure displays the resulting subnets from 172.16.0.0 /23 up to 172.16.254.0 /23.
+
+Resulting /23 Subnets
+After borrowing 7 bits for the subnet, there is one host bit remaining in the third octet, and 8 host bits remaining in the fourth octet, for a total of 9 bits that were not borrowed. 29 results in 512 total host addresses. The first address is reserved for the network address and the last address is reserved for the broadcast address, so subtracting for these two addresses (29 - 2) equals 510 available host addresses for each /23 subnet.
+As shown in the figure, the first host address for the first subnet is 172.16.0.1, and the last host address is 172.16.1.254.
+
+Address Range for 172.16.0.0/23 Subnet
+Create 1000 Subnets with a Slash 8 prefix
+Some organizations, such as small service providers or large enterprises, may need even more subnets. For example, take a small ISP that requires 1000 subnets for its clients. Each client will need plenty of space in the host portion to create its own subnets.
+The ISP has a network address 10.0.0.0 255.0.0.0 or 10.0.0.0/8. This means there are 8 bits in the network portion and 24 host bits available to borrow toward subnetting. Therefore, the small ISP will subnet the 10.0.0.0/8 network.
+To create subnets, you must borrow bits from the host portion of the IPv4 address of the existing internetwork. Starting from the left to the right with the first available host bit, borrow a single bit at a time until you reach the number of bits necessary to create 1000 subnets. As shown in the figure, you need to borrow 10 bits to create 1024 subnets (210 = 1024). This includes 8 bits in the second octet and 2 additional bits from the third octet.
+
+Number of Subnets Created
+This figure displays the network address and the resulting subnet mask, which converts to 255.255.192.0 or 10.0.0.0/18.
+
+10.0.0.0/18 Network
+This figure displays the subnets resulting from borrowing 10 bits, creating subnets from 10.0.0.0/18 to 10.255.128.0/18.
+
+Resulting /18 Subnets
+Borrowing 10 bits to create the subnets, leaves 14 host bits for each subnet. Subtracting two hosts per subnet (one for the network address and one for the broadcast address) equates to 214 - 2 = 16382 hosts per subnet. This means that each of the 1000 subnets can support up to 16,382 hosts.
+This figure displays the specifics of the first subnet.
+
+Address Range for 10.0.0.0/18 Subnet
+Video - Subnet Across Multiple Octets
+Click Play to view an explanation of how to use the magic number across octet boundaries.
+Activity - Calculate the Subnet Mask
+Instructions:
+In this activity, you are given a subnet mask in decimal format. Enter the binary representation of the subnet mask in the octet fields provided. Additionally, convert the mask to prefix notation format in the Prefix Notation field.
+Subnet Mask
+Subnet Mask in binary
+Prefix notation
+Lab - Calculate IPv4 Subnets
+In this lab, you will complete the following objectives:
+Part 1: Determine IPv4 Address Subnetting
+Part 2: Calculate IPv4 Address Subnetting
+Calculate IPv4 Subnets

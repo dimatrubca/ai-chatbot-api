@@ -1,0 +1,42 @@
+Static GUA Configuration on a Router
+As you learned in the previous topic, IPv6 GUAs are the same as public IPv4 addresses. They are globally unique and routable on the IPv6 internet. An IPv6 LLA lets two IPv6-enabled devices communicate with each other on the same link (subnet). It is easy to statically configure IPv6 GUAs and LLAs on routers to help you create an IPv6 network. This topic teaches you how to do just that!
+Most IPv6 configuration and verification commands in the Cisco IOS are similar to their IPv4 counterparts. In many cases, the only difference is the use of ipv6 in place of ip within the commands.
+For example, the Cisco IOS command to configure an IPv4 address on an interface is ip address ip-address subnet-mask. In contrast, the command to configure an IPv6 GUA on an interface is ipv6 address ipv6-address/prefix-length.
+Notice that there is no space between ipv6-address and prefix-length.
+The example configuration uses the topology shown in the figure and these IPv6 subnets:
+2001:db8:acad:1:/64
+2001:db8:acad:2:/64
+2001:db8:acad:3:/64
+
+Example Topology
+The example shows the commands required to configure the IPv6 GUA on GigabitEthernet 0/0/0, GigabitEthernet 0/0/1, and the Serial 0/1/0 interface of R1.
+IPv6 GUA Configuration on Router R1
+Static GUA Configuration on a Windows Host
+Manually configuring the IPv6 address on a host is similar to configuring an IPv4 address.
+As shown in the figure, the default gateway address configured for PC1 is 2001:db8:acad:1::1. This is the GUA of the R1 GigabitEthernet interface on the same network. Alternatively, the default gateway address can be configured to match the LLA of the GigabitEthernet interface. Using the LLA of the router as the default gateway address is considered best practice. Either configuration will work.
+
+Just as with IPv4, configuring static addresses on clients does not scale to larger environments. For this reason, most network administrators in an IPv6 network will enable dynamic assignment of IPv6 addresses.
+There are two ways in which a device can obtain an IPv6 GUA automatically:
+Stateless Address Autoconfiguration (SLAAC)
+Stateful DHCPv6
+SLAAC and DHCPv6 are covered in the next topic.
+Note: When DHCPv6 or SLAAC is used, the LLA of the router will automatically be specified as the default gateway address.
+Static Configuration of a Link-Local Unicast Address
+Configuring the LLA manually lets you create an address that is recognizable and easier to remember. Typically, it is only necessary to create recognizable LLAs on routers. This is beneficial because router LLAs are used as default gateway addresses and in routing advertisement messages.
+LLAs can be configured manually using the ipv6 address ipv6-link-local-address link-local command. When an address begins with this hextet within the range of fe80 to febf, the link-local parameter must follow the address.
+The figure shows an example topology with LLAs on each interface.
+
+Example Topology with LLAs
+The example shows the configuration of an LLA on router R1.
+Statically configured LLAs are used to make them more easily recognizable as belonging to router R1. In this example, all the interfaces of router R1 have been configured with an LLA that begins with fe80::n:1.
+Note: The exact same LLA could be configured on each link as long as it is unique on that link. This is because LLAs only have to be unique on that link. However, common practice is to create a different LLA on each interface of the router to make it easy to identify the router and the specific interface.
+Syntax Checker - GUA and LLA Static Configuration
+Assign IPv6 GUAs and LLAs to the specified interfaces on router R1.
+
+Configure and activate IPv6 on the Gigabit Ethernet 0/0/0 interface with the following addresses:
+Use g0/0/0 as the interface name
+LLA - fe80::1:1
+GUA - 2001:db8:acad:1::1/64
+Activate the interface
+Exit interface configuration mode
+R1(config)#

@@ -1,0 +1,14 @@
+Why should I take this module?
+Welcome to Physical Layer!
+The physical layer of the OSI model sits at the bottom of the stack. It is part of the Network Access layer of the TCP/IP model. Without the physical layer, you would not have a network. This module explains, in detail, the three ways to connect to the physical layer. Packet Tracer activities and labs will give you the confidence you need to cable up your own network! Let’s get busy!
+What will I learn to do in this module?
+Module Title: Physical Layer
+Module Objective: Explain how physical layer protocols, services, and network media support communications across data networks.
+Table caption
+Topic Title Topic Objective
+Purpose of the Physical Layer Describe the purpose and functions of the physical layer in the network.
+Physical Layer Characteristics Describe characteristics of the physical layer.
+Copper Cabling Identify the basic characteristics of copper cabling.
+UTP Cabling Explain how UTP cable is used in Ethernet networks.
+Fiber-Optic Cabling Describe fiber optic cabling and its main advantages over other media.
+Wireless Media Connect devices using wired and wireless media.

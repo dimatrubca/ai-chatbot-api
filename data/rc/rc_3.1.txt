@@ -1,0 +1,76 @@
+Video - Devices in a Bubble
+Click Play in the figure to view a video explaining how a network device operates within a network.
+Communications Fundamentals
+Networks vary in size, shape, and function. They can be as complex as devices connected across the internet, or as simple as two computers directly connected to one another with a single cable, and anything in-between. However, simply having a wired or wireless physical connection between end devices is not enough to enable communication. For communication to occur, devices must know “how” to communicate.
+People exchange ideas using many different communication methods. However, all communication methods have the following three elements in common:
+Message source (sender) - Message sources are people, or electronic devices, that need to send a message to other individuals or devices.
+Message Destination (receiver) - The destination receives the message and interprets it.
+Channel - This consists of the media that provides the pathway over which the message travels from source to destination.
+Communication Protocols
+Sending a message, whether by face-to-face communication or over a network, is governed by rules called protocols. These protocols are specific to the type of communication method being used. In our day-to-day personal communication, the rules we use to communicate over one medium, like a telephone call, are not necessarily the same as the rules for using another medium, such as sending a letter.
+The process of sending a letter is similar to communication that occurs in computer networks.
+Click each button for an analogy and a network example of the communication process.
+Analogy
+Network
+Analogy
+Click Play in the figure to view an animation of two people communicating face-to-face.
+Prior to communicating, they must agree on how to communicate. If the communication is using voice, they must first agree on the language. Next, when they have a message to share, they must be able to format that message in a way that is understandable.
+If someone uses the English language, but poor sentence structure, the message can easily be misunderstood. Each of these tasks describe protocols that are used to accomplish communication.
+Rule Establishment
+Before communicating with one another, individuals must use established rules or agreements to govern the conversation. Consider this message for example:
+Notice how it is difficult to read the message because it is not formatted properly. It should be written using rules (i.e., protocols) that are necessary for effective communication. The example shows the message which is now properly formatted for language and grammar.
+Protocols must account for the following requirements to successfully deliver a message that is understood by the receiver:
+An identified sender and receiver
+Common language and grammar
+Speed and timing of delivery
+Confirmation or acknowledgment requirements
+Network Protocol Requirements
+The protocols that are used in network communications share many of these fundamental traits. In addition to identifying the source and destination, computer and network protocols define the details of how a message is transmitted across a network. Common computer protocols include the following requirements:
+Message encoding
+Message formatting and encapsulation
+Message size
+Message timing
+Message delivery options
+Message Encoding
+One of the first steps to sending a message is encoding. Encoding is the process of converting information into another acceptable form, for transmission. Decoding reverses this process to interpret the information.
+Click each button for an analogy and a network example of message encoding.
+Analogy
+Network
+Analogy
+Imagine a person calls a friend to discuss the details of a beautiful sunset. Click Play in the figure to view an animation of message encoding.
+To communicate the message, she converts her thoughts into an agreed upon language. She then speaks the words using the sounds and inflections of spoken language that convey the message. Her friend listens to the description and decodes the sounds to understand the message he received.
+Message Formatting and Encapsulation
+When a message is sent from source to destination, it must use a specific format or structure. Message formats depend on the type of message and the channel that is used to deliver the message.
+Click each button for an analogy and a network example of message formatting and encapsulation.
+Analogy
+Network
+Analogy
+A common example of requiring the correct format in human communications is when sending a letter. Click Play in the figure to view an animation of formatting and encapsulating a letter.
+An envelope has the address of the sender and receiver, each located at the proper place on the envelope. If the destination address and formatting are not correct, the letter is not delivered.
+The process of placing one message format (the letter) inside another message format (the envelope) is called encapsulation. De-encapsulation occurs when the process is reversed by the recipient and the letter is removed from the envelope.
+
+Message Size
+Another rule of communication is message size.
+Click each button for an analogy and a network example of message size.
+Analogy
+Network
+Analogy
+Click Play in the figure to view an animation of message size in face-to-face communications.
+When people communicate with each other, the messages that they send are usually broken into smaller parts or sentences. These sentences are limited in size to what the receiving person can process at one time, as shown in the figure. It also makes it easier for the receiver to read and comprehend.
+Message Timing
+Message timing is also very important in network communications. Message timing includes the following:
+Flow Control - This is the process of managing the rate of data transmission. Flow control defines how much information can be sent and the speed at which it can be delivered. For example, if one person speaks too quickly, it may be difficult for the receiver to hear and understand the message. In network communication, there are network protocols used by the source and destination devices to negotiate and manage the flow of information.
+Response Timeout - If a person asks a question and does not hear a response within an acceptable amount of time, the person assumes that no answer is coming and reacts accordingly. The person may repeat the question or instead, may go on with the conversation. Hosts on the network use network protocols that specify how long to wait for responses and what action to take if a response timeout occurs.
+Access method - This determines when someone can send a message. Click Play in the figure to see an animation of two people talking at the same time, then a "collision of information" occurs, and it is necessary for the two to back off and start again. Likewise, when a device wants to transmit on a wireless LAN, it is necessary for the WLAN network interface card (NIC) to determine whether the wireless medium is available.
+
+Message Delivery Options
+A message can be delivered in different ways.
+Click each button for an analogy and a network example of message delivery options.
+Analogy
+Network
+Analogy
+Sometimes, a person wants to communicate information to a single individual. At other times, the person may need to send information to a group of people at the same time, or even to all people in the same area.
+Click the unicast, multicast, and broadcast buttons in the figure for an example of each.
+A Note About the Node Icon
+Networking documents and topologies often represent networking and end devices using a node icon. Nodes are typically represented as a circle. The figure shows a comparison of the three different delivery options using node icons instead of computer icons.
+

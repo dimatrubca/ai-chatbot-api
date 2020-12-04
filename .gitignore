@@ -148,7 +148,6 @@ dmypy.json
 
 # haystack files
 haystack/document_store/qa.db
-data
 mlruns
 src
 models

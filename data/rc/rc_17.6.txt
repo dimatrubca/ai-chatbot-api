@@ -1,0 +1,46 @@
+Basic Troubleshooting Approaches
+In the previous two topics, you learned about some utilities and commands that you can use to help identify problem areas in your network. This is an important part of troubleshooting. There are many ways to troubleshoot a network problem. This topic details a structured troubleshooting process that can help you to become a better network administrator. It also provides a few more commands to help you resolve problems. Network problems can be simple or complex, and can result from a combination of hardware, software, and connectivity issues. Technicians must be able to analyze the problem and determine the cause of the error before they can resolve the network issue. This process is called troubleshooting.
+A common and efficient troubleshooting methodology is based on the scientific method.
+The table shows the six main steps in the troubleshooting process.
+Table caption
+Step Description
+Step 1. Identify the Problem
+This is the first step in the troubleshooting process.
+Although tools can be used in this step, a conversation with the user is often very helpful.
+Step 2. Establish a Theory of Probable Causes
+After the problem is identified, try to establish a theory of probable causes.
+This step often yields more than a few probable causes to the problem.
+Step 3. Test the Theory to Determine Cause
+Based on the probable causes, test your theories to determine which one is the cause of the problem.
+A technician will often apply a quick procedure to test and see if it solves the problem.
+If a quick procedure does not correct the problem, you might need to research the problem further to establish the exact cause.
+Step 4. Establish a Plan of Action and Implement the Solution After you have determined the exact cause of the problem, establish a plan of action to resolve the problem and implement the solution.
+Step 5. Verify Solution and Implement Preventive Measures
+After you have corrected the problem, verify full functionality.
+If applicable, implement preventive measures.
+Step 6. Document Findings, Actions, and Outcomes
+In the final step of the troubleshooting process, document your findings, actions, and outcomes.
+This is very important for future reference.
+To assess the problem, determine how many devices on the network are experiencing the problem. If there is a problem with one device on the network, start the troubleshooting process at that device. If there is a problem with all devices on the network, start the troubleshooting process at the device where all other devices are connected. You should develop a logical and consistent method for diagnosing network problems by eliminating one problem at a time.
+Resolve or Escalate?
+In some situations, it may not be possible to resolve the problem immediately. A problem should be escalated when it requires a manager decision, some specific expertise, or network access level unavailable to the troubleshooting technician.
+For example, after troubleshooting, the technician concludes a router module should be replaced. This problem should be escalated for manager approval. The manager may have to escalate the problem again as it may require the approval of the financial department before a new module can be purchased.
+A company policy should clearly state when and how a technician should escalate a problem.
+The debug Command
+OS processes, protocols, mechanisms and events generate messages to communicate their status. These messages can provide valuable information when troubleshooting or verifying system operations. The IOS debug command allows the administrator to display these messages in real-time for analysis. It is a very important tool for monitoring events on a Cisco IOS device.
+All debug commands are entered in privileged EXEC mode. The Cisco IOS allows for narrowing the output of debug to include only the relevant feature or subfeature. This is important because debugging output is assigned high priority in the CPU process and it can render the system unusable. For this reason, use debug commands only to troubleshoot specific problems.
+For example, to monitor the status of ICMP messages in a Cisco router, use debug ip icmp, as shown in the example.
+To list a brief description of all the debugging command options, use the debug ? command in privileged EXEC mode at the command line.
+To turn off a specific debugging feature, add the no keyword in front of the debug command:
+Alternatively, you can enter the undebug form of the command in privileged EXEC mode:
+To turn off all active debug commands at once, use the undebug all command:
+Be cautious using some debug command. Commands such as debug all and debug ip packet generate a substantial amount of output and can use a large portion of system resources. The router could get so busy displaying debug messages that it would not have enough processing power to perform its network functions, or even listen to commands to turn off debugging. For this reason, using these command options is not recommended and should be avoided.
+The terminal monitor Command
+Connections to grant access to the IOS command line interface can be established in the following two ways:
+Locally - Local connections (i.e., console connection) require physical access to the router or switch console port using a rollover cable.
+Remotely - Remote connections require the use of Telnet or SSH to establish a connection to an IP configured device.
+Certain IOS messages are automatically displayed on a console connection but not on a remote connection. For instance, debug output is displayed by default on console connections. However, debug output is not automatically displayed on remote connections. This is because debug messages are log messages which are prevented from being displayed on vty lines.
+In the following output for instance, the user established a remote connection using Telnet from R2 to R1. The user then issued the debug ip icmp command. However, the command failed to display debug output.
+To display log messages on a terminal (virtual console), use the terminal monitor privileged EXEC command. To stop logging messages on a terminal, use the terminal no monitor privileged EXEC command.
+For instance, notice how the terminal monitor command has now been entered and the ping command displays the debug output.
+Note: The intent of the debug command is to capture live output for a short period of time (i.e., a few seconds to a minute or so). Always disable debug when not required.

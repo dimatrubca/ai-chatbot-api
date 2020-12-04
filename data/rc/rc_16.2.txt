@@ -1,0 +1,51 @@
+Types of Malware
+The previous topic explained the types of network threats and the vulnerabilities that make threats possible. This topic goes into more detail about how threat actors gain access to network or restrict authorized users from having access.
+Malware is short for malicious software. It is code or software specifically designed to damage, disrupt, steal, or inflict “bad” or illegitimate action on data, hosts, or networks. Viruses, worms, and Trojan horses are types of malware.
+Viruses
+A computer virus is a type of malware that propagates by inserting a copy of itself into, and becoming part of, another program. It spreads from one computer to another, leaving infections as it travels. Viruses can range in severity from causing mildly annoying effects, to damaging data or software and causing denial of service (DoS) conditions. Almost all viruses are attached to an executable file, which means the virus may exist on a system but will not be active or able to spread until a user runs or opens the malicious host file or program. When the host code is executed, the viral code is executed as well. Normally, the host program keeps functioning after the virus infects it. However, some viruses overwrite other programs with copies of themselves, which destroys the host program altogether. Viruses spread when the software or document they are attached to is transferred from one computer to another using the network, a disk, file sharing, or infected email attachments.
+Worms
+Computer worms are similar to viruses in that they replicate functional copies of themselves and can cause the same type of damage. In contrast to viruses, which require the spreading of an infected host file, worms are standalone software and do not require a host program or human help to propagate. A worm does not need to attach to a program to infect a host and enter a computer through a vulnerability in the system. Worms take advantage of system features to travel through the network unaided.
+Trojan Horses
+A Trojan horse is another type of malware named after the wooden horse the Greeks used to infiltrate Troy. It is a harmful piece of software that looks legitimate. Users are typically tricked into loading and executing it on their systems. After it is activated, it can achieve any number of attacks on the host, from irritating the user (with excessive pop-up windows or changing the desktop) to damaging the host (deleting files, stealing data, or activating and spreading other malware, such as viruses). Trojan horses are also known to create back doors to give malicious users access to the system.
+Unlike viruses and worms, Trojan horses do not reproduce by infecting other files. They self-replicate. Trojan horses must spread through user interaction such as opening an email attachment or downloading and running a file from the internet.
+Click Play in the figure to view an animated explanation of the three types of malware.
+Reconnaissance Attacks
+In addition to malicious code attacks, it is also possible for networks to fall prey to various network attacks. Network attacks can be classified into three major categories:
+Reconnaissance attacks - The discovery and mapping of systems, services, or vulnerabilities.
+Access attacks - The unauthorized manipulation of data, system access, or user privileges.
+Denial of service - The disabling or corruption of networks, systems, or services.
+For reconnaissance attacks, external threat actors can use internet tools, such as the nslookup and whois utilities, to easily determine the IP address space assigned to a given corporation or entity. After the IP address space is determined, a threat actor can then ping the publicly available IP addresses to identify the addresses that are active. To help automate this step, a threat actor may use a ping sweep tool, such as fping or gping. This systematically pings all network addresses in a given range or subnet. This is similar to going through a section of a telephone book and calling each number to see who answers.
+Click each type of reconnaissance attack tool to see an animation of the attack.
+Internet Queries
+Ping Sweeps
+Port Scans
+Internet Queries
+Click Play in the figure to view an animation. The threat actor is looking for initial information about a target. Various tools can be used, including Google search, the websites of organizations, whois, and more.
+Access Attacks
+Access attacks exploit known vulnerabilities in authentication services, FTP services, and web services to gain entry to web accounts, confidential databases, and other sensitive information. An access attack allows individuals to gain unauthorized access to information that they have no right to view. Access attacks can be classified into four types: password attacks, trust exploitation, port redirection, and man-in-the middle.
+Click each button for an explanation of each type of attack.
+Password Attacks
+Trust Exploitation
+Port Redirection
+Man-in-the-Middle
+Password Attacks
+Threat actors can implement password attacks using several different methods:
+Brute-force attacks
+Trojan horse attacks
+Packet sniffers
+
+Denial of Service Attacks
+Denial of service (DoS) attacks are the most publicized form of attack and among the most difficult to eliminate. However, because of their ease of implementation and potentially significant damage, DoS attacks deserve special attention from security administrators.
+DoS attacks take many forms. Ultimately, they prevent authorized people from using a service by consuming system resources. To help prevent DoS attacks it is important to stay up to date with the latest security updates for operating systems and applications.
+Click each button for an example of DoS and distributed DoS (DDoS) attacks.
+DoS Attack
+DDoS Attack
+DoS Attack
+DoS attacks are a major risk because they interrupt communication and cause significant loss of time and money. These attacks are relatively simple to conduct, even by an unskilled threat actor.
+Click Play in the figure to view the animation of a DoS attack.
+Lab - Research Network Security Threats
+In this lab, you will complete the following objectives:
+Part 1: Explore the SANS Website
+Part 2: Identify Recent Network Security Threats
+Part 3: Detail a Specific Network Security Threat
+Research Network Security Threats

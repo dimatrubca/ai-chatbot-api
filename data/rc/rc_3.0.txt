@@ -1,0 +1,21 @@
+Why should I take this module?
+Welcome to Protocols and Models!
+You know the basic components of a simple network, as well as initial configuration. But after you have configured and connected these components, how do you know they will work together? Protocols! Protocols are sets of agreed upon rules that have been created by standards organizations. But, because you cannot pick up a rule and look closely at it, how do you truly understand why there is such a rule and what it is supposed to do? Models! Models give you a way to visualize the rules and their place in your network. This module gives you an overview of network protocols and models. You are about to have a much deeper understanding of how networks actually work!
+What will I learn to do in this module?
+Module Title: Protocols and Models
+Module Objective: Explain how network protocols enable devices to access local and remote network resources.
+Table caption
+Topic Title Topic Objective
+The Rules Describe the types of rules that are necessary to successfully communicate.
+Protocols Explain why protocols are necessary in network communication.
+Protocol Suites Explain the purpose of adhering to a protocol suite.
+Standards Organizations Explain the role of standards organizations in establishing protocols for network interoperability.
+Reference Models Explain how the TCP/IP model and the OSI model are used to facilitate standardization in the communication process.
+Data Encapsulation Explain how data encapsulation allows data to be transported across the network.
+Data Access Explain how local hosts access local resources on a network.
+Class Activity - Design a Communications System
+You have just purchased a new automobile for your personal use. After driving the car for a week or so, you find that it is not working correctly. Discussing the problem with several of your peers, you decide to take it to an automotive repair facility that they highly recommend. It is the only repair facility located in close proximity.
+When you arrive at the repair facility, you find that all the mechanics speak another language. You are having difficulty explaining the automobile’s performance problems, but the repairs really need to be done. You are not sure you can drive it back home to research other options.
+You must find a way to work with the repair facility to ensure your automobile is fixed correctly.
+How will you communicate with the mechanics? Design a communications model to ensure that the car is properly repaired.
+Design a Communications System

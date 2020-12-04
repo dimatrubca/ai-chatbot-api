@@ -1,0 +1,27 @@
+Application Layer
+In the OSI and the TCP/IP models, the application layer is the closest layer to the end user. As shown in the figure, it is the layer that provides the interface between the applications used to communicate, and the underlying network over which messages are transmitted. Application layer protocols are used to exchange data between programs running on the source and destination hosts.
+
+Based on the TCP/IP model, the upper three layers of the OSI model (application, presentation, and session) define functions of the TCP/IP application layer.
+There are many application layer protocols, and new protocols are always being developed. Some of the most widely known application layer protocols include Hypertext Transfer Protocol (HTTP), File Transfer Protocol (FTP), Trivial File Transfer Protocol (TFTP), Internet Message Access Protocol (IMAP), and Domain Name System (DNS) protocol.
+Presentation and Session Layer
+Presentation Layer
+The presentation layer has three primary functions:
+Formatting, or presenting, data at the source device into a compatible format for receipt by the destination device.
+Compressing data in a way that can be decompressed by the destination device.
+Encrypting data for transmission and decrypting data upon receipt.
+As shown in the figure, the presentation layer formats data for the application layer, and it sets standards for file formats. Some well-known standards for video include Matroska Video (MKV), Motion Picture Experts Group (MPG), and QuickTime Video (MOV). Some well-known graphic image formats are Graphics Interchange Format (GIF), Joint Photographic Experts Group (JPG), and Portable Network Graphics (PNG) format.
+
+Session Layer
+As the name implies, functions at the session layer create and maintain dialogs between source and destination applications. The session layer handles the exchange of information to initiate dialogs, keep them active, and to restart sessions that are disrupted or idle for a long period of time.
+TCP/IP Application Layer Protocols
+The TCP/IP application protocols specify the format and control information necessary for many common internet communication functions. Application layer protocols are used by both the source and destination devices during a communication session. For the communications to be successful, the application layer protocols that are implemented on the source and destination host must be compatible.
+Click each application protocol type to learn more about each protocol.
+Name System
+Host Config
+Email
+File Transfer
+Web
+Name System
+DNS - Domain Name System (or Service)
+TCP, UDP client 53
+Translates domain names, such as cisco.com, into IP addresses.

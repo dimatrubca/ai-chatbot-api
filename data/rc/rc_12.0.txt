@@ -1,0 +1,16 @@
+Why should I take this module?
+Welcome to IPv6 Addressing!
+It is a great time to be (or become) a network administrator! Why? Because in many networks, you will find both IPv4 and IPv6 working together. After the hard work of learning to subnet an IPv4 network, you may find that subnetting an IPv6 network is much easier. You probably didn’t expect that, did you? A Packet Tracer at the end of this module will give you the opportunity to subnet an IPv6 network. Go ahead, jump in!
+What will I learn in this module?
+Module Title: IPv6 Addressing
+Module Objective: Implement an IPv6 addressing scheme.
+Table caption
+Topic Title Topic Objective
+IPv4 Issues Explain the need for IPv6 addressing.
+IPv6 Address Representation Explain how IPv6 addresses are represented.
+IPv6 Address Types Compare types of IPv6 network addresses.
+GUA and LLA Static Configuration Explain how to Configure static global unicast and link-local IPv6 network addresses.
+Dynamic Addressing for IPv6 GUAs Explain how to configure global unicast addresses dynamically.
+Dynamic Addressing for IPv6 LLAs Configure link-local addresses dynamically.
+IPv6 Multicast Addresses Identify IPv6 addresses.
+Subnet an IPv6 Network Implement a subnetted IPv6 addressing scheme.

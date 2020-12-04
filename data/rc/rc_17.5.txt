@@ -1,0 +1,84 @@
+IP Configuration on a Windows Host
+If you have used any of the tools in the previous topic to verify connectivity and found that some part of your network is not working as it should, now is the time to use some commands to troubleshoot your devices. Host and IOS commands can help you determine if the problem is with the IP addressing of your devices, which is a common network problem.
+Checking the IP addressing on host devices is a common practice in networking for verifying and troubleshooting end-to-end connectivity. In Windows 10, you can access the IP address details from the Network and Sharing Center, as shown in the figure, to quickly view the four important settings: address, mask, router, and DNS.
+However, network administrators typically view the IP addressing information on a Windows host by issuing the ipconfig command at the command line of a Windows computer, as shown in the sample output.
+Use the ipconfig /all command to view the MAC address, as well as a number of details regarding the Layer 3 addressing of the device, as shown in the example output.
+If a host is configured as a DHCP client, the IP address configuration can be renewed using the ipconfig /release and ipconfig /renew commands, as shown in the sample output.
+The DNS Client service on Windows PCs also optimizes the performance of DNS name resolution by storing previously resolved names in memory. The ipconfig /displaydns command displays all of the cached DNS entries on a Windows computer system, as shown in the example output.
+IP Configuration on a Linux Host
+Verifying IP settings using the GUI on a Linux machine will differ depending on the Linux distribution (distro) and desktop interface. The figure shows the Connection Information dialog box on the Ubuntu distro running the Gnome desktop.
+On the command line, network administrators use the ifconfig command to display the status of the currently active interfaces and their IP configuration, as shown in the output.
+The Linux ip address command is used to display addresses and their properties. It can also be used to add or delete IP addresses.
+Note: The output displayed may vary depending on the Linux distribution.
+IP Configuration on a macOS Host
+In the GUI of a Mac host, open Network Preferences > Advanced to get the IP addressing information, as shown in the figure.
+However, the ifconfig command can also be used to verify the interface IP configuration a shown in the output.
+Other useful macOS commands to verify the host IP settings include networksetup -listallnetworkservices and the networksetup -getinfo <network service>, as shown in the following output.
+The arp Command
+The arp command is executed from the Windows, Linux, or Mac command prompt. The command lists all devices currently in the ARP cache of the host, which includes the IPv4 address, physical address, and the type of addressing (static/dynamic), for each device.
+For instance, refer to the topology in the figure.
+
+The output of the arp -a command on the Windows PC-A host is displayed.
+The arp -a command displays the known IP address and MAC address binding. Notice how IP address 10.0.0.5 is not included in the list. This is because the ARP cache only displays information from devices that have been recently accessed.
+To ensure that the ARP cache is populated, ping a device so that it will have an entry in the ARP table. For instance, if PC-A pinged 10.0.0.5, then the ARP cache would contain an entry for that IP address.
+The cache can be cleared by using the netsh interface ip delete arpcache command in the event the network administrator wants to repopulate the cache with updated information.
+Note: You may need administrator access on the host to be able to use the netsh interface ip delete arpcache command.
+Common show Commands Revisited
+In the same way that commands and utilities are used to verify a host configuration, commands can be used to verify the interfaces of intermediary devices. The Cisco IOS provides commands to verify the operation of router and switch interfaces.
+The Cisco IOS CLI show commands display relevant information about the configuration and operation of the device. Network technicians use show commands extensively for viewing configuration files, checking the status of device interfaces and processes, and verifying the device operational status. The status of nearly every process or function of the router can be displayed using a show command.
+Commonly used show commands and when to use them are listed in the table.
+Command Useful for …
+show running-config
+To verify the current configuration and settings
+show interfaces
+To verify the interface status and see if there are any error messages
+show ip interface
+To verify the Layer 3 information of an interface
+show arp
+To verify the list of known hosts on the local Ethernet LANs
+show ip route
+To verify the Layer 3 routing information
+show protocols
+To verify which protocols are operational
+show version
+To verify the memory, interfaces, and licences of the device
+&nbsp;
+Click the buttons to see example output from each of these show commands.Note: The output of some commands has been edited to focus on pertinent settings and reduce content.
+show running-config
+show interfaces
+show ip interface
+show arp
+show ip route
+show protocols
+show version
+show running-config
+Verifies the current configuration and settings
+The show cdp neighbors Command
+There are several other IOS commands that are useful. The Cisco Discovery Protocol (CDP) is a Cisco proprietary protocol that runs at the data link layer. Because CDP operates at the data link layer, two or more Cisco network devices, such as routers that support different network layer protocols, can learn about each other even if Layer 3 connectivity has not been established.
+When a Cisco device boots, CDP starts by default. CDP automatically discovers neighboring Cisco devices running CDP, regardless of which Layer 3 protocol or suites are running. CDP exchanges hardware and software device information with its directly connected CDP neighbors.
+CDP provides the following information about each CDP neighbor device:
+Device identifiers - The configured host name of a switch, router, or other device
+Address list - Up to one network layer address for each protocol supported
+Port identifier - The name of the local and remote port in the form of an ASCII character string, such as FastEthernet 0/0
+Capabilities list - For example, whether a specific device is a Layer 2 switch or a Layer 3 switch
+Platform - The hardware platform of the device--for example, a Cisco 1841 series router.
+Refer to the topology and the show cdp neighbor command output.
+
+The output displays that the R3 GigabitEthernet 0/0/1 interface is connected to the FastEthernet 0/5 interface of S3, which is a Cisco Catalyst 2960+ switch. Notice that R3 has not gathered information about S4. This is because CDP can only discover directly connected Cisco devices. S4 is not directly connected to R3 and therefore is not listed in the output.
+The show cdp neighbors detail command reveals the IP address of a neighboring device, as shown in the output. CDP will reveal the IP address of the neighbor regardless of whether or not you can ping that neighbor. This command is very helpful when two Cisco routers cannot route across their shared data link. The show cdp neighbors detail command will help determine if one of the CDP neighbors has an IP configuration error.
+As helpful as CDP is, it can also be a security risk because it can provide useful network infrastructure information to threat actors. For example, by default many IOS versions send CDP advertisements out all enabled ports. However, best practices suggest that CDP should be enabled only on interfaces that are connecting to other infrastructure Cisco devices. CDP advertisements should be disabled on user-facing ports.
+Because some IOS versions send out CDP advertisements by default, it is important to know how to disable CDP. To disable CDP globally, use the global configuration command no cdp run. To disable CDP on an interface, use the interface command no cdp enable.
+The show ip interface brief Command
+One of the most frequently used commands is the show ip interface brief command. This command provides a more abbreviated output than the show ip interface command. It provides a summary of the key information for all the network interfaces on a router.
+For example, the show ip interface brief output displays all interfaces on the router, the IP address assigned to each interface, if any, and the operational status of the interface.
+Verify Switch Interfaces
+The show ip interface brief command can also be used to verify the status of the switch interfaces, as shown in the output.
+The VLAN1 interface is assigned an IPv4 address of 192.168.254.250, has been enabled, and is operational.
+The output also shows that the FastEthernet0/1 interface is down. This indicates that either no device is connected to the interface or the device that is connected has a network interface that is not operational.
+In contrast, the output shows that the FastEthernet0/2 and FastEthernet0/3 interfaces are operational. This is indicated by both the status and protocol being shown as up.
+Video - The show version Command
+The show version command can be used to verify and troubleshoot some of the basic hardware and software components used during the boot process. Click Play to view a video from earlier in the course, which reviews an explanation of the show version command.
+Packet Tracer - Interpret show Command Output
+This activity is designed to reinforce the use of router show commands. You are not required to configure, but rather examine, the output of several show commands.
+Interpret show Command Output
+Interpret show Command Output

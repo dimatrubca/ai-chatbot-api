@@ -1,0 +1,109 @@
+Subnet Private versus Public IPv4 Address Space
+While it is nice to quickly segment a network into subnets, your organization’s network may use both public and private IPv4 addresses. This affects how you will subnet your network.
+The figure shows a typical enterprise network:
+Intranet - This is the internal part of a company’s network, accessible only within the organization. Devices in the intranet use private IPv4 addresses.
+DMZ - This is part of the company’s network containing resources available to the internet such as a web server. Devices in the DMZ use public IPv4 addresses.
+
+Public and Private IPv4 Address Space
+Both the intranet and the DMZ have their own subnetting requirements and challenges.
+The intranet uses private IPv4 addressing space. This allows an organization to use any of the private IPv4 network addresses including the 10.0.0.0/8 prefix with 24 host bits and over 16 million hosts. Using a network address with 24 host bits makes subnetting easier and more flexible. This includes subnetting on an octet boundary using a /16 or /24.
+For example, the private IPv4 network address 10.0.0.0/8 can be subnetted using a /16 mask. As shown in the table, this results in 256 subnets, with 65,534 hosts per subnet. If an organization has a need for fewer than 200 subnets, allowing for some growth, this gives each subnet more than enough host addresses.
+Subnetting Network 10.0.0.0/8 using a /16
+Subnet Address (256 Possible Subnets)Host Range (65,534 possible hosts per subnet)Broadcast10.0.0.0/1610.0.0.1 - 10.0.255.25410.0.255.25510.1.0.0/1610.1.0.1 - 10.1.255.25410.1.255.25510.2.0.0/1610.2.0.1 - 10.2.255.25410.2.255.25510.3.0.0/1610.3.0.1 - 10.3.255.25410.3.255.25510.4.0.0/1610.4.0.1 - 10.4.255.25410.4.255.25510.5.0.0/1610.5.0.1 - 10.5.255.25410.5.255.25510.6.0.0/1610.6.0.1 - 10.6.255.25410.6.255.25510.7.0.0/1610.7.0.1 - 10.7.255.25410.7.255.255.........10.255.0.0/1610.255.0.1 - 10.255.255.25410.255.255.255
+Subnet Address
+(256 Possible Subnets) Host Range
+(65,534 possible hosts per subnet) Broadcast
+10.0.0.0/16 10.0.0.1 - 10.0.255.254 10.0.255.255
+10.1.0.0/16 10.1.0.1 - 10.1.255.254 10.1.255.255
+10.2.0.0/16 10.2.0.1 - 10.2.255.254 10.2.255.255
+10.3.0.0/16 10.3.0.1 - 10.3.255.254 10.3.255.255
+10.4.0.0/16 10.4.0.1 - 10.4.255.254 10.4.255.255
+10.5.0.0/16 10.5.0.1 - 10.5.255.254 10.5.255.255
+10.6.0.0/16 10.6.0.1 - 10.6.255.254 10.6.255.255
+10.7.0.0/16 10.7.0.1 - 10.7.255.254 10.7.255.255
+... ... ...
+10.255.0.0/16 10.255.0.1 - 10.255.255.254 10.255.255.255
+Another option using the 10.0.0.0/8 private IPv4 network address is to subnet using a /24 mask. As shown in the table, this results in 65,536 subnets, with 254 hosts per subnet. If an organization needs more than 256 subnets, then using a /24 can be used with 254 hosts per subnet.
+Subnetting Network 10.0.0.0/8 using a /24
+Subnet Address (65,536 Possible Subnets)Host Range(254 possible hosts per subnet)Broadcast10.0.0.0/2410.0.0.1 - 10.0.0.25410.0.0.25510.0.1.0/2410.0.1.1 - 10.0.1.25410.0.1.25510.0.2.0/2410.0.2.1 - 10.0.2.25410.0.2.255………10.0.255.0/2410.0.255.1 - 10.0.255.25410.0.255.25510.1.0.0/2410.1.0.1 - 10.1.0.25410.1.0.25510.1.1.0/2410.1.1.1 - 10.1.1.25410.1.1.25510.1.2.0/2410.1.2.1 - 10.1.2.25410.1.2.255………10.100.0.0/2410.100.0.1 - 10.100.0.25410.100.0.255.........10.255.255.0/2410.255.255.1 - 10.2255.255.25410.255.255.255
+Subnet Address
+(65,536 Possible Subnets) Host Range
+(254 possible hosts per subnet) Broadcast
+10.0.0.0/24 10.0.0.1 - 10.0.0.254 10.0.0.255
+10.0.1.0/24 10.0.1.1 - 10.0.1.254 10.0.1.255
+10.0.2.0/24 10.0.2.1 - 10.0.2.254 10.0.2.255
+… … …
+10.0.255.0/24 10.0.255.1 - 10.0.255.254 10.0.255.255
+10.1.0.0/24 10.1.0.1 - 10.1.0.254 10.1.0.255
+10.1.1.0/24 10.1.1.1 - 10.1.1.254 10.1.1.255
+10.1.2.0/24 10.1.2.1 - 10.1.2.254 10.1.2.255
+… … …
+10.100.0.0/24 10.100.0.1 - 10.100.0.254 10.100.0.255
+... ... ...
+10.255.255.0/24 10.255.255.1 - 10.2255.255.254 10.255.255.255
+The 10.0.0.0/8 can also be subnetted using any other number of prefix lengths, such as /12, /18, /20, etc. This would give the network administrator a wide variety of options. Using a 10.0.0.0/8 private IPv4 network address makes subnet planning and implementation easy.
+What about the DMZ?
+Because these devices need to be publicly accessible from the internet, the devices in the DMZ require public IPv4 addresses. The depletion of public IPv4 address space became an issue beginning in the mid-1990s. Since 2011, IANA and four out of five RIRs have run out of IPv4 address space. Although organizations are making the transition to IPv6, the remaining IPv4 address space remains severely limited. This means an organization must maximize its own limited number of public IPv4 addresses. This requires the network administrator to subnet their public address space into subnets with different subnet masks, in order to minimize the number of unused host addresses per subnet. This is known as Variable Subnet Length Masking (VLSM).
+Minimize Unused Host IPv4 Addresses and Maximize Subnets
+To minimize the number of unused host IPv4 addresses and maximize the number of available subnets, there are two considerations when planning subnets: the number of host addresses required for each network and the number of individual subnets needed.
+The table displays the specifics for subnetting a /24 network. Notice how there is an inverse relationship between the number of subnets and the number of hosts. The more bits that are borrowed to create subnets, the fewer host bits remain available. If more host addresses are needed, more host bits are required, resulting in fewer subnets.
+The number of host addresses required in the largest subnet will determine how many bits must be left in the host portion. Recall that two of the addresses cannot be used, so the usable number of addresses can be calculated as 2n-2.
+Subnetting a /24 Network
+Prefix LengthSubnet MaskSubnet Mask in Binary (n = network, h = host)# of subnets# of hosts per subnet/25255.255.255.128nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh 11111111.11111111.11111111.100000002126/26255.255.255.192nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh 11111111.11111111.11111111.11000000462/27255.255.255.224nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh 11111111.11111111.11111111.11100000830/28255.255.255.240nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh 11111111.11111111.11111111.111100001614/29255.255.255.248nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh 11111111.11111111.11111111.11111000326/30255.255.255.252nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh 11111111.11111111.11111111.11111100642
+Prefix Length Subnet Mask Subnet Mask in Binary
+(n = network, h = host) # of subnets # of hosts per subnet
+/25 255.255.255.128
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nhhhhhhh
+11111111.11111111.11111111.10000000
+2 126
+/26 255.255.255.192
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnhhhhhh
+11111111.11111111.11111111.11000000
+4 62
+/27 255.255.255.224
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnhhhhh
+11111111.11111111.11111111.11100000
+8 30
+/28 255.255.255.240
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnhhhh
+11111111.11111111.11111111.11110000
+16 14
+/29 255.255.255.248
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnhhh
+11111111.11111111.11111111.11111000
+32 6
+/30 255.255.255.252
+nnnnnnnn.nnnnnnnn.nnnnnnnn.nnnnnnhh
+11111111.11111111.11111111.11111100
+64 2
+Network administrators must devise the network addressing scheme to accommodate the maximum number of hosts for each network and the number of subnets. The addressing scheme should allow for growth in both the number of host addresses per subnet and the total number of subnets.
+Example: Efficient IPv4 Subnetting
+In this example, corporate headquarters has been allocated a public network address of 172.16.0.0/22 (10 host bits) by its ISP. As shown in the figure, this will provide 1,022 host addresses.
+Note: 172.16.0.0/22 is part of the IPv4 private address space. We are using this address instead of an actual public IPv4 address.
+
+Network Address
+The corporate headquarters has a DMZ and four branch offices, each needing its own public IPv4 address space. Corporate headquarters needs to make best use of its limited IPv4 address space.
+The topology shown in the figure consists of five sites; a corporate office and four branch sites. Each site requires internet connectivity and therefore, five internet connections. This means that the organization requires 10 subnets from the company’s 172.16.0.0/22 public address. The largest subnet requires 40 addresses.
+
+Corporate Topology with Five Sites
+The 172.16.0.0/22 network address has 10 host bits, as shown in the figure. Because the largest subnet requires 40 hosts, a minimum of 6 host bits are needed to provide addressing for 40 hosts. This is determined by using this formula: 26 - 2 = 62 hosts.
+
+Subnet Scheme
+Using the formula for determining subnets results in 16 subnets: 24 = 16. Because the example internetwork requires 10 subnets, this will meet the requirement and allow for some additional growth.
+Therefore, the first 4 host bits can be used to allocate subnets. This means two bits from the 3rd octet and two bits from the 4th octet will be borrowed. When 4 bits are borrowed from the 172.16.0.0/22 network, the new prefix length is /26 with a subnet mask of 255.255.255.192.
+As shown in this figure, the subnets can be assigned to each location and router-to-ISP connections.
+
+Subnet Assignments to each Site and ISP
+Activity - Determine the Number of Bits to Borrow
+Instructions:
+In this activity, you are given the number of hosts that are needed. Determine the subnet mask that would support the number of hosts as specified. Enter your answers in binary, decimal, and prefix notation format in the fields provided.
+Hosts
+Needed
+Subnet Mask (binary)
+Subnet Mask (decimal)
+Prefix
+Notation(/x)
+Packet Tracer - Subnetting Scenario
+In this activity, you are given the network address of 192.168.100.0/24 to subnet and provide the IP addressing for the network shown in the topology. Each LAN in the network requires enough space for at least 25 addresses, which includes end devices as well as the switch and the router. The connection between R1 to R2 will require an IP address for each end of the link.
+Subnetting Scenario
+Subnetting Scenario

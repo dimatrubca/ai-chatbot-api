@@ -1,0 +1,83 @@
+Basic IOS Command Structure
+This topic covers the basic structure of commands for the Cisco IOS. A network administrator must know the basic IOS command structure to be able to use the CLI for device configuration.
+A Cisco IOS device supports many commands. Each IOS command has a specific format, or syntax, and can only be executed in the appropriate mode. The general syntax for a command, shown in the figure, is the command followed by any appropriate keywords and arguments.
+
+Keyword - This is a specific parameter defined in the operating system (in the figure, ip protocols).
+Argument - This is not predefined; it is a value or variable defined by the user (in the figure, 192.168.10.5).
+After entering each complete command, including any keywords and arguments, press the Enter key to submit the command to the command interpreter.
+IOS Command Syntax Check
+A command might require one or more arguments. To determine the keywords and arguments required for a command, refer to the command syntax. The syntax provides the pattern, or format, that must be used when entering a command.
+As identified in the table, boldface text indicates commands and keywords that are entered as shown. Italic text indicates an argument for which the user provides the value.
+Table caption
+Convention Description
+boldface Boldface text indicates commands and keywords that you enter literally as shown.
+italics Italic text indicates arguments for which you supply values.
+[x] Square brackets indicate an optional element (keyword or argument).
+{x} Braces indicate a required element (keyword or argument).
+[x {y | z }] Braces and vertical lines within square brackets indicate a required choice within an optional element. Spaces are used to clearly delineate parts of the command.
+For instance, the syntax for using the description command is description string. The argument is a string value provided by the user. The description command is typically used to identify the purpose of an interface. For example, entering the command, description Connects to the main headquarter office switch, describes where the other device is at the end of the connection.
+The following examples demonstrate conventions used to document and use IOS commands:
+ping ip-address - The command is ping and the user-defined argument is the ip-address of the destination device. For example, ping 10.10.10.5.
+traceroute ip-address - The command is traceroute and the user-defined argument is the ip-address of the destination device. For example, traceroute 192.168.254.254.
+If a command is complex with multiple arguments, you may see it represented like this:
+Switch(config-if)# switchport port-security aging { static | time time | type {absolute | inactivity}}
+The command will typically be followed with a detailed description of the command and each argument.
+The Cisco IOS Command Reference is the ultimate source of information for a particular IOS command.
+IOS Help Features
+The IOS has two forms of help available: context-sensitive help and command syntax check.
+Context-sensitive help enables you to quickly find answers to these questions:
+Which commands are available in each command mode?
+Which commands start with specific characters or group of characters?
+Which arguments and keywords are available to particular commands?
+To access context-sensitive help, simply enter a question mark, ?, at the CLI.
+Command syntax check verifies that a valid command was entered by the user. When a command is entered, the command line interpreter evaluates the command from left to right. If the interpreter understands the command, the requested action is executed, and the CLI returns to the appropriate prompt. However, if the interpreter cannot understand the command being entered, it will provide feedback describing what is wrong with the command.
+Video - Context Sensitive Help and Command Syntax Check
+Click Play in the figure to view a video demonstration of context-sensitive help and command syntax check.
+Hot Keys and Shortcuts
+The IOS CLI provides hot keys and shortcuts that make configuring, monitoring, and troubleshooting easier.
+Commands and keywords can be shortened to the minimum number of characters that identify a unique selection. For example, the configure command can be shortened to conf because configure is the only command that begins with conf. An even shorter version, con, will not work because more than one command begins with con. Keywords can also be shortened.
+The table lists keystrokes to enhance command line editing.
+Table caption
+Keystroke Description
+Tab Completes a partial command name entry.
+Backspace Erases the character to the left of the cursor.
+Ctrl+D Erases the character at the cursor.
+Ctrl+K Erases all characters from the cursor to the end of the command line.
+Esc D Erases all characters from the cursor to the end of the word.
+Ctrl+U or Ctrl+X Erases all characters from the cursor back to the beginning of the command line.
+Ctrl+W Erases the word to the left of the cursor.
+Ctrl+A Moves the cursor to the beginning of the line.
+Left Arrow or Ctrl+B Moves the cursor one character to the left.
+Esc B Moves the cursor back one word to the left.
+Esc F Moves the cursor forward one word to the right.
+Right Arrow or Ctrl+F Moves the cursor one character to the right.
+Ctrl+E Moves the cursor to the end of command line.
+Up Arrow or Ctrl+P Recalls the previous command in the history buffer, beginning with the most recent command.
+Down Arrow or Ctrl+N Goes to the next line in the the history buffer.
+Ctrl+R or Ctrl+I or Ctrl+L Redisplays the system prompt and command line after a console message is received.
+Note: While the Delete key typically deletes the character to the right of the prompt, the IOS command structure does not recognize the Delete key.
+When a command output produces more text than can be displayed in a terminal window, the IOS will display a “--More--” prompt. The following table describes the keystrokes that can be used when this prompt is displayed.
+Table caption
+Keystroke Description
+Enter Key Displays the next line.
+Space Bar Displays the next screen.
+Any other key * Ends the display string, returning to previous prompt.
+* Except "y", which answers "yes" to the --More-- prompt, and acts like the Space bar
+This table lists commands used to exit out of an operation.
+Table caption
+Keystroke Description
+Ctrl-C When in any configuration mode, ends the configuration mode and returns to privileged EXEC mode. When in setup mode, aborts back to the command prompt.
+Ctrl-Z When in any configuration mode, ends the configuration mode and returns to privileged EXEC mode.
+Ctrl-Shift-6 All-purpose break sequence used to abort DNS lookups, traceroutes, pings, etc.
+Video - Hot Keys and Shortcuts
+Click Play in the figure to view a video demonstration of the various hotkeys and shortcuts.
+Packet Tracer - Navigate the IOS
+In this activity, you will practice skills necessary for navigating the Cisco IOS, including different user access modes, various configuration modes, and common commands used on a regular basis. You will also practice accessing the context-sensitive help by configuring the clock command.
+Navigate the IOS
+Navigate the IOS
+Lab - Navigate the IOS by Using Tera Term for Console Connectivity
+In this lab, you will complete the following objectives:
+Part 1: Access a Cisco Switch through the Serial Console Port
+Part 2: Display and Configure Basic Device Settings
+Part 3: (Optional) Access a Cisco Router Using a Mini-USB Console Cable
+Navigate the IOS by Using Tera Term for Console Connectivity

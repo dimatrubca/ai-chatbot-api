@@ -28,10 +28,12 @@ from haystack.retriever.base import BaseRetriever
 from haystack.retriever.sparse import ElasticsearchRetriever, ElasticsearchFilterOnlyRetriever
 from haystack.retriever.dense import EmbeddingRetriever
 
-
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
 
+from rest_api.models import QAModel, FaqQAModel, DocQAModel
+from rest_api.models import MODELS
+from fastapi.responses import JSONResponse
 
 logger = logging.getLogger('haystack')
 logger.setLevel(LOG_LEVEL)
@@ -107,47 +109,40 @@ if READER_MODEL_PATH:  # for extractive doc-qa
 else:
     reader = None  # don't need one for pure FAQ matching
 
-doc_dir = "../../data/rc"
-# document_store = ElasticsearchDocumentStore()
-dicts = convert_files_to_dicts(dir_path=doc_dir, clean_func=clean_wiki_text, split_paragraphs=True)
-document_store.write_documents(dicts)
-
-retriver2 =  ElasticsearchRetriever(document_store=document_store)
-
-model_name = "deepset/roberta-base-squad2"
-reader2 = FARMReader(model_name, use_gpu=False)
-
-FINDERS = {1: Finder(reader=reader, retriever=retriever),
-            2: Finder(reader=reader2, retriever=retriver2)}
-
 
 #############################################
 # Endpoints
 #############################################
 doc_qa_limiter = RequestLimiter(CONCURRENT_REQUEST_PER_WORKER)
 
+# creates new doc-qa model
+@router.post("/models/doc-qa/")
+def create_model():
+    model = DocQAModel()
+    
+
 
 @router.post("/models/{model_id}/doc-qa", response_model=Answers, response_model_exclude_unset=True)
-def doc_qa(model_id: int, question_request: Question):
+def doc_qa(model_id: int, question_request: Question):  
     with doc_qa_limiter.run():
         start_time = time.time()
-        finder = FINDERS.get(model_id, None)
-        if not finder:
+        model = MODELS.get(model_id, None)
+        if not model:
             raise HTTPException(
-                status_code=404, detail=f"Could not get Finder with ID {model_id}. Available IDs: {list(FINDERS.keys())}"
+                status_code=404, detail=f"Could not get Model with ID {model_id}. Available IDs: {list(MODELS.keys())}"
             )
 
-        results = search_documents(finder, question_request, start_time)
+        results = search_documents(model.finder, question_request, start_time)
 
         return {"results": results}
 
 
 @router.post("/models/{model_id}/faq-qa", response_model=Answers, response_model_exclude_unset=True)
 def faq_qa(model_id: int, request: Question):
-    finder = FINDERS.get(model_id, None)
-    if not finder:
+    model = MODELS.get(model_id, None)
+    if not model:
         raise HTTPException(
-            status_code=404, detail=f"Could not get Finder with ID {model_id}. Available IDs: {list(FINDERS.keys())}"
+            status_code=404, detail=f"Could not get Finder with ID {model_id}. Available IDs: {list(MODELS.keys())}"
         )
 
     results = []
@@ -165,7 +160,7 @@ def faq_qa(model_id: int, request: Question):
         else:
             filters = {}
 
-        result = finder.get_answers_via_similar_questions(
+        result = model.finder.get_answers_via_similar_questions(
             question=question, top_k_retriever=request.top_k_retriever, filters=filters,
         )
         results.append(result)
@@ -180,15 +175,15 @@ def faq_qa(model_id: int, request: Question):
 def query(model_id: int, query_request: Dict[str, Any], top_k_reader: int = DEFAULT_TOP_K_READER):
     with doc_qa_limiter.run():
         start_time = time.time()
-        finder = FINDERS.get(model_id, None)
-        if not finder:
+        model = MODELS.get(model_id, None)
+        if not model:
             raise HTTPException(
-                status_code=404, detail=f"Could not get Finder with ID {model_id}. Available IDs: {list(FINDERS.keys())}"
+                status_code=404, detail=f"Could not get Finder with ID {model_id}. Available IDs: {list(MODELS.keys())}"
             )
 
         question_request = Question.from_elastic_query_dsl(query_request, top_k_reader)
 
-        answers = search_documents(finder, question_request, start_time)
+        answers = search_documents(model.finder, question_request, start_time)
         response: Dict[str, Any] = {}
         if answers and len(answers) > 0:
             response = AnswersToIndividualQuestion.to_elastic_response_dsl(dict(answers[0]))

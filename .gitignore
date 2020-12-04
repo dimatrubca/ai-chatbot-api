@@ -146,6 +146,11 @@ data
 mlruns
 src
 models
+
+annotation_tool
+docs
+test
+setup.py
 *_build
 
 .DS_Store

@@ -1,6 +1,6 @@
-# ai-chatbot-api
+# AI-Chatbot-API
 
-Rest API for document based question answering exposed by [Haystack](https://github.com/deepset-ai/haystack) and configured for [e-learning AIChatbot](https://github.com/Victor0120/ServerPBL) web application.
+Rest API for document based question answering build with FastAPI, exposed by [Haystack](https://github.com/deepset-ai/haystack), adjusted and configured for [e-learning AIChatbot](https://github.com/Victor0120/ServerPBL) web application.
 
 
 To serve the API, adjust the values in `rest_api/config.py` and run:

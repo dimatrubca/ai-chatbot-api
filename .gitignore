@@ -1,3 +1,9 @@
+annotation_tool
+docs
+test
+setup.py
+
+
 # Local run files
 qa.db
 **/qa.db
@@ -147,10 +153,7 @@ mlruns
 src
 models
 
-annotation_tool
-docs
-test
-setup.py
+
 *_build
 
 .DS_Store

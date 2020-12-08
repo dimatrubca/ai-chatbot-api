@@ -1,3 +1,7 @@
-print("inside search")
+from fastapi import APIRouter
 
-a = 3
+router = APIRouter()
+
+@router.post("/test")
+def test_route():
+    return {'Hello': 'World'}

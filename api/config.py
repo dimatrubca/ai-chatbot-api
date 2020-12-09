@@ -4,6 +4,11 @@ import os
 # FastAPI
 PROJECT_NAME = os.getenv("PROJECT_NAME", "CHATBOT-API")
 
+# Supported model types
+FAQ_QA = "faq_qa"
+DOC_QA = "doc_qa"
+
+
 # Resources / Computation
 USE_GPU = os.getenv("USE_GPU", "True").lower() == "true"
 GPU_NUMBER = int(os.getenv("GPU_NUMBER", 1))

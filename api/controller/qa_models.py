@@ -9,20 +9,18 @@ from haystack.preprocessor.cleaning import clean_wiki_text
 #from api.controller.request import Question
 from api.config import DB_HOST, DB_PORT, DB_INDEX
 
+import pandas as pd
 import requests
 
 
 QA_MODELS = {}
 
 class QAModel:
-    _counter = 0
-
-    def __init__(self):
-        QAModel._counter += 1
-        self.id = QAModel._counter
+    def __init__(self, id):
+        self.id = id
         self.finder = None
 
-        MODELS[self.id] = self
+        QA_MODELS[self.id] = self
 
 
     def document_store(self):
@@ -30,8 +28,8 @@ class QAModel:
 
 
 class DocQAModel(QAModel):
-    def __init__(self, add_sample_data=False):
-        QAModel.__init__(self)
+    def __init__(self, id, add_sample_data=False):
+        QAModel.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=DB_INDEX + str(self.id))
         dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
@@ -46,8 +44,8 @@ class DocQAModel(QAModel):
 
 
 class FaqQAModel(QAModel):
-    def __init__(self, add_sample_data=False):
-        QAModel.__init__(self)
+    def __init__(self, id, add_sample_data=False):
+        QAModel.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=DB_INDEX + str(self.id)) 
         retriever = EmbeddingRetriever(document_store=doc_store, embedding_model="deepset/sentence_bert", use_gpu=False)
@@ -68,14 +66,11 @@ def add_sample_data_faq_qa(model: FaqQAModel):
     df.fillna(value="", inplace=True)
     df["question"] = df["question"].apply(lambda x: x.strip())
     
-    self.finder = Finder(reader=None, retriever=retriever)
-
     # Get embeddings for our questions from the FAQs
     questions = list(df["question"].values)
-    df["question_emb"] = retriever.embed_queries(texts=questions)
+    df["question_emb"] = model.finder.retriever.embed_queries(texts=questions)
     df = df.rename(columns={"answer": "text"})
 
     # Convert Dataframe to list of dicts and index them in our DocumentStore
     docs_to_index = df.to_dict(orient="records")
-    document_store.write_documents(docs_to_index)
     model.finder.retriever.document_store.write_documents(docs_to_index)

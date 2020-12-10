@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from api.controller.router import router as api_router
+from api.controller import utils
 
 from config import PROJECT_NAME, LOG_LEVEL
 import uvicorn
@@ -15,10 +16,12 @@ def get_app() -> FastAPI:
     )
 
     app.include_router(api_router)
+    utils.initialize_existing_models()
 
     return app
 
 app = get_app()
+
 
 # logging
 logging.basicConfig(format="%(asctime)s %(message)s", datefmt="%m/%d/%Y %I:%M:%S %p")

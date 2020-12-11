@@ -1,16 +1,21 @@
 import logging
 from pprint import pprint
+from random import randint
 from elasticsearch import Elasticsearch
 
-from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA
+from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA, LOG_LEVEL
 
+
+logging.basicConfig(level=LOG_LEVEL)
+logger = logging.getLogger(__name__)
 
 def connect_elasticsearch() -> Elasticsearch:
     _es = Elasticsearch([{'host': DB_HOST, 'port': DB_PORT}])
     if _es.ping():
-        print('Connected to elasticsearch successfully!')
+        logger.info('Connected to elasticsearch successfully!')
     else:
-        print('Connection to elasticsearch failed!')
+        logger.error('Connection to elasticsearch failed!')
+
     return _es
 
 
@@ -20,7 +25,8 @@ def create_index(es_object: Elasticsearch, index_name: str, settings: dict) -> b
     try:
         if not es_object.indices.exists(index_name):
             # ignore 400 -> ignore index already exists
-            print(es_object.indices.create(index=index_name, ignore=400, body=settings))
+            res = es_object.indices.create(index=index_name, ignore=400, body=settings)
+            logger.info(f'Create index {index_name} response: {res}')
 
         created = True
     except Exception as ex:
@@ -32,19 +38,19 @@ def create_index(es_object: Elasticsearch, index_name: str, settings: dict) -> b
 def add_record(es_object: Elasticsearch, index_name: str, record: dict):
     try:
         outcome = es_object.index(index=index_name, body=record)
-        print("added record:")
-        print(outcome)
+        logger.info(f'Add record', outcome)
     except Exception as e:
-        print('Error in indexing data')
-        print(str(e))
+        logger.error(str(e))
 
 
 def add_model(es_object: Elasticsearch, model_type: str = FAQ_QA):
     record = {
+        'id_model': model_type + str(randint(1, 1000000000000)),
         'type_model': model_type
     }
 
     add_record(es_object, 'ai_models', record)
+
 
 def search(es_object: Elasticsearch, index_name: str, search: dict):
     res = es_object.search(index=index_name, body=search)
@@ -62,8 +68,8 @@ def get_models_data(es_object: Elasticsearch, match_query=None):
 
     for hit in hits:
         models.append({
-            'id': hit['_id'],
-            'type': hit['_source']['type_model']
+            'id_model': hit['_source']['id_model'],
+            'type_model': hit['_source']['type_model']
         })
 
     return models
@@ -73,7 +79,7 @@ def get_model_ids_by_type(es_object: Elasticsearch, model_type=FAQ_QA):
     match_query = { "query": { "match" : { "type_model": model_type }}}
 
     data = get_models_data(es_object, match_query)
-    ids = [x['id'] for x in data]
+    ids = [x['id_model'] for x in data]
 
     return ids
 
@@ -87,14 +93,18 @@ settings = {
     },
     "mappings": {
         "properties": {
+            "id_model": { "type": "keyword"},
             "type_model": { "type": "keyword"}
         }
     }
 }
 
-print(create_index(es, 'ai_models', settings))
+create_index(es, 'ai_models', settings)
 
 #add_record(es, 'ai_models', rec1)
+#add_model(es, DOC_QA)
+#add_model(es, FAQ_QA)
+
 search_object = {'query': {'match_all': {}}}
 search(es, 'ai_models', search_object)
 

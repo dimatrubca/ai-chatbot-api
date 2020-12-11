@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.controller.router import router as api_router
 from api.controller import utils
 
-from config import PROJECT_NAME, LOG_LEVEL
+from api.config import PROJECT_NAME, LOG_LEVEL
 import uvicorn
 import logging
 

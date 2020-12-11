@@ -16,7 +16,7 @@ import requests
 QA_MODELS = {}
 
 class QAModel:
-    def __init__(self, id):
+    def __init__(self, id: str):
         self.id = id
         self.finder = None
 
@@ -31,7 +31,7 @@ class DocQAModel(QAModel):
     def __init__(self, id, add_sample_data=False):
         QAModel.__init__(self, id)
 
-        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=DB_INDEX + str(self.id))
+        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id)
         dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
         doc_store.write_documents(dicts)
         retriever = ElasticsearchRetriever(document_store=doc_store)

@@ -4,14 +4,19 @@ from api.controller.qa_models import QA_MODELS, DocQAModel, FaqQAModel
 from api.config import FAQ_QA, DOC_QA
 
 def initialize_existing_models():
-    doc_ids = get_model_ids_by_type(es, FAQ_QA)
-    faq_ids = get_model_ids_by_type(es, DOC_QA)
-
+    print("Called utils")
+    doc_ids = get_model_ids_by_type(es, DOC_QA)
+    faq_ids = get_model_ids_by_type(es, FAQ_QA)
+    print("!\n\n!\n!\n\n!\n\n\n")
+    print(doc_ids)
     for id in doc_ids:
-        model = DocQAModel(id, False)
-        QA_MODELS[id] = model
+       print("Initializing model with id:", id)
+       model = DocQAModel(id, True)
+       QA_MODELS[id] = model
 
-    for id in faq_ids:
-        model = FaqQAModel(id, False)
-        QA_MODELS[id] = model
+
+    # for id in faq_ids:
+    #     print("Initializeing model with id:", id)
+    #     model = FaqQAModel(id, False)
+    #     QA_MODELS[id] = model
 

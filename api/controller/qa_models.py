@@ -7,7 +7,7 @@ from haystack import Finder
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
 #from api.controller.request import Question
-from api.config import DB_HOST, DB_PORT, DB_INDEX
+from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU
 
 import pandas as pd
 import requests
@@ -32,11 +32,13 @@ class DocQAModel(QAModel):
         QAModel.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id)
-        dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
-        doc_store.write_documents(dicts)
         retriever = ElasticsearchRetriever(document_store=doc_store)
-        reader = FARMReader("deepset/roberta-base-squad2", use_gpu=False)
-        
+        reader = FARMReader(
+            model_name_or_path=READER_MODEL_PATH,
+            batch_size=BATCHSIZE,
+            use_gpu=USE_GPU,
+            num_processes=MAX_PROCESSES,
+        )  
         self.finder = Finder(reader, retriever)
 
         if add_sample_data:

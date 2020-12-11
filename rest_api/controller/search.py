@@ -109,6 +109,14 @@ if READER_MODEL_PATH:  # for extractive doc-qa
 else:
     reader = None  # don't need one for pure FAQ matching
 
+doc_dir = "data/rc"
+# document_store = ElasticsearchDocumentStore()
+dicts = convert_files_to_dicts(dir_path=doc_dir, clean_func=clean_wiki_text, split_paragraphs=True)
+document_store.write_documents(dicts)
+
+
+
+FINDERS = {1: Finder(reader=reader, retriever=retriever)}
 
 #############################################
 # Endpoints
@@ -120,7 +128,6 @@ doc_qa_limiter = RequestLimiter(CONCURRENT_REQUEST_PER_WORKER)
 def create_model():
     model = DocQAModel()
     
-
 
 @router.post("/models/{model_id}/doc-qa", response_model=Answers, response_model_exclude_unset=True)
 def doc_qa(model_id: int, question_request: Question):  

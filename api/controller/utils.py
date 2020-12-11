@@ -15,7 +15,7 @@ def initialize_existing_models():
         model = DocQAWrapper(id, False)
         QA_MODELS[id] = model
 
-    for id faq_ids:
+    for id in faq_ids:
         logger.info(f"Initializing faq_qa model with id = {id}")
         model = FaqQAWrapper(id, False)
         QA_MODELS[id] = model

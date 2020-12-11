@@ -1,5 +1,4 @@
 from fastapi.responses import JSONResponse
-from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import UploadFile, File, Form
 
@@ -19,28 +18,28 @@ from rest_api.config import DB_HOST, DB_PORT, DB_USER, DB_PW, DB_INDEX, ES_CONN_
     CREATE_INDEX, VECTOR_SIMILARITY_METRIC
 
 from api.controller import es
+from api.app import app
 
 logger = logging.getLogger(__name__)
-router = APIRouter()
 
-@router.post("/test")
+@app.post("/test")
 def test_route():
     return {'Hello': 'World'}
 
 
-@router.post("/models/")
+@app.post("/models/")
 def create_model(model_type: str):
     add_model(es.conn, model_type)
 
 
-@router.get("/models/")
+@app.get("/models/")
 def get_models_data():
     data = es.get_models_data(es.conn)
 
     return JSONResponse(content=data)
 
 
-@router.post("/models/faq-qa/{model_id}/")
+@app.post("/models/faq-qa/{model_id}/")
 def add_question_answer(question: str, answer: str):
     return {
         'question': question,
@@ -48,7 +47,7 @@ def add_question_answer(question: str, answer: str):
     }
 
 
-@router.post("/models/doc-qa/{model_id}/")
+@app.post("/models/doc-qa/{model_id}/")
 def upload_file(    
     file: UploadFile = File(...),
     remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES),

@@ -1,15 +1,12 @@
-import logging
 from pprint import pprint
 from random import randint
 from elasticsearch import Elasticsearch
+import logging
 
 from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA, LOG_LEVEL
 
 
-logging.basicConfig(level=LOG_LEVEL)
 logger = logging.getLogger(__name__)
-
-
 
 def connect_elasticsearch() -> Elasticsearch:
     _es = Elasticsearch([{'host': DB_HOST, 'port': DB_PORT}])
@@ -26,7 +23,7 @@ def create_index(es_object: Elasticsearch, index_name: str, settings: dict) -> b
 
     try:
         if not es_object.indices.exists(index_name):
-            # ignore 400 -> ignore index already exists
+            # ignore=400 means ignore index already exists
             res = es_object.indices.create(index=index_name, ignore=400, body=settings)
             logger.info(f'Create index {index_name} response: {res}')
 
@@ -77,9 +74,6 @@ def get_models_data(es_object, match_query=None):
     return models
 
 
-def test_func(a, b=None):
-    return a
-
 def get_model_ids_by_type(es_object: Elasticsearch, model_type=FAQ_QA):
     match_query = { "query": { "match" : { "type_model": model_type }}}
 
@@ -105,15 +99,3 @@ settings = {
 }
 
 create_index(conn, 'ai_models', settings)
-
-#add_record(es, 'ai_models', rec1)
-#add_model(es, DOC_QA)
-#add_model(es, FAQ_QA)
-
-search_object = {'query': {'match_all': {}}}
-search(conn, 'ai_models', search_object)
-
-pprint(get_models_data(conn))
-pprint(get_model_ids_by_type(conn, DOC_QA))
-
-#add_record(es, 'ai_models', rec1)

@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from fastapi import HTTPException
 from fastapi import UploadFile, File, Form
 
-import os
+import os, logging
 import shutil
 import uuid
 from pathlib import Path
@@ -18,8 +18,9 @@ from rest_api.config import DB_HOST, DB_PORT, DB_USER, DB_PW, DB_INDEX, ES_CONN_
     FAQ_QUESTION_FIELD_NAME, REMOVE_NUMERIC_TABLES, REMOVE_WHITESPACE, REMOVE_EMPTY_LINES, REMOVE_HEADER_FOOTER, \
     CREATE_INDEX, VECTOR_SIMILARITY_METRIC
 
-from controller import es
+from api.controller import es
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 @router.post("/test")
@@ -39,7 +40,7 @@ def get_models_data():
     return JSONResponse(content=data)
 
 
-@router.post("/models/faq-qa/{model_id}")
+@router.post("/models/faq-qa/{model_id}/")
 def add_question_answer(question: str, answer: str):
     return {
         'question': question,
@@ -47,7 +48,7 @@ def add_question_answer(question: str, answer: str):
     }
 
 
-@router.post("/models/doc-qa/{model_id}")
+@router.post("/models/doc-qa/{model_id}/")
 def upload_file(    
     file: UploadFile = File(...),
     remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES),

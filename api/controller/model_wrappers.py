@@ -15,7 +15,7 @@ import requests
 
 QA_MODELS = {}
 
-class QAModel:
+class ModelWrapper:
     def __init__(self, id: str):
         self.id = id
         self.finder = None
@@ -27,9 +27,9 @@ class QAModel:
         return self.finder.retriever.document_store
 
 
-class DocQAModel(QAModel):
+class DocQAWrapper(ModelWrapper):
     def __init__(self, id, add_sample_data=False):
-        QAModel.__init__(self, id)
+        ModelWrapper.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id)
         retriever = ElasticsearchRetriever(document_store=doc_store)
@@ -45,9 +45,9 @@ class DocQAModel(QAModel):
             add_sample_data_doc_qa(self)
 
 
-class FaqQAModel(QAModel):
+class FaqQAWrapper(ModelWrapper):
     def __init__(self, id, add_sample_data=False):
-        QAModel.__init__(self, id)
+        ModelWrapper.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=DB_INDEX + str(self.id)) 
         retriever = EmbeddingRetriever(document_store=doc_store, embedding_model="deepset/sentence_bert", use_gpu=False)
@@ -58,12 +58,12 @@ class FaqQAModel(QAModel):
             add_sample_data_faq_qa(self)
 
 
-def add_sample_data_doc_qa(model: DocQAModel):
+def add_sample_data_doc_qa(model: DocQAWrapper):
     dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
     model.finder.retriever.document_store.write_documents(dicts)
 
         
-def add_sample_data_faq_qa(model: FaqQAModel):
+def add_sample_data_faq_qa(model: FaqQAWrapper):
     df = pd.read_csv("data/small_faq_covid.csv")
     df.fillna(value="", inplace=True)
     df["question"] = df["question"].apply(lambda x: x.strip())

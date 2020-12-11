@@ -77,7 +77,7 @@ def add_sample_data_doc_qa(model: DocQAWrapper):
     dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
     model.finder.retriever.document_store.write_documents(dicts)
 
-        
+
 def add_sample_data_faq_qa(model: FaqQAWrapper):
     df = pd.read_csv("data/small_faq_covid.csv")
     df.fillna(value="", inplace=True)

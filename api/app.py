@@ -25,7 +25,6 @@ def get_app() -> FastAPI:
 
     return app
 
-print("INSIDE APP PY \n\n\n...\\n\n\n\n")
 app = get_app()
 
 # logging

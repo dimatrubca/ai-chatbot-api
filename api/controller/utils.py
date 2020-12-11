@@ -7,16 +7,9 @@ def initialize_existing_models():
     print("Called utils")
     doc_ids = get_model_ids_by_type(es_conn, DOC_QA)
     faq_ids = get_model_ids_by_type(es_conn, FAQ_QA)
-    print("!\n\n!\n!\n\n!\n\n\n")
+
     print(doc_ids)
     for id in doc_ids:
        print("Initializing model with id:", id)
        model = DocQAModel(id, False)
        QA_MODELS[id] = model
-
-
-    # for id in faq_ids:
-    #     print("Initializeing model with id:", id)
-    #     model = FaqQAModel(id, False)
-    #     QA_MODELS[id] = model
-

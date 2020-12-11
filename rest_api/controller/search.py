@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 import elasticapm
-from fastapi import APIRouter
+from fastapi import APIRouter, File
 from fastapi import HTTPException
 
 from haystack import Finder

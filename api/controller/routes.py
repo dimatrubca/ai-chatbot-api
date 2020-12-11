@@ -1,3 +1,4 @@
+from starlette.responses import Response
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
 from fastapi import UploadFile, File, Form
@@ -18,7 +19,10 @@ from rest_api.config import DB_HOST, DB_PORT, DB_USER, DB_PW, DB_INDEX, ES_CONN_
     CREATE_INDEX, VECTOR_SIMILARITY_METRIC
 
 from api.controller import es
+from api.controller.models import ModelType
+from api.controller.response import ModelDetails
 from api.app import app
+
 
 logger = logging.getLogger(__name__)
 
@@ -27,20 +31,25 @@ def test_route():
     return {'Hello': 'World'}
 
 
-@app.post("/models/")
-def create_model(model_type: str):
-    add_model(es.conn, model_type)
+@app.post("/models/", status_code=201, response_model=ModelDetails)
+def create_model(model_type: ModelType):
+    try:
+        model_data = es.add_model(es.conn, model_type)
+    except Exception as e:
+        raise HTTPException(status_code=400, details=str(e))
+
+    return model_data
 
 
-@app.get("/models/")
+@app.get("/models/", response_model=List[ModelDetails])
 def get_models_data():
     data = es.get_models_data(es.conn)
 
-    return JSONResponse(content=data)
+    return data
 
 
 @app.post("/models/faq-qa/{model_id}/")
-def add_question_answer(question: str, answer: str):
+def add_question_answer(question: Question):
     return {
         'question': question,
         'answer': answer

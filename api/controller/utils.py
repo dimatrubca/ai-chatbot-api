@@ -2,7 +2,7 @@ import logging
 
 from api.controller.es import conn as es_conn, get_model_ids_by_type
 from api.config import FAQ_QA, DOC_QA
-from api.controller.model_wrappers import QA_MODELS, DocQAWrapper, FaqQAWrapper
+from api.controller.models import QA_MODELS, DocQAWrapper, FaqQAWrapper
 
 logger = logging.getLogger(__name__)
 

@@ -1,3 +1,7 @@
+import requests
+import pandas as pd
+from enum import Enum
+
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 from haystack.retriever.base import BaseRetriever
 from haystack.retriever.sparse import ElasticsearchRetriever, ElasticsearchFilterOnlyRetriever
@@ -6,11 +10,12 @@ from haystack.reader.farm import FARMReader
 from haystack import Finder
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
-#from api.controller.request import Question
 from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU
 
-import pandas as pd
-import requests
+
+class ModelType(str, Enum):
+    faq_qa = 'faq_qa'
+    doc_qa = 'doc_qa'
 
 
 QA_MODELS = {}
@@ -49,13 +54,23 @@ class FaqQAWrapper(ModelWrapper):
     def __init__(self, id, add_sample_data=False):
         ModelWrapper.__init__(self, id)
 
-        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=DB_INDEX + str(self.id)) 
+        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=str(self.id)) 
         retriever = EmbeddingRetriever(document_store=doc_store, embedding_model="deepset/sentence_bert", use_gpu=False)
 
         self.finder = Finder(reader=None, retriever=retriever)
 
         if add_sample_data:
             add_sample_data_faq_qa(self)
+
+
+def create_model(model_id, model_type:str, add_sample_data=False):
+    if model_type == ModelType.doc_qa:
+        model = DocQAWrapper(model_id, add_sample_data)
+    elif model_type == ModelType.faq_qa:
+        model = FaqQAWrapper(model_id, add_sample_data)
+
+    if model:
+        QA_MODELS[model_id] = model
 
 
 def add_sample_data_doc_qa(model: DocQAWrapper):

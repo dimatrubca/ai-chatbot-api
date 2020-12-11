@@ -4,7 +4,7 @@ from elasticsearch import Elasticsearch
 import logging
 
 from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA, LOG_LEVEL
-
+from api.controller.models import create_model
 
 logger = logging.getLogger(__name__)
 
@@ -35,20 +35,22 @@ def create_index(es_object: Elasticsearch, index_name: str, settings: dict) -> b
 
 
 def add_record(es_object: Elasticsearch, index_name: str, record: dict):
-    try:
-        outcome = es_object.index(index=index_name, body=record)
-        logger.info(f'Add record', outcome)
-    except Exception as e:
-        logger.error(str(e))
+    outcome = es_object.index(index=index_name, body=record)
+    logger.info(f'Add record', outcome)
 
 
 def add_model(es_object: Elasticsearch, model_type: str = FAQ_QA):
+    model_id =  model_type + str(randint(1, 1000000000000))
+
     record = {
-        'id_model': model_type + str(randint(1, 1000000000000)),
+        'id_model': model_id,
         'type_model': model_type
     }
 
     add_record(es_object, 'ai_models', record)
+    create_model(model_id, model_type, True)
+
+    return record
 
 
 def search(es_object: Elasticsearch, index_name: str, search: dict):

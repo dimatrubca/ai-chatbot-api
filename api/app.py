@@ -22,6 +22,8 @@ def get_app() -> FastAPI:
     return app
 
 app = get_app()
+from api.controller import routes
+
 
 logger.info("Open http://127.0.0.1:8000/docs to see Swagger API Documentation.")
 

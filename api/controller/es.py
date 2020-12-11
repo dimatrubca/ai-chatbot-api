@@ -9,6 +9,8 @@ from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA, LOG_LEVEL
 logging.basicConfig(level=LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
+
+
 def connect_elasticsearch() -> Elasticsearch:
     _es = Elasticsearch([{'host': DB_HOST, 'port': DB_PORT}])
     if _es.ping():
@@ -59,7 +61,7 @@ def search(es_object: Elasticsearch, index_name: str, search: dict):
     return hits
 
 
-def get_models_data(es_object: Elasticsearch, match_query=None):
+def get_models_data(es_object, match_query=None):
     if not match_query:
         match_query = {'query': {'match_all': {}}}
 
@@ -75,6 +77,9 @@ def get_models_data(es_object: Elasticsearch, match_query=None):
     return models
 
 
+def test_func(a, b=None):
+    return a
+
 def get_model_ids_by_type(es_object: Elasticsearch, model_type=FAQ_QA):
     match_query = { "query": { "match" : { "type_model": model_type }}}
 
@@ -83,7 +88,7 @@ def get_model_ids_by_type(es_object: Elasticsearch, model_type=FAQ_QA):
 
     return ids
 
-es = connect_elasticsearch()
+conn = connect_elasticsearch()
 
 # allowed type_model values: doc_qa, faq_qa
 settings = {
@@ -99,16 +104,16 @@ settings = {
     }
 }
 
-create_index(es, 'ai_models', settings)
+create_index(conn, 'ai_models', settings)
 
 #add_record(es, 'ai_models', rec1)
 #add_model(es, DOC_QA)
 #add_model(es, FAQ_QA)
 
 search_object = {'query': {'match_all': {}}}
-search(es, 'ai_models', search_object)
+search(conn, 'ai_models', search_object)
 
-pprint(get_models_data(es))
-pprint(get_model_ids_by_type(es, DOC_QA))
+pprint(get_models_data(conn))
+pprint(get_model_ids_by_type(conn, DOC_QA))
 
 #add_record(es, 'ai_models', rec1)

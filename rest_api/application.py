@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.path.abspath(''))
+print(sys.path)
 import logging
 
 import uvicorn

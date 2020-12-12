@@ -10,7 +10,7 @@ from haystack.reader.farm import FARMReader
 from haystack import Finder
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
-from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU
+from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU, EMBEDDING_MODEL_FORMAT, EMBEDDING_MODEL_PATH
 
 
 class ModelType(str, Enum):
@@ -55,7 +55,12 @@ class FaqQAWrapper(ModelWrapper):
         ModelWrapper.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=str(self.id)) 
-        retriever = EmbeddingRetriever(document_store=doc_store, embedding_model="deepset/sentence_bert", use_gpu=False)
+        retriever = EmbeddingRetriever(
+            document_store=doc_store,
+            embedding_model=EMBEDDING_MODEL_PATH,
+            model_format=EMBEDDING_MODEL_FORMAT,
+            use_gpu=False
+        )
 
         self.finder = Finder(reader=None, retriever=retriever)
 

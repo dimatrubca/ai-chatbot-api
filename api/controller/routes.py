@@ -69,8 +69,7 @@ def faq_qa_query(model_id: str, request: Question):
     results = []
     print(questions)
     for question in questions:
-        result = model.finder.get_answers_via_similar_questions(
-            question=question, top_k_retriever=request.top_k_retriever
+        result = model.finder.get_answers_via_similar_questions(question=question
         )
         results.append(result)
 

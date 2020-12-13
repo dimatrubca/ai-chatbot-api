@@ -16,10 +16,6 @@ from rest_api.config import DB_HOST, DB_PORT, DB_USER, DB_PW, DB_INDEX, DEFAULT_
     FAQ_QUESTION_FIELD_NAME, EMBEDDING_MODEL_FORMAT, READER_TYPE, READER_TOKENIZER, GPU_NUMBER, NAME_FIELD_NAME, \
     VECTOR_SIMILARITY_METRIC, CREATE_INDEX, LOG_LEVEL
 
-from rest_api.controller.request import Question
-from rest_api.controller.response import Answers, AnswersToIndividualQuestion
-
-from rest_api.controller.utils import RequestLimiter
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 from haystack.reader.base import BaseReader
 from haystack.reader.farm import FARMReader
@@ -31,8 +27,8 @@ from haystack.retriever.dense import EmbeddingRetriever
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
 
-from rest_api.models import QAModel, FaqQAModel, DocQAModel
-from rest_api.models import MODELS
+from api.models import QAModel, FaqQAModel, DocQAModel
+from api.models import MODELS
 from fastapi.responses import JSONResponse
 
 logger = logging.getLogger('haystack')

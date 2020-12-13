@@ -156,3 +156,5 @@ models
 *_build
 
 .DS_Store
+deepset
+test-model

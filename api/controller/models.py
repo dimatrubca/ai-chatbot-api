@@ -13,7 +13,7 @@ from haystack.preprocessor.cleaning import clean_wiki_text
 from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU, EMBEDDING_MODEL_FORMAT, EMBEDDING_MODEL_PATH
 
 
-QA_MODELS = {}
+MODELS = {}
 
 class ModelType(str, Enum):
     faq_qa = 'faq_qa'
@@ -25,7 +25,7 @@ class Model:
         self.id = id
         self.finder = None
 
-        QA_MODELS[self.id] = self
+        MODELS[self.id] = self
 
 
     def document_store(self):
@@ -38,6 +38,7 @@ class DocQAModel(Model):
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id)
         retriever = ElasticsearchRetriever(document_store=doc_store)
+        
         reader = FARMReader(
             model_name_or_path=READER_MODEL_PATH,
             batch_size=BATCHSIZE,
@@ -49,21 +50,20 @@ class DocQAModel(Model):
         if add_sample_data:
             add_sample_data_doc_qa(self)
 
+        reader.save(directory=READER_MODEL_PATH)
+        print("saved")
 
-class FaQAModel(Model):
+
+class FaqQAModel(Model):
     def __init__(self, id, add_sample_data=False):
         Model.__init__(self, id)
 
-        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=str(self.id)) 
-        retriever = EmbeddingRetriever(
-            document_store=doc_store,
-            embedding_model=EMBEDDING_MODEL_PATH,
-            model_format=EMBEDDING_MODEL_FORMAT,
-            use_gpu=False
-        )
+        doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id, 
+            embedding_field="question_emb", embedding_dim=768, excluded_meta_data=["question_emb"]) 
+        retriever = EmbeddingRetriever(document_store=doc_store, embedding_model="deepset/sentence_bert", use_gpu=False)
 
         self.finder = Finder(reader=None, retriever=retriever)
-
+        
         if add_sample_data:
             add_sample_data_faq_qa(self)
 
@@ -72,10 +72,10 @@ def create_model(model_id, model_type:str, add_sample_data=False):
     if model_type == ModelType.doc_qa:
         model = DocQAModel(model_id, add_sample_data)
     elif model_type == ModelType.faq_qa:
-        model = FaQAModel(model_id, add_sample_data)
+        model = FaqQAModel(model_id, add_sample_data)
 
     if model:
-        QA_MODELS[model_id] = model
+        MODELS[model_id] = model
 
 
 def add_sample_data_doc_qa(model: DocQAModel):
@@ -83,7 +83,7 @@ def add_sample_data_doc_qa(model: DocQAModel):
     model.finder.retriever.document_store.write_documents(dicts)
 
 
-def add_sample_data_faq_qa(model: FaQAModel):
+def add_sample_data_faq_qa(model: FaqQAModel):
     df = pd.read_csv("data/small_faq_covid.csv")
     df.fillna(value="", inplace=True)
     df["question"] = df["question"].apply(lambda x: x.strip())

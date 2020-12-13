@@ -16,7 +16,7 @@ from haystack.file_converter.txt import TextConverter
 
 from api.config import  TEXT_FIELD_NAME, FILE_UPLOAD_PATH, VALID_LANGUAGES, REMOVE_NUMERIC_TABLES, REMOVE_WHITESPACE, REMOVE_EMPTY_LINES, REMOVE_HEADER_FOOTER
 from api.controller import es
-from api.controller.models import ModelType, QA_MODELS
+from api.controller.models import ModelType, MODELS
 from api.controller.schemas import ModelDetails
 from api.controller.schemas import Question
 from api.controller.schemas import Answers
@@ -57,11 +57,11 @@ def add_question_answer(question: Question):
 
 @app.post("/models/faq-qa/{model_id}/questions/")
 def faq_qa_query(model_id: str, request: Question):
-    if not model_id in QA_MODELS:
+    if not model_id in MODELS:
         raise HTTPException(status_code=404, 
-            message=f"Couldn't find a model with id {model_id}. Available models: {list(QA_MODELS.keys())}")
+            message=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
 
-    model = QA_MODELS[model_id]
+    model = MODELS[model_id]
     questions = request.questions
     results = []
     print(questions)
@@ -75,11 +75,11 @@ def faq_qa_query(model_id: str, request: Question):
 
 @app.post("/models/doc-qa/{model_id}/questions", response_model=Answers)
 def doc_qa_query(model_id: str, request: Question):
-    if not model_id in QA_MODELS:
+    if not model_id in MODELS:
         raise HTTPException(status_code=404, 
-            message=f"Couldn't find a model with id {model_id}. Available models: {list(QA_MODELS.keys())}")
+            message=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
 
-    model = QA_MODELS[model_id]
+    model = MODELS[model_id]
     questions = request.questions
     results = []
 

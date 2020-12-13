@@ -3,8 +3,8 @@ from random import randint
 from elasticsearch import Elasticsearch
 import logging
 
-from api.config import DB_HOST, DB_PORT, FAQ_QA, DOC_QA, LOG_LEVEL
-from api.controller.models import create_model
+from api.config import DB_HOST, DB_PORT
+from api.controller.models import create_model, ModelType
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def add_record(es_object: Elasticsearch, index_name: str, record: dict):
     logger.info(f'Add record', outcome)
 
 
-def add_model(es_object: Elasticsearch, model_type: str = FAQ_QA):
+def add_model(es_object: Elasticsearch, model_type: str = ModelType.faq_qa):
     model_id =  model_type + str(randint(1, 1000000000000))
 
     record = {
@@ -76,7 +76,7 @@ def get_models_data(es_object, match_query=None):
     return models
 
 
-def get_model_ids_by_type(es_object: Elasticsearch, model_type=FAQ_QA):
+def get_model_ids_by_type(es_object: Elasticsearch, model_type=ModelType.faq_qa):
     match_query = { "query": { "match" : { "type_model": model_type }}}
 
     data = get_models_data(es_object, match_query)

@@ -7,7 +7,7 @@ import uvicorn
 import logging
 from multiprocessing import freeze_support
 
-logging.basicConfig(level=logging.INFO,  format='%(asctime)s:%(name)s:%(message)s', datefmt="%m/%d/%Y %I:%M:%S %p")
+logging.basicConfig(level=logging.DEBUG,  format='%(asctime)s:%(name)s:%(message)s', datefmt="%m/%d/%Y %I:%M:%S %p")
 logger = logging.getLogger(__name__)
 
 def get_app() -> FastAPI:

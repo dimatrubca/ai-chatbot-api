@@ -2,7 +2,7 @@ import logging
 
 from api.controller.es import conn as es_conn, get_model_ids_by_type
 from api.config import FAQ_QA, DOC_QA
-from api.controller.models import QA_MODELS, DocQAModel, FaqQAWrapper
+from api.controller.models import QA_MODELS, DocQAModel, FacQAModel
 
 logger = logging.getLogger(__name__)
 
@@ -17,5 +17,5 @@ def initialize_existing_models():
 
     for id in faq_ids:
         logger.info(f"Initializing faq_qa model with id = {id}")
-        model = FaqQAWrapper(id, False)
+        model = FacQAModel(id, False)
         QA_MODELS[id] = model

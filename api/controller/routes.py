@@ -1,28 +1,25 @@
-from starlette.responses import Response
-from fastapi.responses import JSONResponse
-from fastapi import HTTPException
-from fastapi import UploadFile, File, Form
-
-import os, logging
+import os
+import logging
 import shutil
 import uuid
 from pathlib import Path
 from typing import Optional, List
 
+from starlette.responses import Response
+from fastapi.responses import JSONResponse
+from fastapi import HTTPException
+from fastapi import UploadFile, File, Form
+
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 from haystack.file_converter.pdf import PDFToTextConverter
 from haystack.file_converter.txt import TextConverter
 
-from rest_api.config import DB_HOST, DB_PORT, DB_USER, DB_PW, DB_INDEX, ES_CONN_SCHEME, TEXT_FIELD_NAME, \
-    SEARCH_FIELD_NAME, FILE_UPLOAD_PATH, EMBEDDING_DIM, EMBEDDING_FIELD_NAME, EXCLUDE_META_DATA_FIELDS, VALID_LANGUAGES, \
-    FAQ_QUESTION_FIELD_NAME, REMOVE_NUMERIC_TABLES, REMOVE_WHITESPACE, REMOVE_EMPTY_LINES, REMOVE_HEADER_FOOTER, \
-    CREATE_INDEX, VECTOR_SIMILARITY_METRIC
-
+from api.config import  TEXT_FIELD_NAME, FILE_UPLOAD_PATH, VALID_LANGUAGES, REMOVE_NUMERIC_TABLES, REMOVE_WHITESPACE, REMOVE_EMPTY_LINES, REMOVE_HEADER_FOOTER
 from api.controller import es
 from api.controller.models import ModelType, QA_MODELS
-from api.controller.response import ModelDetails
-from api.controller.request import Question
-from api.controller.response import Answers
+from api.controller.schemas import ModelDetails
+from api.controller.schemas import Question
+from api.controller.schemas import Answers
 from api.app import app
 
 

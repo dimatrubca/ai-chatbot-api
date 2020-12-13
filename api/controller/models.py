@@ -3,24 +3,24 @@ import pandas as pd
 from enum import Enum
 
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
-from haystack.retriever.base import BaseRetriever
 from haystack.retriever.sparse import ElasticsearchRetriever, ElasticsearchFilterOnlyRetriever
 from haystack.retriever.dense import EmbeddingRetriever
 from haystack.reader.farm import FARMReader
 from haystack import Finder
 from haystack.preprocessor.utils import convert_files_to_dicts
 from haystack.preprocessor.cleaning import clean_wiki_text
+
 from api.config import DB_HOST, DB_PORT, DB_INDEX, READER_MODEL_PATH, MAX_PROCESSES, BATCHSIZE, USE_GPU, EMBEDDING_MODEL_FORMAT, EMBEDDING_MODEL_PATH
 
+
+QA_MODELS = {}
 
 class ModelType(str, Enum):
     faq_qa = 'faq_qa'
     doc_qa = 'doc_qa'
 
 
-QA_MODELS = {}
-
-class ModelWrapper:
+class Model:
     def __init__(self, id: str):
         self.id = id
         self.finder = None
@@ -32,9 +32,9 @@ class ModelWrapper:
         return self.finder.retriever.document_store
 
 
-class DocQAWrapper(ModelWrapper):
+class DocQAModel(Model):
     def __init__(self, id, add_sample_data=False):
-        ModelWrapper.__init__(self, id)
+        Model.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=self.id)
         retriever = ElasticsearchRetriever(document_store=doc_store)
@@ -50,9 +50,9 @@ class DocQAWrapper(ModelWrapper):
             add_sample_data_doc_qa(self)
 
 
-class FaqQAWrapper(ModelWrapper):
+class FaQAModel(Model):
     def __init__(self, id, add_sample_data=False):
-        ModelWrapper.__init__(self, id)
+        Model.__init__(self, id)
 
         doc_store = ElasticsearchDocumentStore(host=DB_HOST, port=DB_PORT, index=str(self.id)) 
         retriever = EmbeddingRetriever(
@@ -70,20 +70,20 @@ class FaqQAWrapper(ModelWrapper):
 
 def create_model(model_id, model_type:str, add_sample_data=False):
     if model_type == ModelType.doc_qa:
-        model = DocQAWrapper(model_id, add_sample_data)
+        model = DocQAModel(model_id, add_sample_data)
     elif model_type == ModelType.faq_qa:
-        model = FaqQAWrapper(model_id, add_sample_data)
+        model = FaQAModel(model_id, add_sample_data)
 
     if model:
         QA_MODELS[model_id] = model
 
 
-def add_sample_data_doc_qa(model: DocQAWrapper):
+def add_sample_data_doc_qa(model: DocQAModel):
     dicts = convert_files_to_dicts(dir_path="data/rc", clean_func=clean_wiki_text, split_paragraphs=True)
     model.finder.retriever.document_store.write_documents(dicts)
 
 
-def add_sample_data_faq_qa(model: FaqQAWrapper):
+def add_sample_data_faq_qa(model: FaQAModel):
     df = pd.read_csv("data/small_faq_covid.csv")
     df.fillna(value="", inplace=True)
     df["question"] = df["question"].apply(lambda x: x.strip())

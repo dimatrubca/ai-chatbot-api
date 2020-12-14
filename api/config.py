@@ -61,7 +61,7 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 
 # File uploads
-FILE_UPLOAD_PATH = os.getenv("FILE_UPLOAD_PATH", "file-uploads")
+FILE_UPLOAD_PATH = os.getenv("FILE_UPLOAD_PATH", "data")
 REMOVE_NUMERIC_TABLES = os.getenv("REMOVE_NUMERIC_TABLES", "True").lower() == "true"
 REMOVE_WHITESPACE = os.getenv("REMOVE_WHITESPACE", "True").lower() == "true"
 REMOVE_EMPTY_LINES = os.getenv("REMOVE_EMPTY_LINES", "True").lower() == "true"

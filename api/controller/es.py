@@ -48,7 +48,7 @@ def add_model(es_object: Elasticsearch, model_type: str = ModelType.faq_qa):
     }
 
     add_record(es_object, 'ai_models', record)
-    create_model(model_id, model_type, True)
+    create_model(model_id, model_type, False)
 
     return record
 
@@ -101,3 +101,4 @@ settings = {
 }
 
 create_index(conn, 'ai_models', settings)
+#add_model(conn, ModelType.doc_qa)

@@ -27,7 +27,7 @@ class Answer(BaseModel):
     offset_start_in_doc: int
     offset_end_int_doc: int
     document_id: str
-    meta: create_model('Meta', name=(int, ...))
+    meta: create_model('Meta', name=(str, ...))
 
 
 class Answers(BaseModel):

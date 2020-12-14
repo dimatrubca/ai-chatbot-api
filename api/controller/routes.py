@@ -73,31 +73,36 @@ def faq_qa_query(model_id: str, request: Question):
     return results
 
 
-@app.post("/models/doc-qa/{model_id}/questions", response_model=Answers)
+@app.post("/models/doc-qa/{model_id}/questions")
 def doc_qa_query(model_id: str, request: Question):
     if not model_id in MODELS:
         raise HTTPException(status_code=404, 
-            message=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
+            detail=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
 
     model = MODELS[model_id]
     questions = request.questions
     results = []
 
     for question in questions:
-        result = model.finder.get_answers(question, top_k_retriever=request.top_k_retriever)
+        result = model.finder.get_answers(question, top_k_retriever=request.top_k_retriever, top_k_reader=request.top_k_reader)
         results.append(result)
+
 
     return results
 
 
-@app.post("/models/doc-qa/{model_id}/")
+@app.post("/models/doc-qa/")
 def upload_file(    
+    model_id: str,
     file: UploadFile = File(...),
     remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES),
     remove_whitespace: Optional[bool] = Form(REMOVE_WHITESPACE),
     remove_empty_lines: Optional[bool] = Form(REMOVE_EMPTY_LINES),
     remove_header_footer: Optional[bool] = Form(REMOVE_HEADER_FOOTER),
     valid_languages: Optional[List[str]] = Form(VALID_LANGUAGES)):
+
+    if model_id not in MODELS:
+        raise HTTPException(status_code=400, detail="Invalid model id")
     
     try:
         file_path = Path(FILE_UPLOAD_PATH) / f"{uuid.uuid4().hex}_{file.filename}"
@@ -122,8 +127,10 @@ def upload_file(
             raise HTTPException(status_code=415, detail=f"Only .pdf and .txt file formats are supported.")
 
         document_to_write = {TEXT_FIELD_NAME: document["text"], "name": file.filename}
-        #document_store.write_documents([document_to_write])
-        #return "File upload was successful."
+
+        doc_store = MODELS[model_id].finder.retriever.document_store
+        doc_store.write_documents([document_to_write])
+
         return document_to_write
     finally:
         file.file.close()

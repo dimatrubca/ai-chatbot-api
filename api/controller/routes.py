@@ -47,14 +47,6 @@ def get_models_data():
 
     return data
 
-#
-@app.post("/models/faq-qa/{model_id}/")
-def add_question_answer(question: Question):
-    return {
-        'question': question,
-        'answer': answer
-    }
-#
 
 @app.post("/models/faq-qa/{model_id}/questions/")
 def faq_qa_query(model_id: str, request: Question):
@@ -65,10 +57,9 @@ def faq_qa_query(model_id: str, request: Question):
     model = MODELS[model_id]
     questions = request.questions
     results = []
-    print(questions)
+
     for question in questions:
-        result = model.finder.get_answers_via_similar_questions(question=question
-        )
+        result = model.finder.get_answers_via_similar_questions(question=question)
         results.append(result)
 
     return results
@@ -88,11 +79,28 @@ def doc_qa_query(model_id: str, request: Question):
         result = model.finder.get_answers(question, top_k_retriever=request.top_k_retriever, top_k_reader=request.top_k_reader)
         results.append(result)
 
-
     return results
 
 
-@app.post("/models/doc-qa/")
+@app.post("/models/faq-qa/", status_code=200)
+def add_question_answer(model_id: str, question: str, answer: str):
+    if model_id not in MODELS:
+        raise HTTPException(status_code=400, detail="Invalid model id")
+
+    retriever = MODELS[model_id].finder.retriever
+    doc_store = retriever.document_store
+
+    doc = {
+        'question': question,
+        'text': answer,
+        'question_emb': retriever.embed_queries(texts=[question])[0]
+    }
+
+    print(doc)
+    doc_store.write_documents([doc])
+    
+
+@app.post("/models/doc-qa/", status_code=200)
 def upload_file(    
     model_id: str,
     file: UploadFile = File(...),

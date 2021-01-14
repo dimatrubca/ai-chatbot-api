@@ -13,6 +13,7 @@ from fastapi import UploadFile, File, Form
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 from haystack.file_converter.pdf import PDFToTextConverter
 from haystack.file_converter.txt import TextConverter
+from haystack.preprocessor.preprocessor import PreProcessor
 
 from api.config import  TEXT_FIELD_NAME, FILE_UPLOAD_PATH, VALID_LANGUAGES, REMOVE_NUMERIC_TABLES, REMOVE_WHITESPACE, REMOVE_EMPTY_LINES, REMOVE_HEADER_FOOTER
 from api.controller import es
@@ -95,11 +96,7 @@ def doc_qa_query(model_id: str, request: Question):
 def upload_file(    
     model_id: str,
     file: UploadFile = File(...),
-    remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES),
-    remove_whitespace: Optional[bool] = Form(REMOVE_WHITESPACE),
-    remove_empty_lines: Optional[bool] = Form(REMOVE_EMPTY_LINES),
-    remove_header_footer: Optional[bool] = Form(REMOVE_HEADER_FOOTER),
-    valid_languages: Optional[List[str]] = Form(VALID_LANGUAGES)):
+    remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES)):
 
     if model_id not in MODELS:
         raise HTTPException(status_code=400, detail="Invalid model id")
@@ -112,10 +109,6 @@ def upload_file(
         if file.filename.split(".")[-1].lower() == "pdf":
             pdf_converter = PDFToTextConverter(
                 remove_numeric_tables=remove_numeric_tables,
-                remove_whitespace=remove_whitespace,
-                remove_empty_lines=remove_empty_lines,
-                remove_header_footer=remove_header_footer,
-                valid_languages=valid_languages,
             )
             document = pdf_converter.convert(file_path)
         elif file.filename.split(".")[-1].lower() == "txt":
@@ -126,11 +119,21 @@ def upload_file(
         else:
             raise HTTPException(status_code=415, detail=f"Only .pdf and .txt file formats are supported.")
 
-        document_to_write = {TEXT_FIELD_NAME: document["text"], "name": file.filename}
+        processor = PreProcessor(clean_empty_lines=True,
+                                clean_whitespace=True,
+                                clean_header_footer=True,
+                                split_by="word",
+                                split_length=200,
+                                split_respect_sentence_boundary=True)
+        docs = processor.process(document)
+
+        # Add name field to documents
+        for doc in docs:
+            doc['name'] = file.filename
 
         doc_store = MODELS[model_id].finder.retriever.document_store
-        doc_store.write_documents([document_to_write])
+        doc_store.write_documents(docs)
 
-        return document_to_write
+        return docs
     finally:
         file.file.close()

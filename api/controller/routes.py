@@ -27,14 +27,16 @@ from api.app import app
 logger = logging.getLogger(__name__)
 
 @app.post("/test")
-def test_route():
+def test_route(model_id: str):
+    print(es.delete_model(es.conn, model_id, MODELS))
+
     return {'Hello': 'World'}
 
 
 @app.post("/models/", status_code=201, response_model=ModelDetails)
 def create_model(model_type: ModelType):
     try:
-        model_data = es.add_model(es.conn, model_type)
+        model_data = es.add_model(es.conn, model_type, MODELS)
     except Exception as e:
         raise HTTPException(status_code=400, details=str(e))
 
@@ -96,7 +98,6 @@ def add_question_answer(model_id: str, question: str, answer: str):
         'question_emb': retriever.embed_queries(texts=[question])[0]
     }
 
-    print(doc)
     doc_store.write_documents([doc])
     
 
@@ -145,3 +146,9 @@ def upload_file(
         return docs
     finally:
         file.file.close()
+
+
+@app.delete("/models/doc-qa/", status_code=200)
+def delete_file(model_id: str, filename: str):
+    es.conn.delete_by_query(index='model_id', doc_type='_doc', body={ 'query': { 'match': { 'name': filename  } }})
+        

@@ -50,7 +50,7 @@ def get_models_data():
     return data
 
 
-@app.post("/models/faq-qa/{model_id}/questions/")
+@app.post("/models/faq-qa/questions/")
 def faq_qa_query(model_id: str, request: Question):
     if not model_id in MODELS:
         raise HTTPException(status_code=404, 
@@ -67,7 +67,7 @@ def faq_qa_query(model_id: str, request: Question):
     return results
 
 
-@app.post("/models/doc-qa/{model_id}/questions")
+@app.post("/models/doc-qa/questions")
 def doc_qa_query(model_id: str, request: Question):
     if not model_id in MODELS:
         raise HTTPException(status_code=404, 
@@ -150,5 +150,9 @@ def upload_file(
 
 @app.delete("/models/doc-qa/", status_code=200)
 def delete_file(model_id: str, filename: str):
-    es.conn.delete_by_query(index='model_id', doc_type='_doc', body={ 'query': { 'match': { 'name': filename  } }})
+    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={ 'query': { 'match': { 'name': filename  } }})
         
+
+@app.delete("/models/faq-qa", status_code=200)
+def delete_question_answer(model_id: str, question: str, answer: str):
+    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"text": answer}}, {"match": {"question": question}}]}}})

@@ -99,14 +99,15 @@ def add_question_answer(model_id: str, question: str, answer: str):
     }
 
     doc_store.write_documents([doc])
-    
 
-@app.post("/models/doc-qa/", status_code=200)
+
+@app.post("/models/doc-qa/")
 def upload_file(    
-    model_id: str,
+    model_id: str = Form(...),
     file: UploadFile = File(...),
     remove_numeric_tables: Optional[bool] = Form(REMOVE_NUMERIC_TABLES)):
 
+    print("uploading file")
     if model_id not in MODELS:
         raise HTTPException(status_code=400, detail="Invalid model id")
     
@@ -156,3 +157,8 @@ def delete_file(model_id: str, filename: str):
 @app.delete("/models/faq-qa", status_code=200)
 def delete_question_answer(model_id: str, question: str, answer: str):
     es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"text": answer}}, {"match": {"question": question}}]}}})
+
+
+@app.delete("/models")
+def delete_model(model_id: str, status_code=200):
+    es.delete_model(es.conn, model_id, MODELS)

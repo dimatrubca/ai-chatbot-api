@@ -107,4 +107,3 @@ settings = {
 }
 
 create_index(conn, 'ai_models', settings)
-#add_model(conn, ModelType.doc_qa)

@@ -170,5 +170,17 @@ def delete_model(model_id: str, status_code=200):
 
 
 @app.put("models/faq-qa", status_code=200)
-def modify_question_answer(model_id: str):
-    pass
+def modify_question_answer(model_id: str, new_answer: str, question_answer_id: str):
+     q = {
+        "script": {
+            f"inline": "ctx._source.text = '{new_answer}'",
+            "lang": "painless"
+        },
+        "query": {
+            "match": {
+            "question_answer_id": "3"
+            }
+        }
+    }
+
+    es.update_by_query(body=q,doc_type='_doc', index=model_id)

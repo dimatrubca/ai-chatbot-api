@@ -8,7 +8,7 @@ from typing import Optional, List
 from starlette.responses import Response
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
-from fastapi import UploadFile, File, Form
+from fastapi import UploadFile, File, Form, Body
 
 from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
 from haystack.file_converter.pdf import PDFToTextConverter
@@ -51,7 +51,9 @@ def get_models_data():
 
 
 @app.post("/models/faq-qa/questions/")
-def faq_qa_query(model_id: str, request: Question):
+def faq_qa_query(request: Question):
+    model_id = request.model_id
+
     if not model_id in MODELS:
         raise HTTPException(status_code=404, 
             message=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
@@ -68,7 +70,9 @@ def faq_qa_query(model_id: str, request: Question):
 
 
 @app.post("/models/doc-qa/questions")
-def doc_qa_query(model_id: str, request: Question):
+def doc_qa_query(request: Question):
+    model_id = request.model_id
+    
     if not model_id in MODELS:
         raise HTTPException(status_code=404, 
             detail=f"Couldn't find a model with id {model_id}. Available models: {list(MODELS.keys())}")
@@ -85,7 +89,7 @@ def doc_qa_query(model_id: str, request: Question):
 
 
 @app.post("/models/faq-qa/", status_code=200)
-def add_question_answer(model_id: str, question: str, answer: str):
+def add_question_answer(model_id: str, question: str, answer: str, question_answer_id: int):
     if model_id not in MODELS:
         raise HTTPException(status_code=400, detail="Invalid model id")
 
@@ -95,7 +99,8 @@ def add_question_answer(model_id: str, question: str, answer: str):
     doc = {
         'question': question,
         'text': answer,
-        'question_emb': retriever.embed_queries(texts=[question])[0]
+        'question_emb': retriever.embed_queries(texts=[question])[0],
+        'question_answer_id': question_answer_id
     }
 
     doc_store.write_documents([doc])
@@ -155,10 +160,15 @@ def delete_file(model_id: str, filename: str):
         
 
 @app.delete("/models/faq-qa", status_code=200)
-def delete_question_answer(model_id: str, question: str, answer: str):
-    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"text": answer}}, {"match": {"question": question}}]}}})
+def delete_question_answer(model_id: str, question_answer_id: int):
+    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"question_answer_id": answer}}]}}})
 
 
 @app.delete("/models")
 def delete_model(model_id: str, status_code=200):
     es.delete_model(es.conn, model_id, MODELS)
+
+
+@app.put("models/faq-qa", status_code=200)
+def modify_question_answer(model_id: str):
+    pass

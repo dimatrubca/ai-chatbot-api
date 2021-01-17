@@ -12,6 +12,7 @@ class ModelDetails(BaseModel):
 
 class Question(BaseModel):
     questions: List[str]
+    model_id: str
     filters: Optional[Dict[str, Optional[Union[str, List[str]]]]] = None
     top_k_reader: int = DEFAULT_TOP_K_READER
     top_k_retriever: int = DEFAULT_TOP_K_RETRIEVER

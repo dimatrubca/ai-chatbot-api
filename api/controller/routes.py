@@ -19,14 +19,14 @@ from api.config import  TEXT_FIELD_NAME, FILE_UPLOAD_PATH, VALID_LANGUAGES, REMO
 from api.controller import es
 from api.controller.models import ModelType, MODELS
 from api.controller.schemas import ModelDetails
-from api.controller.schemas import Question
+from api.controller.schemas import Question, Answers, QuestionAnswer
 from api.controller.schemas import Answers
 from api.app import app
 
 
 logger = logging.getLogger(__name__)
 
-@app.post("/test")
+@app.post("/test/")
 def test_route(model_id: str):
     print(es.delete_model(es.conn, model_id, MODELS))
 
@@ -69,7 +69,7 @@ def faq_qa_query(request: Question):
     return results
 
 
-@app.post("/models/doc-qa/questions")
+@app.post("/models/doc-qa/questions/")
 def doc_qa_query(request: Question):
     model_id = request.model_id
     
@@ -89,18 +89,18 @@ def doc_qa_query(request: Question):
 
 
 @app.post("/models/faq-qa/", status_code=200)
-def add_question_answer(model_id: str, question: str, answer: str, question_answer_id: int):
-    if model_id not in MODELS:
+def add_question_answer(request: QuestionAnswer):
+    if request.model_id not in MODELS:
         raise HTTPException(status_code=400, detail="Invalid model id")
 
-    retriever = MODELS[model_id].finder.retriever
+    retriever = MODELS[request.model_id].finder.retriever
     doc_store = retriever.document_store
 
     doc = {
-        'question': question,
-        'text': answer,
-        'question_emb': retriever.embed_queries(texts=[question])[0],
-        'question_answer_id': question_answer_id
+        'question': request.question,
+        'text': request.answer,
+        'question_emb': retriever.embed_queries(texts=[request.question])[0],
+        'question_answer_id': request.question_answer_id
     }
 
     doc_store.write_documents([doc])
@@ -159,28 +159,28 @@ def delete_file(model_id: str, filename: str):
     es.conn.delete_by_query(index=model_id, doc_type='_doc', body={ 'query': { 'match': { 'name': filename  } }})
         
 
-@app.delete("/models/faq-qa", status_code=200)
+@app.delete("/models/faq-qa/", status_code=200)
 def delete_question_answer(model_id: str, question_answer_id: int):
-    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"question_answer_id": answer}}]}}})
+    es.conn.delete_by_query(index=model_id, doc_type='_doc', body={"query": { "bool": {"must": [{"match": {"question_answer_id": question_answer_id}}]}}})
 
 
-@app.delete("/models")
+@app.delete("/models/")
 def delete_model(model_id: str, status_code=200):
     es.delete_model(es.conn, model_id, MODELS)
 
 
-@app.put("models/faq-qa", status_code=200)
-def modify_question_answer(model_id: str, new_answer: str, question_answer_id: str):
-     q = {
+@app.put("/models/faq-qa/", status_code=200)
+def modify_question_answer(model_id: str, new_answer: str, question_answer_id: int):
+    q = {
         "script": {
-            f"inline": "ctx._source.text = '{new_answer}'",
+            "inline": f"ctx._source.text = '{new_answer}'",
             "lang": "painless"
         },
         "query": {
             "match": {
-            "question_answer_id": "3"
+            "question_answer_id": question_answer_id
             }
         }
     }
 
-    es.update_by_query(body=q,doc_type='_doc', index=model_id)
+    es.conn.update_by_query(body=q, doc_type='_doc', index=model_id)

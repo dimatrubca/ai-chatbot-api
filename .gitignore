@@ -2,7 +2,7 @@ annotation_tool
 docs
 test
 setup.py
-
+venv2
 
 # Local run files
 qa.db

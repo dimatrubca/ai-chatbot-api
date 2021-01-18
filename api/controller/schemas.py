@@ -10,6 +10,13 @@ class ModelDetails(BaseModel):
     type_model: str
 
 
+class QuestionAnswer(BaseModel):
+    model_id: str
+    question: str
+    answer: str
+    question_answer_id: int
+
+
 class Question(BaseModel):
     questions: List[str]
     model_id: str

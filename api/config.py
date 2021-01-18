@@ -39,7 +39,7 @@ READER_MODEL_PATH = os.getenv("READER_MODEL_PATH", "deepset/roberta-base-squad2"
 READER_TYPE = os.getenv("READER_TYPE", "FARMReader") # alternative: 'TransformersReader'
 READER_TOKENIZER = os.getenv("READER_TOKENIZER", None)
 CONTEXT_WINDOW_SIZE = int(os.getenv("CONTEXT_WINDOW_SIZE", 500))
-DEFAULT_TOP_K_READER = int(os.getenv("DEFAULT_TOP_K_READER", 5))
+DEFAULT_TOP_K_READER = int(os.getenv("DEFAULT_TOP_K_READER", 7))
 TOP_K_PER_CANDIDATE = int(os.getenv("TOP_K_PER_CANDIDATE", 3))
 NO_ANS_BOOST = int(os.getenv("NO_ANS_BOOST", -10))
 READER_CAN_HAVE_NO_ANSWER = os.getenv("READER_CAN_HAVE_NO_ANSWER", "True").lower() == "true"
@@ -61,7 +61,7 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 
 # File uploads
-FILE_UPLOAD_PATH = os.getenv("FILE_UPLOAD_PATH", "file-uploads")
+FILE_UPLOAD_PATH = os.getenv("FILE_UPLOAD_PATH", "data")
 REMOVE_NUMERIC_TABLES = os.getenv("REMOVE_NUMERIC_TABLES", "True").lower() == "true"
 REMOVE_WHITESPACE = os.getenv("REMOVE_WHITESPACE", "True").lower() == "true"
 REMOVE_EMPTY_LINES = os.getenv("REMOVE_EMPTY_LINES", "True").lower() == "true"

@@ -39,8 +39,8 @@ def add_record(es_object: Elasticsearch, index_name: str, record: dict):
     logger.info(f'Add record', outcome)
 
 
-def add_model(es_object: Elasticsearch, model_type: str = ModelType.faq_qa):
-    model_id =  model_type + str(randint(1, 1000000000000))
+def add_model(es_object: Elasticsearch, model_type: str, models:dict):
+    model_id =  model_type + str(len(models))
 
     record = {
         'id_model': model_id,
@@ -48,9 +48,15 @@ def add_model(es_object: Elasticsearch, model_type: str = ModelType.faq_qa):
     }
 
     add_record(es_object, 'ai_models', record)
-    create_model(model_id, model_type, True)
+    create_model(model_id, model_type, False)
 
     return record
+
+
+def delete_model(es_object: Elasticsearch, model_id: str, models: dict):
+     es_object.delete_by_query(index='ai_models', doc_type='_doc', body={ 'query': { 'match': { 'id_model': model_id  } }})
+     es_object.indices.delete(index=model_id, ignore=[400, 404])
+     models.pop(model_id, None)
 
 
 def search(es_object: Elasticsearch, index_name: str, search: dict):

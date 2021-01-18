@@ -42,7 +42,7 @@ class DocQAModel(Model):
         reader = FARMReader(
             model_name_or_path=READER_MODEL_PATH,
             batch_size=BATCHSIZE,
-            use_gpu=USE_GPU,
+            use_gpu=False,
             num_processes=MAX_PROCESSES,
         )  
         self.finder = Finder(reader, retriever)

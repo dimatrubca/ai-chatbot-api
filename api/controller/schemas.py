@@ -10,8 +10,16 @@ class ModelDetails(BaseModel):
     type_model: str
 
 
+class QuestionAnswer(BaseModel):
+    model_id: str
+    question: str
+    answer: str
+    question_answer_id: int
+
+
 class Question(BaseModel):
     questions: List[str]
+    model_id: str
     filters: Optional[Dict[str, Optional[Union[str, List[str]]]]] = None
     top_k_reader: int = DEFAULT_TOP_K_READER
     top_k_retriever: int = DEFAULT_TOP_K_RETRIEVER
@@ -27,7 +35,7 @@ class Answer(BaseModel):
     offset_start_in_doc: int
     offset_end_int_doc: int
     document_id: str
-    meta: create_model('Meta', name=(int, ...))
+    meta: create_model('Meta', name=(str, ...))
 
 
 class Answers(BaseModel):

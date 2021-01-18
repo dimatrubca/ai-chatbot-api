@@ -98,9 +98,9 @@ class PDFToTextConverter(BaseConverter):
                        the content stream order.
         """
         if layout:
-            command = ["pdftotext", "-layout", str(file_path), "-"]
+            command = ["pdftotext", "-enc", "UTF-8", "-layout", str(file_path), "-"]
         else:
-            command = ["pdftotext", str(file_path), "-"]
+            command = ["pdftotext", "-enc", "UTF-8", str(file_path), "-"]
         output = subprocess.run(command, stdout=subprocess.PIPE, shell=False)
         document = output.stdout.decode(errors="ignore")
         pages = document.split("\f")
